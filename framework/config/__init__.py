@@ -1,0 +1,1 @@
+from framework.config.data import data_meteinfo_dict
