@@ -1,1 +1,1 @@
-from fc.metrics.accuracy import accuracy
+from models.fire_classification.fc.metrics.accuracy import accuracy

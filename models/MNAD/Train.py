@@ -19,21 +19,22 @@ import math
 from collections import OrderedDict
 import copy
 import time
-from model.utils import DataLoader
+from models.MNAD.model.utils import DataLoader
 from sklearn.metrics import roc_auc_score
-from utils import *
+from models.MNAD.utils import *
 import random
 
 import argparse
 
 
 parser = argparse.ArgumentParser(description="MNAD")
-parser.add_argument('--gpus', nargs='+', type=str, help='gpus')
+# parser.add_argument('--gpus', nargs='+', type=str, help='gpus')
+parser.add_argument('--gpus', type=str, help='gpus')
 parser.add_argument('--batch_size', type=int, default=4,
                     help='batch size for training')
 parser.add_argument('--test_batch_size', type=int,
                     default=1, help='batch size for test')
-parser.add_argument('--epochs', type=int, default=60,
+parser.add_argument('--epochs', type=int, default=1,
                     help='number of epochs for training')
 parser.add_argument('--loss_compact', type=float, default=0.1,
                     help='weight of the feature compactness loss')
@@ -62,7 +63,7 @@ parser.add_argument('--num_workers_test', type=int, default=1,
 parser.add_argument('--dataset_type', type=str, default='ShanghaiTech',
                     help='type of dataset: ped2, avenue, ShanghaiTech')
 parser.add_argument('--dataset_path', type=str,
-                    default='./dataset', help='directory of data')
+                    default='/home/yuanyu/projects/rush/models/MNAD/dataset', help='directory of data')
 parser.add_argument('--exp_dir', type=str, default='log',
                     help='directory of log')
 
@@ -73,10 +74,11 @@ if args.gpus is None:
     gpus = "0"
     os.environ["CUDA_VISIBLE_DEVICES"] = gpus
 else:
-    gpus = ""
-    for i in range(len(args.gpus)):
-        gpus = gpus + args.gpus[i] + ","
-    os.environ["CUDA_VISIBLE_DEVICES"] = gpus[:-1]
+    # gpus = ""
+    # for i in range(len(args.gpus)):
+    #     gpus = gpus + args.gpus[i] + ","
+    # os.environ["CUDA_VISIBLE_DEVICES"] = gpus[:-1]
+    os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
 
 # make sure to use cudnn for computational performance
 torch.backends.cudnn.enabled = True
@@ -107,10 +109,10 @@ test_batch = data.DataLoader(test_dataset, batch_size=args.test_batch_size,
 # Model setting
 assert args.method == 'pred' or args.method == 'recon', 'Wrong task name'
 if args.method == 'pred':
-    from model.final_future_prediction_with_memory_spatial_sumonly_weight_ranking_top1 import *
+    from models.MNAD.model.final_future_prediction_with_memory_spatial_sumonly_weight_ranking_top1 import *
     model = convAE(args.c, args.t_length, args.msize, args.fdim, args.mdim)
 else:
-    from model.Reconstruction import *
+    from models.MNAD.model.Reconstruction import *
     model = convAE(args.c, memory_size=args.msize,
                    feature_dim=args.fdim, key_dim=args.mdim)
 params_encoder = list(model.encoder.parameters())
@@ -122,7 +124,7 @@ model.cuda()
 
 
 # Report the training process
-log_dir = os.path.join('./exp', args.dataset_type, args.method, args.exp_dir)
+log_dir = os.path.join('/home/yuanyu/projects/rush/models/MNAD/exp', args.dataset_type, args.method, args.exp_dir)
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 orig_stdout = sys.stdout

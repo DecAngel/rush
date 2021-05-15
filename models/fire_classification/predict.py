@@ -66,7 +66,7 @@ def predict_full(args):
 
     # show_batch(valid_dl)
     model = to_device(create_model(cfg, 2), cfg['device'])
-    model_ckpt = torch.load(os.path.join(writer.logdir, cfg['ckpt']))
+    model_ckpt = torch.load(os.path.join('/home/yuanyu/projects/rush/models/fire_classification/runs/exp-efficientnet_b3a_e11_b16_tt6_vt3_explr_TimmFC3CLF_freeze_Adam', cfg['ckpt']))
     model.load_state_dict(model_ckpt)
 
     train_ds_out, valid_ds_out = dict(), dict()
@@ -91,6 +91,7 @@ def predict(model, dataloader):
             tmp = outputs_dict[key]
             tmp.append(value)
             outputs_dict[key] = tmp
+    print(outputs_dict)
     return model.validation_epoch_end(outputs), outputs_dict
 
 

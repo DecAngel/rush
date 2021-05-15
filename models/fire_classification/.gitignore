@@ -3,7 +3,3 @@
 /out
 *.out
 *tmp
-
-.pytest_cache
-.vscode
-__pycache__

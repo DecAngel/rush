@@ -17,7 +17,7 @@ from models.fire_classification.fc.utils.device import get_default_device
 from models.fire_classification.fc.utils.exp import get_exp_ID
 from models.fire_classification.fc.models import create_model
 from models.fire_classification.fc.optim import create_optimizer
-import config
+import models.fire_classification.config as config
 
 
 @torch.no_grad()

@@ -1,12 +1,23 @@
 from framework.request import (
-    get_image
+    get_fire_image_v,
+    get_weather_image_v,
+    get_vad_frames_v
 )
 
 
 data_meteinfo_dict = {
     'fire-image-v': {
-        'method': get_image,
-        'args': []
+        # 'sensors': ['virtual image'],
+        'method': get_fire_image_v,
+        'args': {}
     },
-
+    'weather-image-v': {
+        # 'sensors': ['virtual image'],
+        'method': get_weather_image_v,
+        'args': {}
+    },
+    'vad-frames-v': {
+        'method': get_vad_frames_v,
+        'args': {}
+    }
 }

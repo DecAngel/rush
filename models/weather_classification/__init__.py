@@ -1,0 +1,1 @@
+from models.weather_classification.framework import WeatherClassifier

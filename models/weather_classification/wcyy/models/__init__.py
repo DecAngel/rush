@@ -1,0 +1,1 @@
+from models.weather_classification.wcyy.models.model_factory import create_model

@@ -8,6 +8,7 @@ import torch.utils.data as data
 
 rng = np.random.RandomState(2020)
 
+
 def np_load_frame(filename, resize_height, resize_width):
     """
     Load image path and convert it to numpy.ndarray. Notes that the color channels are BGR and the color space
@@ -25,8 +26,6 @@ def np_load_frame(filename, resize_height, resize_width):
     return image_resized
 
 
-
-
 class DataLoader(data.Dataset):
     def __init__(self, video_folder, transform, resize_height, resize_width, time_step=4, num_pred=1):
         self.dir = video_folder
@@ -41,19 +40,19 @@ class DataLoader(data.Dataset):
         print('samples:')
         print(len(self.samples))
         # print(self.samples )
-        
-        
+
     def setup(self):
         videos = glob.glob(os.path.join(self.dir, '*'))
         for video in sorted(videos):
             video_name = video.split('/')[-1]
             self.videos[video_name] = {}
             self.videos[video_name]['path'] = video
-            self.videos[video_name]['frame'] = glob.glob(os.path.join(video, '*.jpg'))
+            self.videos[video_name]['frame'] = glob.glob(
+                os.path.join(video, '*.jpg'))
             self.videos[video_name]['frame'].sort()
-            self.videos[video_name]['length'] = len(self.videos[video_name]['frame'])
-            
-            
+            self.videos[video_name]['length'] = len(
+                self.videos[video_name]['frame'])
+
     def get_all_samples(self):
         frames = []
         videos = glob.glob(os.path.join(self.dir, '*'))
@@ -61,18 +60,18 @@ class DataLoader(data.Dataset):
             video_name = video.split('/')[-1]
             for i in range(len(self.videos[video_name]['frame'])-self._time_step-self._num_pred):
                 frames.append(self.videos[video_name]['frame'][i])
-                           
-        return frames               
-            
-        
+
+        return frames
+
     def __getitem__(self, index):
         # try:
         video_name = self.samples[index].split('/')[-2]
         frame_name = int(self.samples[index].split('/')[-1].split('.')[-2])
-        
+
         batch = []
         for i in range(self._time_step+self._num_pred):
-            image = np_load_frame(self.videos[video_name]['frame'][frame_name+i], self._resize_height, self._resize_width)
+            image = np_load_frame(
+                self.videos[video_name]['frame'][frame_name+i], self._resize_height, self._resize_width)
             if self.transform is not None:
                 batch.append(self.transform(image))
         # except Exception as e:
@@ -80,7 +79,6 @@ class DataLoader(data.Dataset):
         #     print(index, video_name, self.videos[video_name]['length'], frame_name+i, self.videos[video_name]['frame'][frame_name+i-1])
 
         return np.concatenate(batch, axis=0)
-        
-        
+
     def __len__(self):
         return len(self.samples)

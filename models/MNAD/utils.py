@@ -57,6 +57,10 @@ def anomaly_score_list(psnr_list):
 
 def anomaly_score_list_inv(psnr_list):
     anomaly_score_list = list()
+    print(f'psnr_max: {np.max(psnr_list)}, psnr_min: {np.min(psnr_list)}')
+    # if np.max(psnr_list) == 0:
+    #     print(len(psnr_list), psnr_list)
+    #     return anomaly_score_list
     for i in range(len(psnr_list)):
         anomaly_score_list.append(anomaly_score_inv(psnr_list[i], np.max(psnr_list), np.min(psnr_list)))
         

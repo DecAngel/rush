@@ -4,9 +4,11 @@ from timm.data.random_erasing import RandomErasing
 from timm.data import Mixup
 
 
-data_dir = './data'
+data_dir = '/home/yuanyu/projects/rush/models/fire_classification/data'
 
 stats = ((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
+
+tt_none = None
 
 tt1 = tt.Compose([
     tt.RandomResizedCrop([200, 200]),
@@ -95,7 +97,9 @@ vt3 = tt.Compose([tt.Resize([256, 256]), tt.ToTensor(), tt.Normalize(*stats)])
 vt4 = tt.Compose([tt.Resize([400, 400]), tt.ToTensor(), tt.Normalize(*stats)])
 
 
-efficientnet_b3a_e8_b16_tt6_vt3_explr_timmfc3clf_freeze_Adam = {
+# efficientnet_b3a_e8_b16_tt6_vt3_explr_timmfc3clf_freeze_Adam = {
+cfg = {
+    'exp_id': 'default',
     'train_ann_file_path': data_dir + '/annotation_for_train.txt',
     'valid_ann_file_path': data_dir + '/annotation_for_valid.txt',
     'epochs': 11,

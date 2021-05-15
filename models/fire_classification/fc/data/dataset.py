@@ -41,7 +41,8 @@ class DataSet(torch.utils.data.Dataset):
                 file = line[0]
                 img = Image.open(file)
 
-                img = self.transform(img)
+                if self.transform:
+                    img = self.transform(img)
                 label = torch.tensor(int(line[1]))
                 self.img_list.append(img)
                 self.label_list.append(label)
