@@ -61,5 +61,5 @@ def get_vad_frames_v() -> np.ndarray:
     frame_array = vad_frames_resource.next()
     return {
         'frames': frame_array,
-        'sensor': 'virtual image'
+        'sensor': 'virtual video'
     }

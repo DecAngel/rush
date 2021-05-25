@@ -8,3 +8,5 @@ vad_mitems_dir = './models/MNAD/exp/ShanghaiTech/pred/log/keys.pt'
 wc_classes = ['cloudy', 'haze', 'rainy', 'snow', 'sunny', 'thunder']
 wc_image_dir = './models/weather_classification/data'
 wc_model_root = './models/weather_classification/runs/default'
+
+PV_cfg_path = './models/PVCGN/trained/default.yaml'

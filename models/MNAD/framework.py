@@ -48,26 +48,30 @@ class VideoAnomalyDetector:
             mse_loss=torch.mean(mse_img).item()
             # mse_feas=compactness_loss.item()
             psnr_list.append(psnr(mse_loss))
-            mse_imgs.append(mse_img)
+            mse_imgs.append(mse_img.permute(1, 2, 0).cpu().numpy())
         anomaly_score_total_list = anomaly_score_list(psnr_list)
 
-        mse_imgs = torch.stack(mse_imgs, 0)
+        # mse_imgs = torch.stack(mse_imgs, 0)
         # print(mse_imgs.shape)
         # print(mse_imgs[0])
-        import matplotlib.pyplot as plt
-        from torchvision.utils import make_grid
-        fig, ax = plt.subplots(figsize=(12, 12))
-        ax.set_xticks([])
-        ax.set_yticks([])
-        ax.imshow(make_grid(mse_imgs.cpu()[:], nrow=32, normalize=True).permute(1, 2, 0))
-        fig2, ax2 = plt.subplots(figsize=(12, 12))
-        ax2.plot(anomaly_score_total_list, color='r')
-        plt.show()
+        # import matplotlib.pyplot as plt
+        # from torchvision.utils import make_grid
+        # fig, ax = plt.subplots(figsize=(12, 12))
+        # ax.set_xticks([])
+        # ax.set_yticks([])
+        # ax.imshow(make_grid(mse_imgs.cpu()[:], nrow=32, normalize=True).permute(1, 2, 0))
+        # fig2, ax2 = plt.subplots(figsize=(12, 12))
+        # ax2.plot(anomaly_score_total_list, color='r')
+        # plt.show()
 
+        print(len(data['frames']))
+        print(len(mse_imgs))
         return {
             'type': 'vad',
-            'anomaly': np.max(anomaly_score_total_list) > self.cfg['th'],
+            'anomaly': bool(np.max(anomaly_score_total_list) > self.cfg['th']),
+            'frames': data['frames'],
             'pred': anomaly_score_total_list,
+            'mse_imgs': mse_imgs,
             # 'label': data['label'].item(),
             'sensors': data['sensors']
         }
@@ -89,7 +93,7 @@ class FramesDataset(data.Dataset):
         self._resize_width = resize_width
         self._time_step = time_step
         self._num_pred = num_pred
-        print(self.frames.shape, type(self.frames.shape))
+        print('VAD', self.frames.shape, type(self.frames.shape))
         self.length = self.frames.shape[0] - self._time_step - self._num_pred
 
     def __getitem__(self, index):

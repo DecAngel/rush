@@ -1,7 +1,8 @@
 from models import (
     FireDetector,
     WeatherClassifier,
-    VideoAnomalyDetector
+    VideoAnomalyDetector,
+    PVCDetector
 )
 
 
@@ -39,4 +40,12 @@ model_config_dict = {
         ],
         'model': VideoAnomalyDetector
     },
+    'pv_detector': {
+        'data_lists': [
+            [
+                'od-v'
+            ]
+        ],
+        'model': PVCDetector
+    }
 }
