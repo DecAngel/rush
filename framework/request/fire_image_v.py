@@ -1,11 +1,5 @@
-import os
-import glob
+from typing import Dict
 
-import numpy
-from PIL import Image
-
-from framework.request.utils import np_load_frame
-# fire_image_dir = '/home/yuanyu/projects/rush/models/fire_classification/data/testingsamples'
 from models.fire_classification.fc.data import create_dataset, DeviceDataLoader, log_dateset_info
 from urls import fire_image_dir
 
@@ -45,7 +39,7 @@ class FireImageResource:
 fireImageResource = FireImageResource()
 
 
-def get_fire_image_v() -> Image.Image:
+def get_fire_image_v() -> Dict[str, object]:
     image, label = fireImageResource.next()
     return {
         'image': image,

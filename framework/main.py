@@ -51,6 +51,7 @@ def init():
 
 def main():
     models_dict = init()
+    print('all model init!'.center(100, '*'))
     pass
     while True:
         pass

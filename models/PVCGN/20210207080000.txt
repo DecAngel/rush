@@ -1,0 +1,1475 @@
+nohup: ignoring input
+2021-02-07 08:00:01,567 - INFO - Log directory: data/checkpoint/nj_mrgcn_global_local_fusion_input/ggnn_256-256_cso_k1_gf_input_lr0.001_bs8_0207080001/
+2021-02-07 08:00:01,567 - INFO - {'base_dir': 'data/checkpoint/nj_mrgcn_global_local_fusion_input', 'log_level': 'INFO', 'data': {'batch_size': 8, 'dataset_dir': 'data/nanjing', 'test_batch_size': 8, 'val_batch_size': 8, 'graph_pkl_filename': ['data/nanjing/graph_nj_conn.pkl', 'data/nanjing/graph_nj_sml.pkl', 'data/nanjing/graph_nj_cor.pkl'], 'name': 'hz'}, 'model': {'cl_decay_steps': 200, 'filter_type': 'chebnet', 'horizon': 4, 'input_dim': 2, 'l1_decay': 0, 'num_nodes': 64, 'num_rnn_layers': 2, 'output_dim': 2, 'output_type': 'fc', 'rnn_units': 256, 'seq_len': 4, 'use_curriculum_learning': True, 'num_branches': 1, 'fusion': 'concat', 'dropout_type': 'zoneout', 'dropout_prop': 0.05, 'use_input': True, 'num_relations': 3, 'num_bases': 3, 'graph_type': 'cso', 'K': 1, 'norm': True, 'global_fusion': True}, 'train': {'base_lr': 0.001, 'epoch': 0, 'epochs': 200, 'epsilon': 0.0001, 'global_step': 0, 'lr_decay_ratio': 0.1, 'max_grad_norm': 5, 'max_to_keep': 100, 'min_learning_rate': 2e-06, 'optimizer': 'adam', 'patience': 100, 'steps': [100, 150], 'test_every_n_epochs': 1, 'save_every_n_epochs': 5}}
+row normalization
+2021-02-07 08:00:04,890 - INFO - [[0.         0.25       0.         ... 0.         0.         0.        ]
+ [0.33333334 0.         0.33333334 ... 0.         0.         0.        ]
+ [0.         0.25       0.         ... 0.         0.         0.        ]
+ ...
+ [0.         0.         0.         ... 0.         0.33333334 0.        ]
+ [0.         0.         0.         ... 0.5        0.         1.        ]
+ [0.         0.         0.         ... 0.         0.6666667  0.        ]]
+2021-02-07 08:00:04,891 - INFO - [[0.         0.01698584 0.01680135 ... 0.01938612 0.01938612 0.01938612]
+ [0.01629671 0.         0.01815116 ... 0.0123895  0.0123895  0.0123895 ]
+ [0.01658655 0.01834585 0.         ... 0.01324038 0.01324038 0.01324038]
+ ...
+ [0.01955441 0.01276675 0.0135713  ... 0.         0.04337461 0.04337461]
+ [0.01955441 0.01276675 0.0135713  ... 0.04337461 0.         0.04337461]
+ [0.01955441 0.01276675 0.0135713  ... 0.04337461 0.04337461 0.        ]]
+2021-02-07 08:00:04,892 - INFO - [[0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ ...
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]
+ [0. 0. 0. ... 0. 0. 0.]]
+2021-02-07 08:00:04,923 - INFO - ('x_train', (1188, 4, 64, 2))
+2021-02-07 08:00:04,923 - INFO - ('xtime_train', (1188, 4))
+2021-02-07 08:00:04,923 - INFO - ('y_train', (1188, 4, 64, 2))
+2021-02-07 08:00:04,923 - INFO - ('ytime_train', (1188, 4))
+2021-02-07 08:00:04,923 - INFO - ('x_val', (132, 4, 64, 2))
+2021-02-07 08:00:04,924 - INFO - ('xtime_val', (132, 4))
+2021-02-07 08:00:04,924 - INFO - ('y_val', (132, 4, 64, 2))
+2021-02-07 08:00:04,924 - INFO - ('ytime_val', (132, 4))
+2021-02-07 08:00:04,924 - INFO - ('x_test', (330, 4, 64, 2))
+2021-02-07 08:00:04,924 - INFO - ('xtime_test', (330, 4))
+2021-02-07 08:00:04,924 - INFO - ('y_test', (330, 4, 64, 2))
+2021-02-07 08:00:04,924 - INFO - ('ytime_test', (330, 4))
+2021-02-07 08:00:04,924 - INFO - scaler.mean:129.72100891729798, scaler.std:246.0926126375675
+2021-02-07 08:01:00,641 - INFO - Epoch:0, train_mae:89.68, val_mae:74.56562232971191,r_loss=0.00,lr=[0.001],  time_elapsed:55.447383898019325
+2021-02-07 08:01:00,642 - INFO - val_mae decreased from 1000000.00 to 74.57
+2021-02-07 08:01:00,642 - INFO - Evaluation_test_Begin:
+2021-02-07 08:01:06,934 - INFO - Horizon 01, MAE: 77.78, MAPE: 0.6700, RMSE: 188.95
+2021-02-07 08:01:06,936 - INFO - Horizon 02, MAE: 83.68, MAPE: 0.7380, RMSE: 198.56
+2021-02-07 08:01:06,937 - INFO - Horizon 03, MAE: 86.90, MAPE: 0.8722, RMSE: 202.47
+2021-02-07 08:01:06,939 - INFO - Horizon 04, MAE: 94.02, MAPE: 0.9519, RMSE: 215.38
+2021-02-07 08:01:06,939 - INFO - Evaluation_test_End:
+2021-02-07 08:02:03,921 - INFO - Epoch:1, train_mae:55.52, val_mae:64.13714504241943,r_loss=0.00,lr=[0.001],  time_elapsed:56.982172927004285
+2021-02-07 08:02:03,922 - INFO - val_mae decreased from 74.57 to 64.14
+2021-02-07 08:02:03,922 - INFO - Evaluation_test_Begin:
+2021-02-07 08:02:10,282 - INFO - Horizon 01, MAE: 63.44, MAPE: 0.7620, RMSE: 148.31
+2021-02-07 08:02:10,283 - INFO - Horizon 02, MAE: 66.95, MAPE: 0.6966, RMSE: 153.03
+2021-02-07 08:02:10,285 - INFO - Horizon 03, MAE: 73.69, MAPE: 0.8073, RMSE: 166.81
+2021-02-07 08:02:10,286 - INFO - Horizon 04, MAE: 84.10, MAPE: 0.8144, RMSE: 184.09
+2021-02-07 08:02:10,286 - INFO - Evaluation_test_End:
+2021-02-07 08:03:07,454 - INFO - Epoch:2, train_mae:41.89, val_mae:61.31197738647461,r_loss=0.00,lr=[0.001],  time_elapsed:57.16685688501457
+2021-02-07 08:03:07,454 - INFO - val_mae decreased from 64.14 to 61.31
+2021-02-07 08:03:07,454 - INFO - Evaluation_test_Begin:
+2021-02-07 08:03:13,810 - INFO - Horizon 01, MAE: 54.88, MAPE: 0.8741, RMSE: 127.55
+2021-02-07 08:03:13,812 - INFO - Horizon 02, MAE: 66.56, MAPE: 0.7327, RMSE: 145.78
+2021-02-07 08:03:13,814 - INFO - Horizon 03, MAE: 75.67, MAPE: 1.0622, RMSE: 159.60
+2021-02-07 08:03:13,815 - INFO - Horizon 04, MAE: 85.01, MAPE: 0.9601, RMSE: 176.91
+2021-02-07 08:03:13,815 - INFO - Evaluation_test_End:
+2021-02-07 08:04:11,001 - INFO - Epoch:3, train_mae:34.76, val_mae:44.20506954193115,r_loss=0.00,lr=[0.001],  time_elapsed:57.18523816304514
+2021-02-07 08:04:11,001 - INFO - val_mae decreased from 61.31 to 44.21
+2021-02-07 08:04:11,001 - INFO - Evaluation_test_Begin:
+2021-02-07 08:04:17,360 - INFO - Horizon 01, MAE: 42.21, MAPE: 0.5078, RMSE: 104.16
+2021-02-07 08:04:17,361 - INFO - Horizon 02, MAE: 45.28, MAPE: 0.4168, RMSE: 108.19
+2021-02-07 08:04:17,363 - INFO - Horizon 03, MAE: 51.77, MAPE: 0.4876, RMSE: 120.24
+2021-02-07 08:04:17,364 - INFO - Horizon 04, MAE: 63.09, MAPE: 0.5617, RMSE: 143.95
+2021-02-07 08:04:17,364 - INFO - Evaluation_test_End:
+2021-02-07 08:05:14,549 - INFO - Epoch:4, train_mae:31.35, val_mae:47.144089698791504,r_loss=0.00,lr=[0.001],  time_elapsed:57.184840478992555
+2021-02-07 08:05:14,550 - INFO - Evaluation_test_Begin:
+2021-02-07 08:05:20,907 - INFO - Horizon 01, MAE: 40.19, MAPE: 0.4457, RMSE: 96.58
+2021-02-07 08:05:20,909 - INFO - Horizon 02, MAE: 48.22, MAPE: 0.8154, RMSE: 106.73
+2021-02-07 08:05:20,910 - INFO - Horizon 03, MAE: 56.55, MAPE: 0.6324, RMSE: 128.22
+2021-02-07 08:05:20,912 - INFO - Horizon 04, MAE: 73.24, MAPE: 0.8439, RMSE: 161.82
+2021-02-07 08:05:20,912 - INFO - Evaluation_test_End:
+2021-02-07 08:06:18,357 - INFO - Epoch:5, train_mae:30.27, val_mae:43.86452674865723,r_loss=0.00,lr=[0.001],  time_elapsed:57.199361872975715
+2021-02-07 08:06:18,357 - INFO - val_mae decreased from 44.21 to 43.86
+2021-02-07 08:06:18,358 - INFO - Evaluation_test_Begin:
+2021-02-07 08:06:24,717 - INFO - Horizon 01, MAE: 37.18, MAPE: 0.3742, RMSE: 90.31
+2021-02-07 08:06:24,719 - INFO - Horizon 02, MAE: 43.71, MAPE: 0.4895, RMSE: 97.31
+2021-02-07 08:06:24,720 - INFO - Horizon 03, MAE: 50.87, MAPE: 0.5094, RMSE: 108.87
+2021-02-07 08:06:24,722 - INFO - Horizon 04, MAE: 62.58, MAPE: 0.7954, RMSE: 126.66
+2021-02-07 08:06:24,722 - INFO - Evaluation_test_End:
+2021-02-07 08:07:21,942 - INFO - Epoch:6, train_mae:29.03, val_mae:37.30391550064087,r_loss=0.00,lr=[0.001],  time_elapsed:57.21956506802235
+2021-02-07 08:07:21,942 - INFO - val_mae decreased from 43.86 to 37.30
+2021-02-07 08:07:21,942 - INFO - Evaluation_test_Begin:
+2021-02-07 08:07:28,302 - INFO - Horizon 01, MAE: 34.63, MAPE: 0.3659, RMSE: 86.89
+2021-02-07 08:07:28,304 - INFO - Horizon 02, MAE: 38.46, MAPE: 0.4217, RMSE: 90.58
+2021-02-07 08:07:28,305 - INFO - Horizon 03, MAE: 44.02, MAPE: 0.4881, RMSE: 102.04
+2021-02-07 08:07:28,307 - INFO - Horizon 04, MAE: 50.17, MAPE: 0.4850, RMSE: 112.99
+2021-02-07 08:07:28,307 - INFO - Evaluation_test_End:
+2021-02-07 08:08:25,541 - INFO - Epoch:7, train_mae:29.63, val_mae:36.2966833114624,r_loss=0.00,lr=[0.001],  time_elapsed:57.23350644297898
+2021-02-07 08:08:25,541 - INFO - val_mae decreased from 37.30 to 36.30
+2021-02-07 08:08:25,541 - INFO - Evaluation_test_Begin:
+2021-02-07 08:08:31,903 - INFO - Horizon 01, MAE: 34.08, MAPE: 0.5335, RMSE: 84.55
+2021-02-07 08:08:31,905 - INFO - Horizon 02, MAE: 38.27, MAPE: 0.4444, RMSE: 88.96
+2021-02-07 08:08:31,906 - INFO - Horizon 03, MAE: 43.24, MAPE: 0.5066, RMSE: 99.40
+2021-02-07 08:08:31,908 - INFO - Horizon 04, MAE: 49.11, MAPE: 0.4785, RMSE: 109.19
+2021-02-07 08:08:31,908 - INFO - Evaluation_test_End:
+2021-02-07 08:09:29,160 - INFO - Epoch:8, train_mae:31.36, val_mae:38.57470893859863,r_loss=0.00,lr=[0.001],  time_elapsed:57.2516427669907
+2021-02-07 08:09:29,160 - INFO - Evaluation_test_Begin:
+2021-02-07 08:09:35,523 - INFO - Horizon 01, MAE: 35.21, MAPE: 0.3842, RMSE: 86.70
+2021-02-07 08:09:35,525 - INFO - Horizon 02, MAE: 40.32, MAPE: 0.4607, RMSE: 90.56
+2021-02-07 08:09:35,527 - INFO - Horizon 03, MAE: 46.05, MAPE: 0.4990, RMSE: 101.12
+2021-02-07 08:09:35,528 - INFO - Horizon 04, MAE: 53.11, MAPE: 0.6174, RMSE: 112.66
+2021-02-07 08:09:35,528 - INFO - Evaluation_test_End:
+2021-02-07 08:10:32,798 - INFO - Epoch:9, train_mae:29.70, val_mae:35.71518516540527,r_loss=0.00,lr=[0.001],  time_elapsed:57.26917609095108
+2021-02-07 08:10:32,798 - INFO - val_mae decreased from 36.30 to 35.72
+2021-02-07 08:10:32,798 - INFO - Evaluation_test_Begin:
+2021-02-07 08:10:39,164 - INFO - Horizon 01, MAE: 33.64, MAPE: 0.5082, RMSE: 80.88
+2021-02-07 08:10:39,165 - INFO - Horizon 02, MAE: 36.68, MAPE: 0.4215, RMSE: 83.94
+2021-02-07 08:10:39,167 - INFO - Horizon 03, MAE: 42.67, MAPE: 0.6218, RMSE: 94.56
+2021-02-07 08:10:39,168 - INFO - Horizon 04, MAE: 48.53, MAPE: 0.5197, RMSE: 104.57
+2021-02-07 08:10:39,168 - INFO - Evaluation_test_End:
+2021-02-07 08:11:36,673 - INFO - Epoch:10, train_mae:30.47, val_mae:39.32032585144043,r_loss=0.00,lr=[0.001],  time_elapsed:57.26515830098651
+2021-02-07 08:11:36,673 - INFO - Evaluation_test_Begin:
+2021-02-07 08:11:43,039 - INFO - Horizon 01, MAE: 35.87, MAPE: 0.3713, RMSE: 88.22
+2021-02-07 08:11:43,041 - INFO - Horizon 02, MAE: 42.52, MAPE: 0.5314, RMSE: 101.31
+2021-02-07 08:11:43,042 - INFO - Horizon 03, MAE: 49.32, MAPE: 0.5245, RMSE: 116.53
+2021-02-07 08:11:43,044 - INFO - Horizon 04, MAE: 58.37, MAPE: 0.5297, RMSE: 140.39
+2021-02-07 08:11:43,044 - INFO - Evaluation_test_End:
+2021-02-07 08:12:40,333 - INFO - Epoch:11, train_mae:34.45, val_mae:38.10728740692139,r_loss=0.00,lr=[0.001],  time_elapsed:57.28836793801747
+2021-02-07 08:12:40,333 - INFO - Evaluation_test_Begin:
+2021-02-07 08:12:46,701 - INFO - Horizon 01, MAE: 36.32, MAPE: 0.6121, RMSE: 83.93
+2021-02-07 08:12:46,703 - INFO - Horizon 02, MAE: 39.96, MAPE: 0.4033, RMSE: 89.78
+2021-02-07 08:12:46,704 - INFO - Horizon 03, MAE: 45.59, MAPE: 0.6014, RMSE: 99.22
+2021-02-07 08:12:46,706 - INFO - Horizon 04, MAE: 51.64, MAPE: 0.5402, RMSE: 111.32
+2021-02-07 08:12:46,706 - INFO - Evaluation_test_End:
+2021-02-07 08:13:43,998 - INFO - Epoch:12, train_mae:28.89, val_mae:34.54554271697998,r_loss=0.00,lr=[0.001],  time_elapsed:57.2915384999942
+2021-02-07 08:13:43,998 - INFO - val_mae decreased from 35.72 to 34.55
+2021-02-07 08:13:43,998 - INFO - Evaluation_test_Begin:
+2021-02-07 08:13:50,365 - INFO - Horizon 01, MAE: 33.36, MAPE: 0.6686, RMSE: 79.96
+2021-02-07 08:13:50,366 - INFO - Horizon 02, MAE: 38.48, MAPE: 0.6176, RMSE: 87.43
+2021-02-07 08:13:50,368 - INFO - Horizon 03, MAE: 44.41, MAPE: 0.8256, RMSE: 99.79
+2021-02-07 08:13:50,369 - INFO - Horizon 04, MAE: 49.28, MAPE: 0.8207, RMSE: 109.29
+2021-02-07 08:13:50,369 - INFO - Evaluation_test_End:
+2021-02-07 08:14:47,670 - INFO - Epoch:13, train_mae:29.45, val_mae:34.95017433166504,r_loss=0.00,lr=[0.001],  time_elapsed:57.300840606039856
+2021-02-07 08:14:47,671 - INFO - Evaluation_test_Begin:
+2021-02-07 08:14:54,037 - INFO - Horizon 01, MAE: 32.41, MAPE: 0.3584, RMSE: 76.79
+2021-02-07 08:14:54,039 - INFO - Horizon 02, MAE: 35.89, MAPE: 0.3711, RMSE: 81.10
+2021-02-07 08:14:54,040 - INFO - Horizon 03, MAE: 43.00, MAPE: 0.4115, RMSE: 93.57
+2021-02-07 08:14:54,042 - INFO - Horizon 04, MAE: 49.11, MAPE: 0.4153, RMSE: 105.92
+2021-02-07 08:14:54,042 - INFO - Evaluation_test_End:
+2021-02-07 08:15:51,354 - INFO - Epoch:14, train_mae:28.64, val_mae:37.451072216033936,r_loss=0.00,lr=[0.001],  time_elapsed:57.3120856389869
+2021-02-07 08:15:51,355 - INFO - Evaluation_test_Begin:
+2021-02-07 08:15:57,722 - INFO - Horizon 01, MAE: 33.18, MAPE: 0.5842, RMSE: 76.36
+2021-02-07 08:15:57,724 - INFO - Horizon 02, MAE: 38.85, MAPE: 0.5191, RMSE: 83.23
+2021-02-07 08:15:57,725 - INFO - Horizon 03, MAE: 44.14, MAPE: 0.5985, RMSE: 97.24
+2021-02-07 08:15:57,726 - INFO - Horizon 04, MAE: 52.66, MAPE: 0.6519, RMSE: 109.88
+2021-02-07 08:15:57,727 - INFO - Evaluation_test_End:
+2021-02-07 08:16:55,269 - INFO - Epoch:15, train_mae:27.71, val_mae:31.481120586395264,r_loss=0.00,lr=[0.001],  time_elapsed:57.302903177042026
+2021-02-07 08:16:55,270 - INFO - val_mae decreased from 34.55 to 31.48
+2021-02-07 08:16:55,270 - INFO - Evaluation_test_Begin:
+2021-02-07 08:17:01,636 - INFO - Horizon 01, MAE: 29.86, MAPE: 0.4098, RMSE: 71.82
+2021-02-07 08:17:01,637 - INFO - Horizon 02, MAE: 33.11, MAPE: 0.3763, RMSE: 76.04
+2021-02-07 08:17:01,639 - INFO - Horizon 03, MAE: 38.16, MAPE: 0.5452, RMSE: 87.79
+2021-02-07 08:17:01,640 - INFO - Horizon 04, MAE: 43.50, MAPE: 0.4981, RMSE: 97.55
+2021-02-07 08:17:01,641 - INFO - Evaluation_test_End:
+2021-02-07 08:17:58,922 - INFO - Epoch:16, train_mae:27.07, val_mae:30.727288246154785,r_loss=0.00,lr=[0.001],  time_elapsed:57.28105024097022
+2021-02-07 08:17:58,922 - INFO - val_mae decreased from 31.48 to 30.73
+2021-02-07 08:17:58,922 - INFO - Evaluation_test_Begin:
+2021-02-07 08:18:05,289 - INFO - Horizon 01, MAE: 29.65, MAPE: 0.3780, RMSE: 71.27
+2021-02-07 08:18:05,290 - INFO - Horizon 02, MAE: 33.00, MAPE: 0.3579, RMSE: 74.49
+2021-02-07 08:18:05,292 - INFO - Horizon 03, MAE: 37.19, MAPE: 0.3928, RMSE: 84.36
+2021-02-07 08:18:05,293 - INFO - Horizon 04, MAE: 42.72, MAPE: 0.4365, RMSE: 93.95
+2021-02-07 08:18:05,293 - INFO - Evaluation_test_End:
+2021-02-07 08:19:02,568 - INFO - Epoch:17, train_mae:27.93, val_mae:34.982754707336426,r_loss=0.00,lr=[0.001],  time_elapsed:57.27419753198046
+2021-02-07 08:19:02,568 - INFO - Evaluation_test_Begin:
+2021-02-07 08:19:08,931 - INFO - Horizon 01, MAE: 31.91, MAPE: 0.4613, RMSE: 72.01
+2021-02-07 08:19:08,932 - INFO - Horizon 02, MAE: 36.79, MAPE: 0.4201, RMSE: 77.73
+2021-02-07 08:19:08,934 - INFO - Horizon 03, MAE: 42.27, MAPE: 0.4996, RMSE: 90.56
+2021-02-07 08:19:08,935 - INFO - Horizon 04, MAE: 48.52, MAPE: 0.5173, RMSE: 102.62
+2021-02-07 08:19:08,935 - INFO - Evaluation_test_End:
+2021-02-07 08:20:06,188 - INFO - Epoch:18, train_mae:27.26, val_mae:33.21909952163696,r_loss=0.00,lr=[0.001],  time_elapsed:57.25223773001926
+2021-02-07 08:20:06,188 - INFO - Evaluation_test_Begin:
+2021-02-07 08:20:12,552 - INFO - Horizon 01, MAE: 30.93, MAPE: 0.3411, RMSE: 72.50
+2021-02-07 08:20:12,553 - INFO - Horizon 02, MAE: 35.27, MAPE: 0.3795, RMSE: 77.42
+2021-02-07 08:20:12,555 - INFO - Horizon 03, MAE: 39.51, MAPE: 0.3541, RMSE: 86.95
+2021-02-07 08:20:12,556 - INFO - Horizon 04, MAE: 45.13, MAPE: 0.3796, RMSE: 97.05
+2021-02-07 08:20:12,556 - INFO - Evaluation_test_End:
+2021-02-07 08:21:09,825 - INFO - Epoch:19, train_mae:24.77, val_mae:35.648624420166016,r_loss=0.00,lr=[0.001],  time_elapsed:57.2680834599887
+2021-02-07 08:21:09,825 - INFO - Evaluation_test_Begin:
+2021-02-07 08:21:16,189 - INFO - Horizon 01, MAE: 33.62, MAPE: 0.4031, RMSE: 79.02
+2021-02-07 08:21:16,191 - INFO - Horizon 02, MAE: 37.09, MAPE: 0.3599, RMSE: 82.14
+2021-02-07 08:21:16,192 - INFO - Horizon 03, MAE: 43.86, MAPE: 0.4492, RMSE: 97.35
+2021-02-07 08:21:16,194 - INFO - Horizon 04, MAE: 49.38, MAPE: 0.4137, RMSE: 107.25
+2021-02-07 08:21:16,194 - INFO - Evaluation_test_End:
+2021-02-07 08:22:13,695 - INFO - Epoch:20, train_mae:28.05, val_mae:31.038098335266113,r_loss=0.00,lr=[0.001],  time_elapsed:57.25973305001389
+2021-02-07 08:22:13,695 - INFO - Evaluation_test_Begin:
+2021-02-07 08:22:20,056 - INFO - Horizon 01, MAE: 29.37, MAPE: 0.3143, RMSE: 69.50
+2021-02-07 08:22:20,058 - INFO - Horizon 02, MAE: 32.39, MAPE: 0.4503, RMSE: 71.42
+2021-02-07 08:22:20,059 - INFO - Horizon 03, MAE: 37.16, MAPE: 0.4002, RMSE: 81.27
+2021-02-07 08:22:20,061 - INFO - Horizon 04, MAE: 42.57, MAPE: 0.5375, RMSE: 89.89
+2021-02-07 08:22:20,061 - INFO - Evaluation_test_End:
+2021-02-07 08:23:17,320 - INFO - Epoch:21, train_mae:23.92, val_mae:33.56704139709473,r_loss=0.00,lr=[0.001],  time_elapsed:57.25933805597015
+2021-02-07 08:23:17,321 - INFO - Evaluation_test_Begin:
+2021-02-07 08:23:23,683 - INFO - Horizon 01, MAE: 34.38, MAPE: 0.5874, RMSE: 73.50
+2021-02-07 08:23:23,685 - INFO - Horizon 02, MAE: 37.68, MAPE: 0.5045, RMSE: 77.41
+2021-02-07 08:23:23,686 - INFO - Horizon 03, MAE: 41.71, MAPE: 0.5513, RMSE: 86.50
+2021-02-07 08:23:23,688 - INFO - Horizon 04, MAE: 47.27, MAPE: 0.5664, RMSE: 98.41
+2021-02-07 08:23:23,688 - INFO - Evaluation_test_End:
+2021-02-07 08:24:20,942 - INFO - Epoch:22, train_mae:24.24, val_mae:30.127187728881836,r_loss=0.00,lr=[0.001],  time_elapsed:57.25403291999828
+2021-02-07 08:24:20,942 - INFO - val_mae decreased from 30.73 to 30.13
+2021-02-07 08:24:20,943 - INFO - Evaluation_test_Begin:
+2021-02-07 08:24:27,305 - INFO - Horizon 01, MAE: 28.91, MAPE: 0.3154, RMSE: 65.27
+2021-02-07 08:24:27,307 - INFO - Horizon 02, MAE: 32.24, MAPE: 0.3963, RMSE: 67.73
+2021-02-07 08:24:27,308 - INFO - Horizon 03, MAE: 36.61, MAPE: 0.5112, RMSE: 77.57
+2021-02-07 08:24:27,310 - INFO - Horizon 04, MAE: 41.70, MAPE: 0.4665, RMSE: 86.86
+2021-02-07 08:24:27,310 - INFO - Evaluation_test_End:
+2021-02-07 08:25:24,563 - INFO - Epoch:23, train_mae:22.56, val_mae:31.981502056121826,r_loss=0.00,lr=[0.001],  time_elapsed:57.253457523009274
+2021-02-07 08:25:24,564 - INFO - Evaluation_test_Begin:
+2021-02-07 08:25:30,924 - INFO - Horizon 01, MAE: 29.10, MAPE: 0.3814, RMSE: 65.06
+2021-02-07 08:25:30,925 - INFO - Horizon 02, MAE: 34.44, MAPE: 0.7165, RMSE: 66.43
+2021-02-07 08:25:30,927 - INFO - Horizon 03, MAE: 37.50, MAPE: 0.6348, RMSE: 74.87
+2021-02-07 08:25:30,928 - INFO - Horizon 04, MAE: 43.64, MAPE: 0.8533, RMSE: 82.83
+2021-02-07 08:25:30,928 - INFO - Evaluation_test_End:
+2021-02-07 08:26:28,165 - INFO - Epoch:24, train_mae:22.95, val_mae:29.91769504547119,r_loss=0.00,lr=[0.001],  time_elapsed:57.2363766739727
+2021-02-07 08:26:28,165 - INFO - val_mae decreased from 30.13 to 29.92
+2021-02-07 08:26:28,165 - INFO - Evaluation_test_Begin:
+2021-02-07 08:26:34,523 - INFO - Horizon 01, MAE: 29.35, MAPE: 0.5227, RMSE: 63.08
+2021-02-07 08:26:34,525 - INFO - Horizon 02, MAE: 31.71, MAPE: 0.5024, RMSE: 63.82
+2021-02-07 08:26:34,526 - INFO - Horizon 03, MAE: 35.52, MAPE: 0.5370, RMSE: 73.27
+2021-02-07 08:26:34,528 - INFO - Horizon 04, MAE: 39.36, MAPE: 0.5182, RMSE: 80.10
+2021-02-07 08:26:34,528 - INFO - Evaluation_test_End:
+2021-02-07 08:27:31,994 - INFO - Epoch:25, train_mae:22.33, val_mae:31.1634202003479,r_loss=0.00,lr=[0.001],  time_elapsed:57.22417534602573
+2021-02-07 08:27:31,994 - INFO - Evaluation_test_Begin:
+2021-02-07 08:27:38,354 - INFO - Horizon 01, MAE: 29.80, MAPE: 0.4241, RMSE: 63.08
+2021-02-07 08:27:38,356 - INFO - Horizon 02, MAE: 32.18, MAPE: 0.3428, RMSE: 64.38
+2021-02-07 08:27:38,357 - INFO - Horizon 03, MAE: 36.70, MAPE: 0.4381, RMSE: 73.10
+2021-02-07 08:27:38,359 - INFO - Horizon 04, MAE: 40.63, MAPE: 0.4095, RMSE: 80.59
+2021-02-07 08:27:38,359 - INFO - Evaluation_test_End:
+2021-02-07 08:28:35,592 - INFO - Epoch:26, train_mae:21.54, val_mae:28.357279300689697,r_loss=0.00,lr=[0.001],  time_elapsed:57.23232785600703
+2021-02-07 08:28:35,592 - INFO - val_mae decreased from 29.92 to 28.36
+2021-02-07 08:28:35,592 - INFO - Evaluation_test_Begin:
+2021-02-07 08:28:41,949 - INFO - Horizon 01, MAE: 27.56, MAPE: 0.3470, RMSE: 61.22
+2021-02-07 08:28:41,951 - INFO - Horizon 02, MAE: 30.05, MAPE: 0.3766, RMSE: 62.23
+2021-02-07 08:28:41,952 - INFO - Horizon 03, MAE: 34.14, MAPE: 0.4554, RMSE: 70.75
+2021-02-07 08:28:41,954 - INFO - Horizon 04, MAE: 38.44, MAPE: 0.4598, RMSE: 78.80
+2021-02-07 08:28:41,954 - INFO - Evaluation_test_End:
+2021-02-07 08:29:39,182 - INFO - Epoch:27, train_mae:21.87, val_mae:29.513431549072266,r_loss=0.00,lr=[0.001],  time_elapsed:57.22753852797905
+2021-02-07 08:29:39,182 - INFO - Evaluation_test_Begin:
+2021-02-07 08:29:45,542 - INFO - Horizon 01, MAE: 27.39, MAPE: 0.3440, RMSE: 58.91
+2021-02-07 08:29:45,543 - INFO - Horizon 02, MAE: 30.12, MAPE: 0.3359, RMSE: 59.62
+2021-02-07 08:29:45,545 - INFO - Horizon 03, MAE: 34.01, MAPE: 0.3870, RMSE: 68.31
+2021-02-07 08:29:45,546 - INFO - Horizon 04, MAE: 37.94, MAPE: 0.4095, RMSE: 74.46
+2021-02-07 08:29:45,546 - INFO - Evaluation_test_End:
+2021-02-07 08:30:42,792 - INFO - Epoch:28, train_mae:21.70, val_mae:28.21613883972168,r_loss=0.00,lr=[0.001],  time_elapsed:57.24533828900894
+2021-02-07 08:30:42,792 - INFO - val_mae decreased from 28.36 to 28.22
+2021-02-07 08:30:42,792 - INFO - Evaluation_test_Begin:
+2021-02-07 08:30:49,154 - INFO - Horizon 01, MAE: 27.64, MAPE: 0.5037, RMSE: 57.16
+2021-02-07 08:30:49,156 - INFO - Horizon 02, MAE: 29.22, MAPE: 0.3248, RMSE: 58.24
+2021-02-07 08:30:49,157 - INFO - Horizon 03, MAE: 33.38, MAPE: 0.4991, RMSE: 67.04
+2021-02-07 08:30:49,159 - INFO - Horizon 04, MAE: 37.69, MAPE: 0.3731, RMSE: 75.66
+2021-02-07 08:30:49,159 - INFO - Evaluation_test_End:
+2021-02-07 08:31:46,411 - INFO - Epoch:29, train_mae:24.59, val_mae:33.159555435180664,r_loss=0.00,lr=[0.001],  time_elapsed:57.25230102997739
+2021-02-07 08:31:46,412 - INFO - Evaluation_test_Begin:
+2021-02-07 08:31:52,775 - INFO - Horizon 01, MAE: 33.85, MAPE: 0.5497, RMSE: 68.84
+2021-02-07 08:31:52,776 - INFO - Horizon 02, MAE: 34.83, MAPE: 0.3821, RMSE: 72.85
+2021-02-07 08:31:52,778 - INFO - Horizon 03, MAE: 41.13, MAPE: 0.5707, RMSE: 90.76
+2021-02-07 08:31:52,779 - INFO - Horizon 04, MAE: 46.71, MAPE: 0.4199, RMSE: 109.50
+2021-02-07 08:31:52,779 - INFO - Evaluation_test_End:
+2021-02-07 08:32:50,264 - INFO - Epoch:30, train_mae:24.57, val_mae:29.438990116119385,r_loss=0.00,lr=[0.001],  time_elapsed:57.241872359008994
+2021-02-07 08:32:50,265 - INFO - Evaluation_test_Begin:
+2021-02-07 08:32:56,625 - INFO - Horizon 01, MAE: 28.65, MAPE: 0.3509, RMSE: 58.65
+2021-02-07 08:32:56,626 - INFO - Horizon 02, MAE: 30.71, MAPE: 0.2904, RMSE: 59.96
+2021-02-07 08:32:56,628 - INFO - Horizon 03, MAE: 34.53, MAPE: 0.4067, RMSE: 68.52
+2021-02-07 08:32:56,629 - INFO - Horizon 04, MAE: 38.45, MAPE: 0.3395, RMSE: 75.70
+2021-02-07 08:32:56,629 - INFO - Evaluation_test_End:
+2021-02-07 08:33:53,895 - INFO - Epoch:31, train_mae:21.49, val_mae:28.01199197769165,r_loss=0.00,lr=[0.001],  time_elapsed:57.26511723099975
+2021-02-07 08:33:53,895 - INFO - val_mae decreased from 28.22 to 28.01
+2021-02-07 08:33:53,895 - INFO - Evaluation_test_Begin:
+2021-02-07 08:34:00,258 - INFO - Horizon 01, MAE: 27.43, MAPE: 0.4210, RMSE: 55.73
+2021-02-07 08:34:00,259 - INFO - Horizon 02, MAE: 29.27, MAPE: 0.3183, RMSE: 57.61
+2021-02-07 08:34:00,261 - INFO - Horizon 03, MAE: 33.16, MAPE: 0.3877, RMSE: 65.92
+2021-02-07 08:34:00,262 - INFO - Horizon 04, MAE: 37.16, MAPE: 0.3769, RMSE: 73.83
+2021-02-07 08:34:00,262 - INFO - Evaluation_test_End:
+2021-02-07 08:34:57,537 - INFO - Epoch:32, train_mae:22.51, val_mae:29.804985523223877,r_loss=0.00,lr=[0.001],  time_elapsed:57.27467660600087
+2021-02-07 08:34:57,537 - INFO - Evaluation_test_Begin:
+2021-02-07 08:35:03,903 - INFO - Horizon 01, MAE: 27.91, MAPE: 0.3451, RMSE: 56.53
+2021-02-07 08:35:03,904 - INFO - Horizon 02, MAE: 30.06, MAPE: 0.3083, RMSE: 58.02
+2021-02-07 08:35:03,906 - INFO - Horizon 03, MAE: 34.86, MAPE: 0.3560, RMSE: 68.89
+2021-02-07 08:35:03,907 - INFO - Horizon 04, MAE: 39.56, MAPE: 0.3644, RMSE: 78.41
+2021-02-07 08:35:03,907 - INFO - Evaluation_test_End:
+2021-02-07 08:36:01,194 - INFO - Epoch:33, train_mae:20.80, val_mae:28.94578742980957,r_loss=0.00,lr=[0.001],  time_elapsed:57.286884300003294
+2021-02-07 08:36:01,195 - INFO - Evaluation_test_Begin:
+2021-02-07 08:36:07,560 - INFO - Horizon 01, MAE: 26.86, MAPE: 0.2835, RMSE: 53.18
+2021-02-07 08:36:07,562 - INFO - Horizon 02, MAE: 29.83, MAPE: 0.3322, RMSE: 55.74
+2021-02-07 08:36:07,563 - INFO - Horizon 03, MAE: 33.38, MAPE: 0.3745, RMSE: 63.83
+2021-02-07 08:36:07,565 - INFO - Horizon 04, MAE: 37.93, MAPE: 0.3725, RMSE: 72.77
+2021-02-07 08:36:07,565 - INFO - Evaluation_test_End:
+2021-02-07 08:37:04,855 - INFO - Epoch:34, train_mae:20.82, val_mae:28.034510612487793,r_loss=0.00,lr=[0.001],  time_elapsed:57.290449615975376
+2021-02-07 08:37:04,856 - INFO - Evaluation_test_Begin:
+2021-02-07 08:37:11,223 - INFO - Horizon 01, MAE: 27.04, MAPE: 0.2914, RMSE: 53.48
+2021-02-07 08:37:11,224 - INFO - Horizon 02, MAE: 29.31, MAPE: 0.3294, RMSE: 53.92
+2021-02-07 08:37:11,226 - INFO - Horizon 03, MAE: 32.70, MAPE: 0.3349, RMSE: 62.31
+2021-02-07 08:37:11,227 - INFO - Horizon 04, MAE: 36.88, MAPE: 0.3731, RMSE: 69.46
+2021-02-07 08:37:11,227 - INFO - Evaluation_test_End:
+2021-02-07 08:38:08,763 - INFO - Epoch:35, train_mae:21.59, val_mae:28.065460681915283,r_loss=0.00,lr=[0.001],  time_elapsed:57.29577761597466
+2021-02-07 08:38:08,763 - INFO - Evaluation_test_Begin:
+2021-02-07 08:38:15,130 - INFO - Horizon 01, MAE: 27.18, MAPE: 0.3899, RMSE: 52.16
+2021-02-07 08:38:15,132 - INFO - Horizon 02, MAE: 29.62, MAPE: 0.3727, RMSE: 54.75
+2021-02-07 08:38:15,133 - INFO - Horizon 03, MAE: 32.63, MAPE: 0.4324, RMSE: 63.10
+2021-02-07 08:38:15,135 - INFO - Horizon 04, MAE: 37.40, MAPE: 0.4293, RMSE: 72.44
+2021-02-07 08:38:15,135 - INFO - Evaluation_test_End:
+2021-02-07 08:39:12,416 - INFO - Epoch:36, train_mae:19.75, val_mae:28.03169059753418,r_loss=0.00,lr=[0.001],  time_elapsed:57.280479883018415
+2021-02-07 08:39:12,416 - INFO - Evaluation_test_Begin:
+2021-02-07 08:39:18,781 - INFO - Horizon 01, MAE: 26.58, MAPE: 0.4011, RMSE: 50.51
+2021-02-07 08:39:18,783 - INFO - Horizon 02, MAE: 28.33, MAPE: 0.3933, RMSE: 51.56
+2021-02-07 08:39:18,785 - INFO - Horizon 03, MAE: 32.22, MAPE: 0.4895, RMSE: 60.43
+2021-02-07 08:39:18,786 - INFO - Horizon 04, MAE: 36.76, MAPE: 0.4555, RMSE: 69.20
+2021-02-07 08:39:18,786 - INFO - Evaluation_test_End:
+2021-02-07 08:40:16,069 - INFO - Epoch:37, train_mae:19.42, val_mae:27.258217811584473,r_loss=0.00,lr=[0.001],  time_elapsed:57.28194340999471
+2021-02-07 08:40:16,069 - INFO - val_mae decreased from 28.01 to 27.26
+2021-02-07 08:40:16,069 - INFO - Evaluation_test_Begin:
+2021-02-07 08:40:22,435 - INFO - Horizon 01, MAE: 26.07, MAPE: 0.2870, RMSE: 49.14
+2021-02-07 08:40:22,436 - INFO - Horizon 02, MAE: 28.01, MAPE: 0.3003, RMSE: 51.07
+2021-02-07 08:40:22,438 - INFO - Horizon 03, MAE: 31.55, MAPE: 0.3469, RMSE: 58.80
+2021-02-07 08:40:22,439 - INFO - Horizon 04, MAE: 34.98, MAPE: 0.3282, RMSE: 65.48
+2021-02-07 08:40:22,439 - INFO - Evaluation_test_End:
+2021-02-07 08:41:19,721 - INFO - Epoch:38, train_mae:19.71, val_mae:27.988303184509277,r_loss=0.00,lr=[0.001],  time_elapsed:57.28128839103738
+2021-02-07 08:41:19,721 - INFO - Evaluation_test_Begin:
+2021-02-07 08:41:26,086 - INFO - Horizon 01, MAE: 25.99, MAPE: 0.3617, RMSE: 49.03
+2021-02-07 08:41:26,088 - INFO - Horizon 02, MAE: 28.58, MAPE: 0.3931, RMSE: 51.42
+2021-02-07 08:41:26,089 - INFO - Horizon 03, MAE: 32.25, MAPE: 0.4830, RMSE: 58.82
+2021-02-07 08:41:26,091 - INFO - Horizon 04, MAE: 35.80, MAPE: 0.4321, RMSE: 65.55
+2021-02-07 08:41:26,091 - INFO - Evaluation_test_End:
+2021-02-07 08:42:23,366 - INFO - Epoch:39, train_mae:18.31, val_mae:26.567995071411133,r_loss=0.00,lr=[0.001],  time_elapsed:57.27536520501599
+2021-02-07 08:42:23,366 - INFO - val_mae decreased from 27.26 to 26.57
+2021-02-07 08:42:23,366 - INFO - Evaluation_test_Begin:
+2021-02-07 08:42:29,730 - INFO - Horizon 01, MAE: 25.54, MAPE: 0.2706, RMSE: 47.87
+2021-02-07 08:42:29,731 - INFO - Horizon 02, MAE: 27.31, MAPE: 0.2925, RMSE: 49.67
+2021-02-07 08:42:29,733 - INFO - Horizon 03, MAE: 30.49, MAPE: 0.3635, RMSE: 56.17
+2021-02-07 08:42:29,734 - INFO - Horizon 04, MAE: 34.18, MAPE: 0.3516, RMSE: 63.85
+2021-02-07 08:42:29,734 - INFO - Evaluation_test_End:
+2021-02-07 08:43:27,260 - INFO - Epoch:40, train_mae:19.23, val_mae:28.962818145751953,r_loss=0.00,lr=[0.001],  time_elapsed:57.286554047022946
+2021-02-07 08:43:27,260 - INFO - Evaluation_test_Begin:
+2021-02-07 08:43:33,625 - INFO - Horizon 01, MAE: 26.75, MAPE: 0.3431, RMSE: 48.33
+2021-02-07 08:43:33,627 - INFO - Horizon 02, MAE: 29.41, MAPE: 0.3790, RMSE: 50.97
+2021-02-07 08:43:33,629 - INFO - Horizon 03, MAE: 33.61, MAPE: 0.4138, RMSE: 59.59
+2021-02-07 08:43:33,630 - INFO - Horizon 04, MAE: 37.25, MAPE: 0.4399, RMSE: 67.29
+2021-02-07 08:43:33,630 - INFO - Evaluation_test_End:
+2021-02-07 08:44:30,920 - INFO - Epoch:41, train_mae:18.74, val_mae:26.281447887420654,r_loss=0.00,lr=[0.001],  time_elapsed:57.28917132294737
+2021-02-07 08:44:30,920 - INFO - val_mae decreased from 26.57 to 26.28
+2021-02-07 08:44:30,920 - INFO - Evaluation_test_Begin:
+2021-02-07 08:44:37,283 - INFO - Horizon 01, MAE: 25.39, MAPE: 0.2737, RMSE: 46.54
+2021-02-07 08:44:37,284 - INFO - Horizon 02, MAE: 27.36, MAPE: 0.3279, RMSE: 48.58
+2021-02-07 08:44:37,286 - INFO - Horizon 03, MAE: 30.30, MAPE: 0.3541, RMSE: 55.23
+2021-02-07 08:44:37,287 - INFO - Horizon 04, MAE: 34.21, MAPE: 0.3915, RMSE: 63.22
+2021-02-07 08:44:37,287 - INFO - Evaluation_test_End:
+2021-02-07 08:45:34,541 - INFO - Epoch:42, train_mae:20.04, val_mae:27.79484462738037,r_loss=0.00,lr=[0.001],  time_elapsed:57.25343458901625
+2021-02-07 08:45:34,541 - INFO - Evaluation_test_Begin:
+2021-02-07 08:45:40,900 - INFO - Horizon 01, MAE: 25.98, MAPE: 0.2683, RMSE: 48.05
+2021-02-07 08:45:40,902 - INFO - Horizon 02, MAE: 29.09, MAPE: 0.3456, RMSE: 53.03
+2021-02-07 08:45:40,904 - INFO - Horizon 03, MAE: 31.61, MAPE: 0.3248, RMSE: 59.17
+2021-02-07 08:45:40,905 - INFO - Horizon 04, MAE: 35.99, MAPE: 0.3121, RMSE: 68.85
+2021-02-07 08:45:40,905 - INFO - Evaluation_test_End:
+2021-02-07 08:46:38,151 - INFO - Epoch:43, train_mae:18.81, val_mae:27.214972972869873,r_loss=0.00,lr=[0.001],  time_elapsed:57.24562139296904
+2021-02-07 08:46:38,151 - INFO - Evaluation_test_Begin:
+2021-02-07 08:46:44,513 - INFO - Horizon 01, MAE: 26.61, MAPE: 0.3361, RMSE: 49.10
+2021-02-07 08:46:44,514 - INFO - Horizon 02, MAE: 28.87, MAPE: 0.3574, RMSE: 53.12
+2021-02-07 08:46:44,516 - INFO - Horizon 03, MAE: 32.06, MAPE: 0.4087, RMSE: 60.19
+2021-02-07 08:46:44,517 - INFO - Horizon 04, MAE: 35.72, MAPE: 0.4337, RMSE: 66.62
+2021-02-07 08:46:44,517 - INFO - Evaluation_test_End:
+2021-02-07 08:47:41,766 - INFO - Epoch:44, train_mae:18.39, val_mae:27.01845359802246,r_loss=0.00,lr=[0.001],  time_elapsed:57.24812456499785
+2021-02-07 08:47:41,766 - INFO - Evaluation_test_Begin:
+2021-02-07 08:47:48,126 - INFO - Horizon 01, MAE: 25.57, MAPE: 0.3034, RMSE: 46.87
+2021-02-07 08:47:48,127 - INFO - Horizon 02, MAE: 27.96, MAPE: 0.3289, RMSE: 50.57
+2021-02-07 08:47:48,129 - INFO - Horizon 03, MAE: 31.09, MAPE: 0.3685, RMSE: 56.85
+2021-02-07 08:47:48,130 - INFO - Horizon 04, MAE: 35.06, MAPE: 0.3411, RMSE: 65.41
+2021-02-07 08:47:48,130 - INFO - Evaluation_test_End:
+2021-02-07 08:48:45,624 - INFO - Epoch:45, train_mae:18.89, val_mae:27.87714195251465,r_loss=0.00,lr=[0.001],  time_elapsed:57.25442902301438
+2021-02-07 08:48:45,624 - INFO - Evaluation_test_Begin:
+2021-02-07 08:48:51,986 - INFO - Horizon 01, MAE: 26.51, MAPE: 0.3542, RMSE: 49.03
+2021-02-07 08:48:51,988 - INFO - Horizon 02, MAE: 28.43, MAPE: 0.3977, RMSE: 50.57
+2021-02-07 08:48:51,989 - INFO - Horizon 03, MAE: 31.65, MAPE: 0.3659, RMSE: 57.69
+2021-02-07 08:48:51,991 - INFO - Horizon 04, MAE: 35.82, MAPE: 0.4517, RMSE: 66.09
+2021-02-07 08:48:51,991 - INFO - Evaluation_test_End:
+2021-02-07 08:49:49,242 - INFO - Epoch:46, train_mae:18.63, val_mae:26.830906867980957,r_loss=0.00,lr=[0.001],  time_elapsed:57.25029744801577
+2021-02-07 08:49:49,242 - INFO - Evaluation_test_Begin:
+2021-02-07 08:49:55,604 - INFO - Horizon 01, MAE: 26.48, MAPE: 0.3100, RMSE: 47.42
+2021-02-07 08:49:55,606 - INFO - Horizon 02, MAE: 27.53, MAPE: 0.3140, RMSE: 48.56
+2021-02-07 08:49:55,607 - INFO - Horizon 03, MAE: 30.96, MAPE: 0.3925, RMSE: 55.16
+2021-02-07 08:49:55,609 - INFO - Horizon 04, MAE: 34.52, MAPE: 0.3865, RMSE: 63.11
+2021-02-07 08:49:55,609 - INFO - Evaluation_test_End:
+2021-02-07 08:50:52,866 - INFO - Epoch:47, train_mae:17.47, val_mae:26.565349102020264,r_loss=0.00,lr=[0.001],  time_elapsed:57.256779910007026
+2021-02-07 08:50:52,866 - INFO - Evaluation_test_Begin:
+2021-02-07 08:50:59,227 - INFO - Horizon 01, MAE: 24.90, MAPE: 0.2614, RMSE: 46.09
+2021-02-07 08:50:59,228 - INFO - Horizon 02, MAE: 26.88, MAPE: 0.2841, RMSE: 49.53
+2021-02-07 08:50:59,230 - INFO - Horizon 03, MAE: 29.59, MAPE: 0.2883, RMSE: 54.32
+2021-02-07 08:50:59,231 - INFO - Horizon 04, MAE: 33.24, MAPE: 0.3090, RMSE: 62.03
+2021-02-07 08:50:59,232 - INFO - Evaluation_test_End:
+2021-02-07 08:51:56,481 - INFO - Epoch:48, train_mae:18.16, val_mae:26.336297512054443,r_loss=0.00,lr=[0.001],  time_elapsed:57.2488801869913
+2021-02-07 08:51:56,481 - INFO - Evaluation_test_Begin:
+2021-02-07 08:52:02,844 - INFO - Horizon 01, MAE: 25.25, MAPE: 0.3399, RMSE: 45.75
+2021-02-07 08:52:02,846 - INFO - Horizon 02, MAE: 26.95, MAPE: 0.3289, RMSE: 49.05
+2021-02-07 08:52:02,847 - INFO - Horizon 03, MAE: 29.84, MAPE: 0.3641, RMSE: 54.60
+2021-02-07 08:52:02,849 - INFO - Horizon 04, MAE: 33.33, MAPE: 0.3680, RMSE: 62.16
+2021-02-07 08:52:02,849 - INFO - Evaluation_test_End:
+2021-02-07 08:53:00,116 - INFO - Epoch:49, train_mae:17.97, val_mae:25.931212425231934,r_loss=0.00,lr=[0.001],  time_elapsed:57.266768164001405
+2021-02-07 08:53:00,116 - INFO - val_mae decreased from 26.28 to 25.93
+2021-02-07 08:53:00,116 - INFO - Evaluation_test_Begin:
+2021-02-07 08:53:06,478 - INFO - Horizon 01, MAE: 25.08, MAPE: 0.2715, RMSE: 45.28
+2021-02-07 08:53:06,480 - INFO - Horizon 02, MAE: 26.94, MAPE: 0.2947, RMSE: 48.88
+2021-02-07 08:53:06,481 - INFO - Horizon 03, MAE: 29.83, MAPE: 0.3014, RMSE: 54.51
+2021-02-07 08:53:06,483 - INFO - Horizon 04, MAE: 33.78, MAPE: 0.3266, RMSE: 63.26
+2021-02-07 08:53:06,483 - INFO - Evaluation_test_End:
+2021-02-07 08:54:03,990 - INFO - Epoch:50, train_mae:16.96, val_mae:25.826364040374756,r_loss=0.00,lr=[0.001],  time_elapsed:57.26809647603659
+2021-02-07 08:54:03,991 - INFO - val_mae decreased from 25.93 to 25.83
+2021-02-07 08:54:03,991 - INFO - Evaluation_test_Begin:
+2021-02-07 08:54:10,356 - INFO - Horizon 01, MAE: 24.87, MAPE: 0.2827, RMSE: 44.80
+2021-02-07 08:54:10,357 - INFO - Horizon 02, MAE: 26.64, MAPE: 0.2944, RMSE: 47.58
+2021-02-07 08:54:10,359 - INFO - Horizon 03, MAE: 29.03, MAPE: 0.3273, RMSE: 52.71
+2021-02-07 08:54:10,360 - INFO - Horizon 04, MAE: 32.58, MAPE: 0.3192, RMSE: 60.25
+2021-02-07 08:54:10,360 - INFO - Evaluation_test_End:
+2021-02-07 08:55:07,638 - INFO - Epoch:51, train_mae:17.30, val_mae:26.435553073883057,r_loss=0.00,lr=[0.001],  time_elapsed:57.27753496298101
+2021-02-07 08:55:07,639 - INFO - Evaluation_test_Begin:
+2021-02-07 08:55:13,999 - INFO - Horizon 01, MAE: 26.21, MAPE: 0.2914, RMSE: 48.82
+2021-02-07 08:55:14,001 - INFO - Horizon 02, MAE: 28.35, MAPE: 0.3843, RMSE: 51.01
+2021-02-07 08:55:14,002 - INFO - Horizon 03, MAE: 30.33, MAPE: 0.3348, RMSE: 55.44
+2021-02-07 08:55:14,004 - INFO - Horizon 04, MAE: 33.91, MAPE: 0.3529, RMSE: 63.12
+2021-02-07 08:55:14,004 - INFO - Evaluation_test_End:
+2021-02-07 08:56:11,275 - INFO - Epoch:52, train_mae:17.83, val_mae:25.856351375579834,r_loss=0.00,lr=[0.001],  time_elapsed:57.27041401603492
+2021-02-07 08:56:11,275 - INFO - Evaluation_test_Begin:
+2021-02-07 08:56:17,639 - INFO - Horizon 01, MAE: 24.72, MAPE: 0.2712, RMSE: 44.80
+2021-02-07 08:56:17,641 - INFO - Horizon 02, MAE: 26.56, MAPE: 0.2948, RMSE: 47.14
+2021-02-07 08:56:17,642 - INFO - Horizon 03, MAE: 29.56, MAPE: 0.3106, RMSE: 53.53
+2021-02-07 08:56:17,644 - INFO - Horizon 04, MAE: 32.96, MAPE: 0.3112, RMSE: 60.45
+2021-02-07 08:56:17,644 - INFO - Evaluation_test_End:
+2021-02-07 08:57:14,917 - INFO - Epoch:53, train_mae:17.47, val_mae:24.950804710388184,r_loss=0.00,lr=[0.001],  time_elapsed:57.27311142202234
+2021-02-07 08:57:14,918 - INFO - val_mae decreased from 25.83 to 24.95
+2021-02-07 08:57:14,918 - INFO - Evaluation_test_Begin:
+2021-02-07 08:57:21,283 - INFO - Horizon 01, MAE: 24.50, MAPE: 0.2680, RMSE: 44.60
+2021-02-07 08:57:21,284 - INFO - Horizon 02, MAE: 26.49, MAPE: 0.2961, RMSE: 47.89
+2021-02-07 08:57:21,286 - INFO - Horizon 03, MAE: 29.07, MAPE: 0.3164, RMSE: 52.88
+2021-02-07 08:57:21,288 - INFO - Horizon 04, MAE: 32.47, MAPE: 0.3498, RMSE: 60.17
+2021-02-07 08:57:21,288 - INFO - Evaluation_test_End:
+2021-02-07 08:58:18,574 - INFO - Epoch:54, train_mae:17.40, val_mae:27.267104148864746,r_loss=0.00,lr=[0.001],  time_elapsed:57.28643191995798
+2021-02-07 08:58:18,575 - INFO - Evaluation_test_Begin:
+2021-02-07 08:58:24,939 - INFO - Horizon 01, MAE: 26.23, MAPE: 0.3168, RMSE: 46.60
+2021-02-07 08:58:24,941 - INFO - Horizon 02, MAE: 28.05, MAPE: 0.3363, RMSE: 49.99
+2021-02-07 08:58:24,942 - INFO - Horizon 03, MAE: 31.24, MAPE: 0.3864, RMSE: 56.01
+2021-02-07 08:58:24,944 - INFO - Horizon 04, MAE: 34.37, MAPE: 0.3486, RMSE: 63.15
+2021-02-07 08:58:24,944 - INFO - Evaluation_test_End:
+2021-02-07 08:59:22,561 - INFO - Epoch:55, train_mae:16.54, val_mae:25.169538497924805,r_loss=0.00,lr=[0.001],  time_elapsed:57.28624570905231
+2021-02-07 08:59:22,561 - INFO - Evaluation_test_Begin:
+2021-02-07 08:59:28,927 - INFO - Horizon 01, MAE: 24.41, MAPE: 0.2588, RMSE: 44.41
+2021-02-07 08:59:28,928 - INFO - Horizon 02, MAE: 26.25, MAPE: 0.2749, RMSE: 47.72
+2021-02-07 08:59:28,930 - INFO - Horizon 03, MAE: 28.82, MAPE: 0.3023, RMSE: 52.08
+2021-02-07 08:59:28,931 - INFO - Horizon 04, MAE: 31.88, MAPE: 0.2902, RMSE: 59.09
+2021-02-07 08:59:28,931 - INFO - Evaluation_test_End:
+2021-02-07 09:00:26,228 - INFO - Epoch:56, train_mae:16.50, val_mae:24.61470127105713,r_loss=0.00,lr=[0.001],  time_elapsed:57.29666559997713
+2021-02-07 09:00:26,229 - INFO - val_mae decreased from 24.95 to 24.61
+2021-02-07 09:00:26,229 - INFO - Evaluation_test_Begin:
+2021-02-07 09:00:32,595 - INFO - Horizon 01, MAE: 24.22, MAPE: 0.2718, RMSE: 44.45
+2021-02-07 09:00:32,596 - INFO - Horizon 02, MAE: 25.93, MAPE: 0.2673, RMSE: 46.62
+2021-02-07 09:00:32,598 - INFO - Horizon 03, MAE: 28.01, MAPE: 0.2759, RMSE: 50.95
+2021-02-07 09:00:32,599 - INFO - Horizon 04, MAE: 31.24, MAPE: 0.2910, RMSE: 57.44
+2021-02-07 09:00:32,599 - INFO - Evaluation_test_End:
+2021-02-07 09:01:29,893 - INFO - Epoch:57, train_mae:16.40, val_mae:24.466114044189453,r_loss=0.00,lr=[0.001],  time_elapsed:57.29282288602553
+2021-02-07 09:01:29,893 - INFO - val_mae decreased from 24.61 to 24.47
+2021-02-07 09:01:29,893 - INFO - Evaluation_test_Begin:
+2021-02-07 09:01:36,258 - INFO - Horizon 01, MAE: 24.18, MAPE: 0.2749, RMSE: 44.16
+2021-02-07 09:01:36,260 - INFO - Horizon 02, MAE: 25.59, MAPE: 0.3020, RMSE: 45.96
+2021-02-07 09:01:36,261 - INFO - Horizon 03, MAE: 28.01, MAPE: 0.3275, RMSE: 50.77
+2021-02-07 09:01:36,263 - INFO - Horizon 04, MAE: 31.10, MAPE: 0.3451, RMSE: 57.28
+2021-02-07 09:01:36,263 - INFO - Evaluation_test_End:
+2021-02-07 09:02:33,545 - INFO - Epoch:58, train_mae:16.39, val_mae:24.87978219985962,r_loss=0.00,lr=[0.001],  time_elapsed:57.281558335991576
+2021-02-07 09:02:33,545 - INFO - Evaluation_test_Begin:
+2021-02-07 09:02:39,909 - INFO - Horizon 01, MAE: 24.24, MAPE: 0.2679, RMSE: 44.98
+2021-02-07 09:02:39,911 - INFO - Horizon 02, MAE: 26.20, MAPE: 0.2920, RMSE: 47.34
+2021-02-07 09:02:39,912 - INFO - Horizon 03, MAE: 28.66, MAPE: 0.2908, RMSE: 52.26
+2021-02-07 09:02:39,914 - INFO - Horizon 04, MAE: 32.48, MAPE: 0.3118, RMSE: 60.03
+2021-02-07 09:02:39,914 - INFO - Evaluation_test_End:
+2021-02-07 09:03:37,180 - INFO - Epoch:59, train_mae:16.48, val_mae:24.588144779205322,r_loss=0.00,lr=[0.001],  time_elapsed:57.265745820011944
+2021-02-07 09:03:37,180 - INFO - Evaluation_test_Begin:
+2021-02-07 09:03:43,541 - INFO - Horizon 01, MAE: 24.21, MAPE: 0.2798, RMSE: 44.09
+2021-02-07 09:03:43,542 - INFO - Horizon 02, MAE: 25.88, MAPE: 0.3014, RMSE: 46.49
+2021-02-07 09:03:43,544 - INFO - Horizon 03, MAE: 27.99, MAPE: 0.2837, RMSE: 50.94
+2021-02-07 09:03:43,545 - INFO - Horizon 04, MAE: 31.17, MAPE: 0.3074, RMSE: 57.43
+2021-02-07 09:03:43,545 - INFO - Evaluation_test_End:
+2021-02-07 09:04:41,041 - INFO - Epoch:60, train_mae:16.00, val_mae:25.319895267486572,r_loss=0.00,lr=[0.001],  time_elapsed:57.25610797497211
+2021-02-07 09:04:41,041 - INFO - Evaluation_test_Begin:
+2021-02-07 09:04:47,403 - INFO - Horizon 01, MAE: 25.09, MAPE: 0.2539, RMSE: 45.59
+2021-02-07 09:04:47,404 - INFO - Horizon 02, MAE: 26.41, MAPE: 0.3057, RMSE: 47.13
+2021-02-07 09:04:47,406 - INFO - Horizon 03, MAE: 29.52, MAPE: 0.2663, RMSE: 53.70
+2021-02-07 09:04:47,407 - INFO - Horizon 04, MAE: 33.02, MAPE: 0.3768, RMSE: 60.79
+2021-02-07 09:04:47,407 - INFO - Evaluation_test_End:
+2021-02-07 09:05:44,683 - INFO - Epoch:61, train_mae:16.77, val_mae:25.85941743850708,r_loss=0.00,lr=[0.001],  time_elapsed:57.275676018965896
+2021-02-07 09:05:44,684 - INFO - Evaluation_test_Begin:
+2021-02-07 09:05:51,045 - INFO - Horizon 01, MAE: 25.34, MAPE: 0.3314, RMSE: 46.74
+2021-02-07 09:05:51,047 - INFO - Horizon 02, MAE: 27.58, MAPE: 0.3113, RMSE: 50.08
+2021-02-07 09:05:51,048 - INFO - Horizon 03, MAE: 29.33, MAPE: 0.3268, RMSE: 53.64
+2021-02-07 09:05:51,050 - INFO - Horizon 04, MAE: 33.29, MAPE: 0.3600, RMSE: 60.56
+2021-02-07 09:05:51,050 - INFO - Evaluation_test_End:
+2021-02-07 09:06:48,329 - INFO - Epoch:62, train_mae:16.34, val_mae:24.330155849456787,r_loss=0.00,lr=[0.001],  time_elapsed:57.27852683502715
+2021-02-07 09:06:48,329 - INFO - val_mae decreased from 24.47 to 24.33
+2021-02-07 09:06:48,329 - INFO - Evaluation_test_Begin:
+2021-02-07 09:06:54,691 - INFO - Horizon 01, MAE: 24.32, MAPE: 0.3102, RMSE: 44.75
+2021-02-07 09:06:54,692 - INFO - Horizon 02, MAE: 25.85, MAPE: 0.3004, RMSE: 46.39
+2021-02-07 09:06:54,694 - INFO - Horizon 03, MAE: 28.13, MAPE: 0.3546, RMSE: 50.89
+2021-02-07 09:06:54,695 - INFO - Horizon 04, MAE: 31.06, MAPE: 0.3353, RMSE: 56.95
+2021-02-07 09:06:54,695 - INFO - Evaluation_test_End:
+2021-02-07 09:07:51,974 - INFO - Epoch:63, train_mae:16.10, val_mae:25.89238691329956,r_loss=0.00,lr=[0.001],  time_elapsed:57.27832442201907
+2021-02-07 09:07:51,974 - INFO - Evaluation_test_Begin:
+2021-02-07 09:07:58,335 - INFO - Horizon 01, MAE: 24.35, MAPE: 0.2623, RMSE: 44.66
+2021-02-07 09:07:58,337 - INFO - Horizon 02, MAE: 26.33, MAPE: 0.3015, RMSE: 47.04
+2021-02-07 09:07:58,338 - INFO - Horizon 03, MAE: 29.22, MAPE: 0.3508, RMSE: 52.68
+2021-02-07 09:07:58,340 - INFO - Horizon 04, MAE: 32.38, MAPE: 0.3546, RMSE: 59.14
+2021-02-07 09:07:58,340 - INFO - Evaluation_test_End:
+2021-02-07 09:08:55,603 - INFO - Epoch:64, train_mae:16.16, val_mae:24.49714708328247,r_loss=0.00,lr=[0.001],  time_elapsed:57.262805160018615
+2021-02-07 09:08:55,603 - INFO - Evaluation_test_Begin:
+2021-02-07 09:09:01,966 - INFO - Horizon 01, MAE: 24.19, MAPE: 0.2550, RMSE: 44.37
+2021-02-07 09:09:01,967 - INFO - Horizon 02, MAE: 26.59, MAPE: 0.3342, RMSE: 47.26
+2021-02-07 09:09:01,969 - INFO - Horizon 03, MAE: 28.28, MAPE: 0.2860, RMSE: 51.46
+2021-02-07 09:09:01,970 - INFO - Horizon 04, MAE: 31.53, MAPE: 0.3453, RMSE: 57.94
+2021-02-07 09:09:01,970 - INFO - Evaluation_test_End:
+2021-02-07 09:09:59,470 - INFO - Epoch:65, train_mae:15.53, val_mae:24.276410579681396,r_loss=0.00,lr=[0.001],  time_elapsed:57.26096050697379
+2021-02-07 09:09:59,471 - INFO - val_mae decreased from 24.33 to 24.28
+2021-02-07 09:09:59,471 - INFO - Evaluation_test_Begin:
+2021-02-07 09:10:05,834 - INFO - Horizon 01, MAE: 24.16, MAPE: 0.2885, RMSE: 44.43
+2021-02-07 09:10:05,836 - INFO - Horizon 02, MAE: 25.92, MAPE: 0.2794, RMSE: 47.16
+2021-02-07 09:10:05,837 - INFO - Horizon 03, MAE: 27.93, MAPE: 0.2851, RMSE: 51.12
+2021-02-07 09:10:05,839 - INFO - Horizon 04, MAE: 31.02, MAPE: 0.3044, RMSE: 57.88
+2021-02-07 09:10:05,839 - INFO - Evaluation_test_End:
+2021-02-07 09:11:03,102 - INFO - Epoch:66, train_mae:15.17, val_mae:24.50179386138916,r_loss=0.00,lr=[0.001],  time_elapsed:57.26321874302812
+2021-02-07 09:11:03,103 - INFO - Evaluation_test_Begin:
+2021-02-07 09:11:09,461 - INFO - Horizon 01, MAE: 24.36, MAPE: 0.3570, RMSE: 44.05
+2021-02-07 09:11:09,463 - INFO - Horizon 02, MAE: 25.69, MAPE: 0.3130, RMSE: 46.63
+2021-02-07 09:11:09,464 - INFO - Horizon 03, MAE: 27.80, MAPE: 0.3061, RMSE: 50.82
+2021-02-07 09:11:09,466 - INFO - Horizon 04, MAE: 30.53, MAPE: 0.3272, RMSE: 56.89
+2021-02-07 09:11:09,466 - INFO - Evaluation_test_End:
+2021-02-07 09:12:06,699 - INFO - Epoch:67, train_mae:15.29, val_mae:25.084290981292725,r_loss=0.00,lr=[0.001],  time_elapsed:57.23278516798746
+2021-02-07 09:12:06,699 - INFO - Evaluation_test_Begin:
+2021-02-07 09:12:13,058 - INFO - Horizon 01, MAE: 25.45, MAPE: 0.3585, RMSE: 45.80
+2021-02-07 09:12:13,060 - INFO - Horizon 02, MAE: 26.60, MAPE: 0.3057, RMSE: 49.08
+2021-02-07 09:12:13,061 - INFO - Horizon 03, MAE: 28.89, MAPE: 0.2904, RMSE: 53.32
+2021-02-07 09:12:13,063 - INFO - Horizon 04, MAE: 31.75, MAPE: 0.2965, RMSE: 59.44
+2021-02-07 09:12:13,063 - INFO - Evaluation_test_End:
+2021-02-07 09:13:10,304 - INFO - Epoch:68, train_mae:16.92, val_mae:25.291505336761475,r_loss=0.00,lr=[0.001],  time_elapsed:57.240894660993945
+2021-02-07 09:13:10,304 - INFO - Evaluation_test_Begin:
+2021-02-07 09:13:16,664 - INFO - Horizon 01, MAE: 24.39, MAPE: 0.2764, RMSE: 44.95
+2021-02-07 09:13:16,666 - INFO - Horizon 02, MAE: 26.61, MAPE: 0.2854, RMSE: 49.02
+2021-02-07 09:13:16,667 - INFO - Horizon 03, MAE: 29.47, MAPE: 0.3503, RMSE: 54.72
+2021-02-07 09:13:16,669 - INFO - Horizon 04, MAE: 33.02, MAPE: 0.3685, RMSE: 62.51
+2021-02-07 09:13:16,669 - INFO - Evaluation_test_End:
+2021-02-07 09:14:13,920 - INFO - Epoch:69, train_mae:15.61, val_mae:24.303010940551758,r_loss=0.00,lr=[0.001],  time_elapsed:57.251132420962676
+2021-02-07 09:14:13,920 - INFO - Evaluation_test_Begin:
+2021-02-07 09:14:20,278 - INFO - Horizon 01, MAE: 24.88, MAPE: 0.3759, RMSE: 45.09
+2021-02-07 09:14:20,279 - INFO - Horizon 02, MAE: 25.76, MAPE: 0.3178, RMSE: 46.33
+2021-02-07 09:14:20,281 - INFO - Horizon 03, MAE: 27.76, MAPE: 0.3313, RMSE: 50.48
+2021-02-07 09:14:20,282 - INFO - Horizon 04, MAE: 30.75, MAPE: 0.3667, RMSE: 56.81
+2021-02-07 09:14:20,282 - INFO - Evaluation_test_End:
+2021-02-07 09:15:17,758 - INFO - Epoch:70, train_mae:15.44, val_mae:24.14627981185913,r_loss=0.00,lr=[0.001],  time_elapsed:57.23320140800206
+2021-02-07 09:15:17,758 - INFO - val_mae decreased from 24.28 to 24.15
+2021-02-07 09:15:17,758 - INFO - Evaluation_test_Begin:
+2021-02-07 09:15:24,118 - INFO - Horizon 01, MAE: 24.31, MAPE: 0.2955, RMSE: 44.80
+2021-02-07 09:15:24,120 - INFO - Horizon 02, MAE: 25.64, MAPE: 0.3041, RMSE: 46.53
+2021-02-07 09:15:24,121 - INFO - Horizon 03, MAE: 27.66, MAPE: 0.3152, RMSE: 50.79
+2021-02-07 09:15:24,122 - INFO - Horizon 04, MAE: 30.58, MAPE: 0.3252, RMSE: 56.93
+2021-02-07 09:15:24,123 - INFO - Evaluation_test_End:
+2021-02-07 09:16:21,375 - INFO - Epoch:71, train_mae:15.45, val_mae:24.077609062194824,r_loss=0.00,lr=[0.001],  time_elapsed:57.251864591031335
+2021-02-07 09:16:21,375 - INFO - val_mae decreased from 24.15 to 24.08
+2021-02-07 09:16:21,375 - INFO - Evaluation_test_Begin:
+2021-02-07 09:16:27,737 - INFO - Horizon 01, MAE: 24.15, MAPE: 0.3050, RMSE: 44.30
+2021-02-07 09:16:27,739 - INFO - Horizon 02, MAE: 25.68, MAPE: 0.3469, RMSE: 46.46
+2021-02-07 09:16:27,741 - INFO - Horizon 03, MAE: 27.60, MAPE: 0.3545, RMSE: 50.16
+2021-02-07 09:16:27,742 - INFO - Horizon 04, MAE: 30.46, MAPE: 0.3800, RMSE: 56.31
+2021-02-07 09:16:27,743 - INFO - Evaluation_test_End:
+2021-02-07 09:17:25,015 - INFO - Epoch:72, train_mae:15.15, val_mae:24.65254259109497,r_loss=0.00,lr=[0.001],  time_elapsed:57.27185677597299
+2021-02-07 09:17:25,015 - INFO - Evaluation_test_Begin:
+2021-02-07 09:17:31,382 - INFO - Horizon 01, MAE: 24.43, MAPE: 0.2757, RMSE: 44.61
+2021-02-07 09:17:31,384 - INFO - Horizon 02, MAE: 25.81, MAPE: 0.2884, RMSE: 46.28
+2021-02-07 09:17:31,386 - INFO - Horizon 03, MAE: 27.64, MAPE: 0.3067, RMSE: 49.98
+2021-02-07 09:17:31,387 - INFO - Horizon 04, MAE: 30.39, MAPE: 0.3360, RMSE: 55.98
+2021-02-07 09:17:31,387 - INFO - Evaluation_test_End:
+2021-02-07 09:18:28,661 - INFO - Epoch:73, train_mae:15.70, val_mae:25.201534748077393,r_loss=0.00,lr=[0.001],  time_elapsed:57.273315327009186
+2021-02-07 09:18:28,661 - INFO - Evaluation_test_Begin:
+2021-02-07 09:18:35,024 - INFO - Horizon 01, MAE: 24.38, MAPE: 0.3041, RMSE: 43.53
+2021-02-07 09:18:35,026 - INFO - Horizon 02, MAE: 26.02, MAPE: 0.3466, RMSE: 46.17
+2021-02-07 09:18:35,027 - INFO - Horizon 03, MAE: 28.63, MAPE: 0.3708, RMSE: 51.30
+2021-02-07 09:18:35,029 - INFO - Horizon 04, MAE: 31.02, MAPE: 0.3563, RMSE: 56.15
+2021-02-07 09:18:35,029 - INFO - Evaluation_test_End:
+2021-02-07 09:19:32,301 - INFO - Epoch:74, train_mae:15.44, val_mae:24.88073492050171,r_loss=0.00,lr=[0.001],  time_elapsed:57.271588616014924
+2021-02-07 09:19:32,301 - INFO - Evaluation_test_Begin:
+2021-02-07 09:19:38,664 - INFO - Horizon 01, MAE: 24.37, MAPE: 0.2839, RMSE: 44.13
+2021-02-07 09:19:38,665 - INFO - Horizon 02, MAE: 26.52, MAPE: 0.3147, RMSE: 48.38
+2021-02-07 09:19:38,667 - INFO - Horizon 03, MAE: 28.48, MAPE: 0.3124, RMSE: 52.71
+2021-02-07 09:19:38,668 - INFO - Horizon 04, MAE: 31.85, MAPE: 0.3551, RMSE: 59.43
+2021-02-07 09:19:38,668 - INFO - Evaluation_test_End:
+2021-02-07 09:20:36,172 - INFO - Epoch:75, train_mae:14.85, val_mae:25.21942710876465,r_loss=0.00,lr=[0.001],  time_elapsed:57.26288359798491
+2021-02-07 09:20:36,172 - INFO - Evaluation_test_Begin:
+2021-02-07 09:20:42,535 - INFO - Horizon 01, MAE: 24.89, MAPE: 0.3101, RMSE: 44.58
+2021-02-07 09:20:42,537 - INFO - Horizon 02, MAE: 26.78, MAPE: 0.3094, RMSE: 48.04
+2021-02-07 09:20:42,538 - INFO - Horizon 03, MAE: 29.14, MAPE: 0.3282, RMSE: 51.92
+2021-02-07 09:20:42,540 - INFO - Horizon 04, MAE: 31.63, MAPE: 0.3183, RMSE: 57.87
+2021-02-07 09:20:42,540 - INFO - Evaluation_test_End:
+2021-02-07 09:21:39,802 - INFO - Epoch:76, train_mae:14.56, val_mae:24.942872524261475,r_loss=0.00,lr=[0.001],  time_elapsed:57.26164268999128
+2021-02-07 09:21:39,802 - INFO - Evaluation_test_Begin:
+2021-02-07 09:21:46,170 - INFO - Horizon 01, MAE: 24.93, MAPE: 0.3733, RMSE: 44.00
+2021-02-07 09:21:46,172 - INFO - Horizon 02, MAE: 26.55, MAPE: 0.3743, RMSE: 46.57
+2021-02-07 09:21:46,173 - INFO - Horizon 03, MAE: 28.18, MAPE: 0.4097, RMSE: 50.29
+2021-02-07 09:21:46,175 - INFO - Horizon 04, MAE: 31.34, MAPE: 0.4048, RMSE: 56.68
+2021-02-07 09:21:46,175 - INFO - Evaluation_test_End:
+2021-02-07 09:22:43,496 - INFO - Epoch:77, train_mae:14.51, val_mae:24.559814929962158,r_loss=0.00,lr=[0.001],  time_elapsed:57.320586504007224
+2021-02-07 09:22:43,496 - INFO - Evaluation_test_Begin:
+2021-02-07 09:22:49,860 - INFO - Horizon 01, MAE: 24.38, MAPE: 0.2957, RMSE: 44.30
+2021-02-07 09:22:49,862 - INFO - Horizon 02, MAE: 26.25, MAPE: 0.3078, RMSE: 47.22
+2021-02-07 09:22:49,863 - INFO - Horizon 03, MAE: 28.16, MAPE: 0.3302, RMSE: 51.19
+2021-02-07 09:22:49,865 - INFO - Horizon 04, MAE: 31.16, MAPE: 0.3387, RMSE: 58.05
+2021-02-07 09:22:49,865 - INFO - Evaluation_test_End:
+2021-02-07 09:23:47,172 - INFO - Epoch:78, train_mae:14.18, val_mae:23.689594268798828,r_loss=0.00,lr=[0.001],  time_elapsed:57.30681828496745
+2021-02-07 09:23:47,172 - INFO - val_mae decreased from 24.08 to 23.69
+2021-02-07 09:23:47,172 - INFO - Evaluation_test_Begin:
+2021-02-07 09:23:53,536 - INFO - Horizon 01, MAE: 23.94, MAPE: 0.3305, RMSE: 43.75
+2021-02-07 09:23:53,538 - INFO - Horizon 02, MAE: 25.19, MAPE: 0.3035, RMSE: 45.57
+2021-02-07 09:23:53,539 - INFO - Horizon 03, MAE: 27.19, MAPE: 0.3866, RMSE: 49.27
+2021-02-07 09:23:53,541 - INFO - Horizon 04, MAE: 29.71, MAPE: 0.3481, RMSE: 54.79
+2021-02-07 09:23:53,541 - INFO - Evaluation_test_End:
+2021-02-07 09:24:50,837 - INFO - Epoch:79, train_mae:14.41, val_mae:25.50235080718994,r_loss=0.00,lr=[0.001],  time_elapsed:57.29602457705187
+2021-02-07 09:24:50,837 - INFO - Evaluation_test_Begin:
+2021-02-07 09:24:57,203 - INFO - Horizon 01, MAE: 27.12, MAPE: 0.4983, RMSE: 45.96
+2021-02-07 09:24:57,205 - INFO - Horizon 02, MAE: 26.47, MAPE: 0.3863, RMSE: 46.90
+2021-02-07 09:24:57,206 - INFO - Horizon 03, MAE: 28.42, MAPE: 0.3768, RMSE: 51.20
+2021-02-07 09:24:57,208 - INFO - Horizon 04, MAE: 31.03, MAPE: 0.3725, RMSE: 56.94
+2021-02-07 09:24:57,208 - INFO - Evaluation_test_End:
+2021-02-07 09:25:54,740 - INFO - Epoch:80, train_mae:16.19, val_mae:25.77570104598999,r_loss=0.00,lr=[0.001],  time_elapsed:57.29180961003294
+2021-02-07 09:25:54,741 - INFO - Evaluation_test_Begin:
+2021-02-07 09:26:01,104 - INFO - Horizon 01, MAE: 25.00, MAPE: 0.2902, RMSE: 44.19
+2021-02-07 09:26:01,105 - INFO - Horizon 02, MAE: 26.99, MAPE: 0.3279, RMSE: 47.51
+2021-02-07 09:26:01,107 - INFO - Horizon 03, MAE: 28.97, MAPE: 0.3111, RMSE: 50.67
+2021-02-07 09:26:01,108 - INFO - Horizon 04, MAE: 31.86, MAPE: 0.3416, RMSE: 57.76
+2021-02-07 09:26:01,108 - INFO - Evaluation_test_End:
+2021-02-07 09:26:58,394 - INFO - Epoch:81, train_mae:15.98, val_mae:26.133724212646484,r_loss=0.00,lr=[0.001],  time_elapsed:57.28540598100517
+2021-02-07 09:26:58,394 - INFO - Evaluation_test_Begin:
+2021-02-07 09:27:04,759 - INFO - Horizon 01, MAE: 25.54, MAPE: 0.3062, RMSE: 47.24
+2021-02-07 09:27:04,760 - INFO - Horizon 02, MAE: 28.02, MAPE: 0.3289, RMSE: 51.42
+2021-02-07 09:27:04,762 - INFO - Horizon 03, MAE: 30.37, MAPE: 0.3443, RMSE: 56.79
+2021-02-07 09:27:04,763 - INFO - Horizon 04, MAE: 34.49, MAPE: 0.3480, RMSE: 65.44
+2021-02-07 09:27:04,763 - INFO - Evaluation_test_End:
+2021-02-07 09:28:02,059 - INFO - Epoch:82, train_mae:14.94, val_mae:24.079432487487793,r_loss=0.00,lr=[0.001],  time_elapsed:57.29581393901026
+2021-02-07 09:28:02,060 - INFO - Evaluation_test_Begin:
+2021-02-07 09:28:08,426 - INFO - Horizon 01, MAE: 23.79, MAPE: 0.2747, RMSE: 43.50
+2021-02-07 09:28:08,427 - INFO - Horizon 02, MAE: 25.68, MAPE: 0.2850, RMSE: 46.36
+2021-02-07 09:28:08,429 - INFO - Horizon 03, MAE: 27.31, MAPE: 0.2868, RMSE: 49.84
+2021-02-07 09:28:08,430 - INFO - Horizon 04, MAE: 30.11, MAPE: 0.3102, RMSE: 55.41
+2021-02-07 09:28:08,430 - INFO - Evaluation_test_End:
+2021-02-07 09:29:05,714 - INFO - Epoch:83, train_mae:17.96, val_mae:26.23594331741333,r_loss=0.00,lr=[0.001],  time_elapsed:57.282833931967616
+2021-02-07 09:29:05,714 - INFO - Evaluation_test_Begin:
+2021-02-07 09:29:12,076 - INFO - Horizon 01, MAE: 25.30, MAPE: 0.2698, RMSE: 46.38
+2021-02-07 09:29:12,077 - INFO - Horizon 02, MAE: 27.12, MAPE: 0.2809, RMSE: 48.23
+2021-02-07 09:29:12,079 - INFO - Horizon 03, MAE: 29.67, MAPE: 0.2986, RMSE: 54.91
+2021-02-07 09:29:12,080 - INFO - Horizon 04, MAE: 33.37, MAPE: 0.3488, RMSE: 62.23
+2021-02-07 09:29:12,080 - INFO - Evaluation_test_End:
+2021-02-07 09:30:09,342 - INFO - Epoch:84, train_mae:15.14, val_mae:23.700621128082275,r_loss=0.00,lr=[0.001],  time_elapsed:57.261734485044144
+2021-02-07 09:30:09,343 - INFO - Evaluation_test_Begin:
+2021-02-07 09:30:15,704 - INFO - Horizon 01, MAE: 23.72, MAPE: 0.2679, RMSE: 43.96
+2021-02-07 09:30:15,705 - INFO - Horizon 02, MAE: 25.26, MAPE: 0.2709, RMSE: 46.11
+2021-02-07 09:30:15,707 - INFO - Horizon 03, MAE: 27.29, MAPE: 0.2940, RMSE: 50.02
+2021-02-07 09:30:15,708 - INFO - Horizon 04, MAE: 29.83, MAPE: 0.3124, RMSE: 54.92
+2021-02-07 09:30:15,708 - INFO - Evaluation_test_End:
+2021-02-07 09:31:13,219 - INFO - Epoch:85, train_mae:14.45, val_mae:26.168713569641113,r_loss=0.00,lr=[0.001],  time_elapsed:57.268150401010644
+2021-02-07 09:31:13,219 - INFO - Evaluation_test_Begin:
+2021-02-07 09:31:19,583 - INFO - Horizon 01, MAE: 25.59, MAPE: 0.3647, RMSE: 47.05
+2021-02-07 09:31:19,585 - INFO - Horizon 02, MAE: 27.60, MAPE: 0.3606, RMSE: 51.03
+2021-02-07 09:31:19,586 - INFO - Horizon 03, MAE: 29.88, MAPE: 0.4087, RMSE: 56.15
+2021-02-07 09:31:19,588 - INFO - Horizon 04, MAE: 32.80, MAPE: 0.3739, RMSE: 62.18
+2021-02-07 09:31:19,588 - INFO - Evaluation_test_End:
+2021-02-07 09:32:16,848 - INFO - Epoch:86, train_mae:14.86, val_mae:24.889866828918457,r_loss=0.00,lr=[0.001],  time_elapsed:57.25938922597561
+2021-02-07 09:32:16,848 - INFO - Evaluation_test_Begin:
+2021-02-07 09:32:23,207 - INFO - Horizon 01, MAE: 24.67, MAPE: 0.2914, RMSE: 44.53
+2021-02-07 09:32:23,209 - INFO - Horizon 02, MAE: 26.82, MAPE: 0.3205, RMSE: 47.75
+2021-02-07 09:32:23,210 - INFO - Horizon 03, MAE: 28.48, MAPE: 0.3689, RMSE: 51.21
+2021-02-07 09:32:23,212 - INFO - Horizon 04, MAE: 30.77, MAPE: 0.3401, RMSE: 56.46
+2021-02-07 09:32:23,212 - INFO - Evaluation_test_End:
+2021-02-07 09:33:20,499 - INFO - Epoch:87, train_mae:14.29, val_mae:24.11689567565918,r_loss=0.00,lr=[0.001],  time_elapsed:57.28682671597926
+2021-02-07 09:33:20,499 - INFO - Evaluation_test_Begin:
+2021-02-07 09:33:26,860 - INFO - Horizon 01, MAE: 24.34, MAPE: 0.3272, RMSE: 43.72
+2021-02-07 09:33:26,862 - INFO - Horizon 02, MAE: 25.74, MAPE: 0.3056, RMSE: 45.67
+2021-02-07 09:33:26,863 - INFO - Horizon 03, MAE: 27.23, MAPE: 0.2908, RMSE: 49.97
+2021-02-07 09:33:26,865 - INFO - Horizon 04, MAE: 30.40, MAPE: 0.3490, RMSE: 55.94
+2021-02-07 09:33:26,865 - INFO - Evaluation_test_End:
+2021-02-07 09:34:24,116 - INFO - Epoch:88, train_mae:14.61, val_mae:23.62342882156372,r_loss=0.00,lr=[0.001],  time_elapsed:57.2508482739795
+2021-02-07 09:34:24,116 - INFO - val_mae decreased from 23.69 to 23.62
+2021-02-07 09:34:24,116 - INFO - Evaluation_test_Begin:
+2021-02-07 09:34:30,478 - INFO - Horizon 01, MAE: 23.89, MAPE: 0.2627, RMSE: 44.11
+2021-02-07 09:34:30,479 - INFO - Horizon 02, MAE: 25.41, MAPE: 0.2855, RMSE: 46.32
+2021-02-07 09:34:30,481 - INFO - Horizon 03, MAE: 26.97, MAPE: 0.2956, RMSE: 49.54
+2021-02-07 09:34:30,482 - INFO - Horizon 04, MAE: 29.79, MAPE: 0.3099, RMSE: 55.25
+2021-02-07 09:34:30,482 - INFO - Evaluation_test_End:
+2021-02-07 09:35:27,729 - INFO - Epoch:89, train_mae:14.02, val_mae:23.643482208251953,r_loss=0.00,lr=[0.001],  time_elapsed:57.246239127009176
+2021-02-07 09:35:27,729 - INFO - Evaluation_test_Begin:
+2021-02-07 09:35:34,088 - INFO - Horizon 01, MAE: 23.65, MAPE: 0.2895, RMSE: 43.35
+2021-02-07 09:35:34,089 - INFO - Horizon 02, MAE: 25.08, MAPE: 0.3091, RMSE: 45.48
+2021-02-07 09:35:34,091 - INFO - Horizon 03, MAE: 26.99, MAPE: 0.3464, RMSE: 49.04
+2021-02-07 09:35:34,092 - INFO - Horizon 04, MAE: 29.48, MAPE: 0.3601, RMSE: 54.57
+2021-02-07 09:35:34,092 - INFO - Evaluation_test_End:
+2021-02-07 09:36:31,581 - INFO - Epoch:90, train_mae:14.41, val_mae:23.284528732299805,r_loss=0.00,lr=[0.001],  time_elapsed:57.24620329699246
+2021-02-07 09:36:31,581 - INFO - val_mae decreased from 23.62 to 23.28
+2021-02-07 09:36:31,581 - INFO - Evaluation_test_Begin:
+2021-02-07 09:36:37,938 - INFO - Horizon 01, MAE: 23.80, MAPE: 0.2858, RMSE: 43.37
+2021-02-07 09:36:37,939 - INFO - Horizon 02, MAE: 25.08, MAPE: 0.2979, RMSE: 45.86
+2021-02-07 09:36:37,941 - INFO - Horizon 03, MAE: 26.90, MAPE: 0.3296, RMSE: 49.58
+2021-02-07 09:36:37,942 - INFO - Horizon 04, MAE: 29.58, MAPE: 0.3237, RMSE: 54.85
+2021-02-07 09:36:37,942 - INFO - Evaluation_test_End:
+2021-02-07 09:37:35,180 - INFO - Epoch:91, train_mae:14.06, val_mae:23.919416904449463,r_loss=0.00,lr=[0.001],  time_elapsed:57.237233655992895
+2021-02-07 09:37:35,180 - INFO - Evaluation_test_Begin:
+2021-02-07 09:37:41,538 - INFO - Horizon 01, MAE: 24.51, MAPE: 0.3969, RMSE: 44.40
+2021-02-07 09:37:41,540 - INFO - Horizon 02, MAE: 25.63, MAPE: 0.3191, RMSE: 46.87
+2021-02-07 09:37:41,541 - INFO - Horizon 03, MAE: 27.45, MAPE: 0.2774, RMSE: 50.95
+2021-02-07 09:37:41,543 - INFO - Horizon 04, MAE: 30.75, MAPE: 0.3366, RMSE: 57.44
+2021-02-07 09:37:41,543 - INFO - Evaluation_test_End:
+2021-02-07 09:38:38,865 - INFO - Epoch:92, train_mae:14.28, val_mae:25.58334445953369,r_loss=0.00,lr=[0.001],  time_elapsed:57.32202611101093
+2021-02-07 09:38:38,866 - INFO - Evaluation_test_Begin:
+2021-02-07 09:38:45,242 - INFO - Horizon 01, MAE: 26.43, MAPE: 0.3652, RMSE: 47.81
+2021-02-07 09:38:45,244 - INFO - Horizon 02, MAE: 27.18, MAPE: 0.3455, RMSE: 49.54
+2021-02-07 09:38:45,246 - INFO - Horizon 03, MAE: 28.89, MAPE: 0.3512, RMSE: 52.24
+2021-02-07 09:38:45,247 - INFO - Horizon 04, MAE: 31.71, MAPE: 0.3715, RMSE: 58.18
+2021-02-07 09:38:45,247 - INFO - Evaluation_test_End:
+2021-02-07 09:39:42,572 - INFO - Epoch:93, train_mae:14.43, val_mae:23.573410987854004,r_loss=0.00,lr=[0.001],  time_elapsed:57.324310349998996
+2021-02-07 09:39:42,573 - INFO - Evaluation_test_Begin:
+2021-02-07 09:39:48,939 - INFO - Horizon 01, MAE: 23.73, MAPE: 0.2889, RMSE: 43.59
+2021-02-07 09:39:48,941 - INFO - Horizon 02, MAE: 25.27, MAPE: 0.2960, RMSE: 45.94
+2021-02-07 09:39:48,942 - INFO - Horizon 03, MAE: 27.07, MAPE: 0.2945, RMSE: 49.95
+2021-02-07 09:39:48,944 - INFO - Horizon 04, MAE: 29.77, MAPE: 0.3373, RMSE: 54.74
+2021-02-07 09:39:48,944 - INFO - Evaluation_test_End:
+2021-02-07 09:40:46,408 - INFO - Epoch:94, train_mae:14.00, val_mae:24.365478992462158,r_loss=0.00,lr=[0.001],  time_elapsed:57.463595661043655
+2021-02-07 09:40:46,408 - INFO - Evaluation_test_Begin:
+2021-02-07 09:40:52,805 - INFO - Horizon 01, MAE: 24.20, MAPE: 0.3015, RMSE: 44.31
+2021-02-07 09:40:52,807 - INFO - Horizon 02, MAE: 26.00, MAPE: 0.3026, RMSE: 47.07
+2021-02-07 09:40:52,808 - INFO - Horizon 03, MAE: 27.79, MAPE: 0.3598, RMSE: 50.35
+2021-02-07 09:40:52,810 - INFO - Horizon 04, MAE: 30.32, MAPE: 0.3426, RMSE: 56.00
+2021-02-07 09:40:52,810 - INFO - Evaluation_test_End:
+2021-02-07 09:41:50,780 - INFO - Epoch:95, train_mae:13.71, val_mae:23.394848823547363,r_loss=0.00,lr=[0.001],  time_elapsed:57.67573431303026
+2021-02-07 09:41:50,781 - INFO - Evaluation_test_Begin:
+2021-02-07 09:41:57,193 - INFO - Horizon 01, MAE: 23.74, MAPE: 0.2722, RMSE: 43.46
+2021-02-07 09:41:57,195 - INFO - Horizon 02, MAE: 24.99, MAPE: 0.2846, RMSE: 45.69
+2021-02-07 09:41:57,196 - INFO - Horizon 03, MAE: 27.05, MAPE: 0.3151, RMSE: 49.83
+2021-02-07 09:41:57,198 - INFO - Horizon 04, MAE: 29.47, MAPE: 0.3213, RMSE: 54.81
+2021-02-07 09:41:57,198 - INFO - Evaluation_test_End:
+2021-02-07 09:42:55,112 - INFO - Epoch:96, train_mae:13.47, val_mae:24.57425546646118,r_loss=0.00,lr=[0.001],  time_elapsed:57.91408133402001
+2021-02-07 09:42:55,113 - INFO - Evaluation_test_Begin:
+2021-02-07 09:43:01,553 - INFO - Horizon 01, MAE: 24.02, MAPE: 0.2707, RMSE: 43.25
+2021-02-07 09:43:01,555 - INFO - Horizon 02, MAE: 25.69, MAPE: 0.2753, RMSE: 46.08
+2021-02-07 09:43:01,557 - INFO - Horizon 03, MAE: 28.33, MAPE: 0.2936, RMSE: 49.96
+2021-02-07 09:43:01,559 - INFO - Horizon 04, MAE: 30.54, MAPE: 0.2994, RMSE: 55.07
+2021-02-07 09:43:01,559 - INFO - Evaluation_test_End:
+2021-02-07 09:43:59,624 - INFO - Epoch:97, train_mae:14.14, val_mae:24.292152404785156,r_loss=0.00,lr=[0.001],  time_elapsed:58.064455146028195
+2021-02-07 09:43:59,624 - INFO - Evaluation_test_Begin:
+2021-02-07 09:44:06,070 - INFO - Horizon 01, MAE: 24.24, MAPE: 0.2679, RMSE: 44.05
+2021-02-07 09:44:06,073 - INFO - Horizon 02, MAE: 26.02, MAPE: 0.3065, RMSE: 46.68
+2021-02-07 09:44:06,074 - INFO - Horizon 03, MAE: 27.79, MAPE: 0.3295, RMSE: 50.50
+2021-02-07 09:44:06,076 - INFO - Horizon 04, MAE: 30.44, MAPE: 0.3532, RMSE: 55.61
+2021-02-07 09:44:06,076 - INFO - Evaluation_test_End:
+2021-02-07 09:45:04,198 - INFO - Epoch:98, train_mae:14.08, val_mae:24.01385498046875,r_loss=0.00,lr=[0.001],  time_elapsed:58.12097864999669
+2021-02-07 09:45:04,198 - INFO - Evaluation_test_Begin:
+2021-02-07 09:45:10,653 - INFO - Horizon 01, MAE: 24.72, MAPE: 0.3084, RMSE: 44.60
+2021-02-07 09:45:10,655 - INFO - Horizon 02, MAE: 25.76, MAPE: 0.3206, RMSE: 46.98
+2021-02-07 09:45:10,657 - INFO - Horizon 03, MAE: 27.53, MAPE: 0.3334, RMSE: 50.80
+2021-02-07 09:45:10,659 - INFO - Horizon 04, MAE: 30.17, MAPE: 0.3429, RMSE: 55.55
+2021-02-07 09:45:10,659 - INFO - Evaluation_test_End:
+2021-02-07 09:46:08,775 - INFO - Epoch:99, train_mae:13.94, val_mae:24.232515335083008,r_loss=0.00,lr=[0.001],  time_elapsed:58.11584577098256
+2021-02-07 09:46:08,776 - INFO - Evaluation_test_Begin:
+2021-02-07 09:46:15,225 - INFO - Horizon 01, MAE: 24.54, MAPE: 0.2993, RMSE: 44.84
+2021-02-07 09:46:15,227 - INFO - Horizon 02, MAE: 25.91, MAPE: 0.3201, RMSE: 47.02
+2021-02-07 09:46:15,228 - INFO - Horizon 03, MAE: 28.06, MAPE: 0.2969, RMSE: 51.49
+2021-02-07 09:46:15,230 - INFO - Horizon 04, MAE: 30.68, MAPE: 0.3206, RMSE: 57.09
+2021-02-07 09:46:15,230 - INFO - Evaluation_test_End:
+2021-02-07 09:47:13,673 - INFO - Epoch:100, train_mae:12.82, val_mae:22.827043056488037,r_loss=0.00,lr=[1e-05],  time_elapsed:58.12198591599008
+2021-02-07 09:47:13,673 - INFO - val_mae decreased from 23.28 to 22.83
+2021-02-07 09:47:13,673 - INFO - Evaluation_test_Begin:
+2021-02-07 09:47:20,128 - INFO - Horizon 01, MAE: 23.36, MAPE: 0.2462, RMSE: 43.36
+2021-02-07 09:47:20,130 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2508, RMSE: 45.10
+2021-02-07 09:47:20,132 - INFO - Horizon 03, MAE: 26.40, MAPE: 0.2832, RMSE: 49.81
+2021-02-07 09:47:20,133 - INFO - Horizon 04, MAE: 28.57, MAPE: 0.2954, RMSE: 53.64
+2021-02-07 09:47:20,133 - INFO - Evaluation_test_End:
+2021-02-07 09:48:18,221 - INFO - Epoch:101, train_mae:12.16, val_mae:22.608681201934814,r_loss=0.00,lr=[0.0001],  time_elapsed:58.086660860979464
+2021-02-07 09:48:18,221 - INFO - val_mae decreased from 22.83 to 22.61
+2021-02-07 09:48:18,221 - INFO - Evaluation_test_Begin:
+2021-02-07 09:48:24,666 - INFO - Horizon 01, MAE: 23.28, MAPE: 0.2416, RMSE: 43.47
+2021-02-07 09:48:24,668 - INFO - Horizon 02, MAE: 24.33, MAPE: 0.2508, RMSE: 45.04
+2021-02-07 09:48:24,670 - INFO - Horizon 03, MAE: 26.15, MAPE: 0.2763, RMSE: 49.23
+2021-02-07 09:48:24,672 - INFO - Horizon 04, MAE: 28.21, MAPE: 0.2902, RMSE: 53.03
+2021-02-07 09:48:24,672 - INFO - Evaluation_test_End:
+2021-02-07 09:49:22,749 - INFO - Epoch:102, train_mae:11.93, val_mae:22.644306182861328,r_loss=0.00,lr=[0.0001],  time_elapsed:58.077059108007234
+2021-02-07 09:49:22,750 - INFO - Evaluation_test_Begin:
+2021-02-07 09:49:29,196 - INFO - Horizon 01, MAE: 23.23, MAPE: 0.2367, RMSE: 43.19
+2021-02-07 09:49:29,198 - INFO - Horizon 02, MAE: 24.34, MAPE: 0.2515, RMSE: 44.94
+2021-02-07 09:49:29,200 - INFO - Horizon 03, MAE: 26.12, MAPE: 0.2685, RMSE: 48.92
+2021-02-07 09:49:29,201 - INFO - Horizon 04, MAE: 28.16, MAPE: 0.2895, RMSE: 52.70
+2021-02-07 09:49:29,202 - INFO - Evaluation_test_End:
+2021-02-07 09:50:27,260 - INFO - Epoch:103, train_mae:11.83, val_mae:22.622211933135986,r_loss=0.00,lr=[0.0001],  time_elapsed:58.05754657398211
+2021-02-07 09:50:27,260 - INFO - Evaluation_test_Begin:
+2021-02-07 09:50:33,706 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2365, RMSE: 43.04
+2021-02-07 09:50:33,707 - INFO - Horizon 02, MAE: 24.33, MAPE: 0.2512, RMSE: 45.13
+2021-02-07 09:50:33,709 - INFO - Horizon 03, MAE: 26.12, MAPE: 0.2698, RMSE: 48.88
+2021-02-07 09:50:33,711 - INFO - Horizon 04, MAE: 28.15, MAPE: 0.2862, RMSE: 52.74
+2021-02-07 09:50:33,711 - INFO - Evaluation_test_End:
+2021-02-07 09:51:31,809 - INFO - Epoch:104, train_mae:11.74, val_mae:22.655787467956543,r_loss=0.00,lr=[0.0001],  time_elapsed:58.09677959099645
+2021-02-07 09:51:31,809 - INFO - Evaluation_test_Begin:
+2021-02-07 09:51:38,251 - INFO - Horizon 01, MAE: 23.32, MAPE: 0.2352, RMSE: 43.22
+2021-02-07 09:51:38,253 - INFO - Horizon 02, MAE: 24.39, MAPE: 0.2527, RMSE: 45.08
+2021-02-07 09:51:38,255 - INFO - Horizon 03, MAE: 26.14, MAPE: 0.2735, RMSE: 48.76
+2021-02-07 09:51:38,257 - INFO - Horizon 04, MAE: 28.06, MAPE: 0.2906, RMSE: 52.43
+2021-02-07 09:51:38,257 - INFO - Evaluation_test_End:
+2021-02-07 09:52:36,555 - INFO - Epoch:105, train_mae:11.65, val_mae:22.573960304260254,r_loss=0.00,lr=[0.0001],  time_elapsed:58.03732922900235
+2021-02-07 09:52:36,555 - INFO - val_mae decreased from 22.61 to 22.57
+2021-02-07 09:52:36,555 - INFO - Evaluation_test_Begin:
+2021-02-07 09:52:43,001 - INFO - Horizon 01, MAE: 23.21, MAPE: 0.2383, RMSE: 43.16
+2021-02-07 09:52:43,003 - INFO - Horizon 02, MAE: 24.31, MAPE: 0.2518, RMSE: 44.94
+2021-02-07 09:52:43,004 - INFO - Horizon 03, MAE: 26.14, MAPE: 0.2751, RMSE: 48.94
+2021-02-07 09:52:43,006 - INFO - Horizon 04, MAE: 28.12, MAPE: 0.2914, RMSE: 52.65
+2021-02-07 09:52:43,006 - INFO - Evaluation_test_End:
+2021-02-07 09:53:41,050 - INFO - Epoch:106, train_mae:11.59, val_mae:22.506126403808594,r_loss=0.00,lr=[0.0001],  time_elapsed:58.04356199799804
+2021-02-07 09:53:41,050 - INFO - val_mae decreased from 22.57 to 22.51
+2021-02-07 09:53:41,051 - INFO - Evaluation_test_Begin:
+2021-02-07 09:53:47,494 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2350, RMSE: 42.95
+2021-02-07 09:53:47,496 - INFO - Horizon 02, MAE: 24.23, MAPE: 0.2526, RMSE: 44.77
+2021-02-07 09:53:47,498 - INFO - Horizon 03, MAE: 26.02, MAPE: 0.2711, RMSE: 48.55
+2021-02-07 09:53:47,500 - INFO - Horizon 04, MAE: 27.96, MAPE: 0.2907, RMSE: 52.22
+2021-02-07 09:53:47,500 - INFO - Evaluation_test_End:
+2021-02-07 09:54:45,510 - INFO - Epoch:107, train_mae:11.50, val_mae:22.59921407699585,r_loss=0.00,lr=[0.0001],  time_elapsed:58.00978641299298
+2021-02-07 09:54:45,510 - INFO - Evaluation_test_Begin:
+2021-02-07 09:54:51,948 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2358, RMSE: 42.81
+2021-02-07 09:54:51,949 - INFO - Horizon 02, MAE: 24.25, MAPE: 0.2515, RMSE: 44.80
+2021-02-07 09:54:51,951 - INFO - Horizon 03, MAE: 26.06, MAPE: 0.2735, RMSE: 48.53
+2021-02-07 09:54:51,953 - INFO - Horizon 04, MAE: 27.95, MAPE: 0.2909, RMSE: 52.09
+2021-02-07 09:54:51,953 - INFO - Evaluation_test_End:
+2021-02-07 09:55:50,037 - INFO - Epoch:108, train_mae:11.50, val_mae:22.54962158203125,r_loss=0.00,lr=[0.0001],  time_elapsed:58.084273708984256
+2021-02-07 09:55:50,038 - INFO - Evaluation_test_Begin:
+2021-02-07 09:55:56,476 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2322, RMSE: 42.96
+2021-02-07 09:55:56,478 - INFO - Horizon 02, MAE: 24.22, MAPE: 0.2507, RMSE: 44.95
+2021-02-07 09:55:56,480 - INFO - Horizon 03, MAE: 25.98, MAPE: 0.2687, RMSE: 48.53
+2021-02-07 09:55:56,482 - INFO - Horizon 04, MAE: 27.95, MAPE: 0.2886, RMSE: 52.29
+2021-02-07 09:55:56,482 - INFO - Evaluation_test_End:
+2021-02-07 09:56:54,562 - INFO - Epoch:109, train_mae:11.46, val_mae:22.621532917022705,r_loss=0.00,lr=[0.0001],  time_elapsed:58.07904265495017
+2021-02-07 09:56:54,562 - INFO - Evaluation_test_Begin:
+2021-02-07 09:57:01,004 - INFO - Horizon 01, MAE: 23.23, MAPE: 0.2358, RMSE: 43.01
+2021-02-07 09:57:01,006 - INFO - Horizon 02, MAE: 24.33, MAPE: 0.2490, RMSE: 45.02
+2021-02-07 09:57:01,008 - INFO - Horizon 03, MAE: 26.13, MAPE: 0.2728, RMSE: 48.61
+2021-02-07 09:57:01,009 - INFO - Horizon 04, MAE: 28.08, MAPE: 0.2867, RMSE: 52.28
+2021-02-07 09:57:01,010 - INFO - Evaluation_test_End:
+2021-02-07 09:57:59,274 - INFO - Epoch:110, train_mae:11.42, val_mae:22.519297122955322,r_loss=0.00,lr=[0.0001],  time_elapsed:58.002157413051464
+2021-02-07 09:57:59,275 - INFO - Evaluation_test_Begin:
+2021-02-07 09:58:05,709 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2320, RMSE: 42.90
+2021-02-07 09:58:05,711 - INFO - Horizon 02, MAE: 24.25, MAPE: 0.2459, RMSE: 44.94
+2021-02-07 09:58:05,712 - INFO - Horizon 03, MAE: 26.07, MAPE: 0.2644, RMSE: 48.42
+2021-02-07 09:58:05,714 - INFO - Horizon 04, MAE: 27.89, MAPE: 0.2833, RMSE: 51.91
+2021-02-07 09:58:05,714 - INFO - Evaluation_test_End:
+2021-02-07 09:59:03,774 - INFO - Epoch:111, train_mae:11.35, val_mae:22.56173324584961,r_loss=0.00,lr=[0.0001],  time_elapsed:58.05939671001397
+2021-02-07 09:59:03,774 - INFO - Evaluation_test_Begin:
+2021-02-07 09:59:10,209 - INFO - Horizon 01, MAE: 23.13, MAPE: 0.2368, RMSE: 42.89
+2021-02-07 09:59:10,211 - INFO - Horizon 02, MAE: 24.21, MAPE: 0.2505, RMSE: 44.96
+2021-02-07 09:59:10,213 - INFO - Horizon 03, MAE: 26.04, MAPE: 0.2712, RMSE: 48.53
+2021-02-07 09:59:10,215 - INFO - Horizon 04, MAE: 27.96, MAPE: 0.2875, RMSE: 52.31
+2021-02-07 09:59:10,215 - INFO - Evaluation_test_End:
+2021-02-07 10:00:08,228 - INFO - Epoch:112, train_mae:11.35, val_mae:22.550530433654785,r_loss=0.00,lr=[0.0001],  time_elapsed:58.01302175200544
+2021-02-07 10:00:08,229 - INFO - Evaluation_test_Begin:
+2021-02-07 10:00:14,666 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2374, RMSE: 43.05
+2021-02-07 10:00:14,668 - INFO - Horizon 02, MAE: 24.23, MAPE: 0.2521, RMSE: 44.92
+2021-02-07 10:00:14,669 - INFO - Horizon 03, MAE: 26.01, MAPE: 0.2734, RMSE: 48.50
+2021-02-07 10:00:14,671 - INFO - Horizon 04, MAE: 27.97, MAPE: 0.2899, RMSE: 52.28
+2021-02-07 10:00:14,671 - INFO - Evaluation_test_End:
+2021-02-07 10:01:12,698 - INFO - Epoch:113, train_mae:11.28, val_mae:22.57875919342041,r_loss=0.00,lr=[0.0001],  time_elapsed:58.0263569780509
+2021-02-07 10:01:12,698 - INFO - Evaluation_test_Begin:
+2021-02-07 10:01:19,134 - INFO - Horizon 01, MAE: 23.14, MAPE: 0.2344, RMSE: 42.99
+2021-02-07 10:01:19,136 - INFO - Horizon 02, MAE: 24.25, MAPE: 0.2508, RMSE: 45.00
+2021-02-07 10:01:19,138 - INFO - Horizon 03, MAE: 26.05, MAPE: 0.2729, RMSE: 48.58
+2021-02-07 10:01:19,140 - INFO - Horizon 04, MAE: 27.97, MAPE: 0.2892, RMSE: 52.26
+2021-02-07 10:01:19,140 - INFO - Evaluation_test_End:
+2021-02-07 10:02:17,087 - INFO - Epoch:114, train_mae:11.28, val_mae:22.529513835906982,r_loss=0.00,lr=[0.0001],  time_elapsed:57.94651910697576
+2021-02-07 10:02:17,087 - INFO - Evaluation_test_Begin:
+2021-02-07 10:02:23,517 - INFO - Horizon 01, MAE: 23.20, MAPE: 0.2359, RMSE: 43.01
+2021-02-07 10:02:23,519 - INFO - Horizon 02, MAE: 24.33, MAPE: 0.2509, RMSE: 45.27
+2021-02-07 10:02:23,521 - INFO - Horizon 03, MAE: 26.16, MAPE: 0.2767, RMSE: 48.73
+2021-02-07 10:02:23,522 - INFO - Horizon 04, MAE: 28.05, MAPE: 0.2892, RMSE: 52.52
+2021-02-07 10:02:23,522 - INFO - Evaluation_test_End:
+2021-02-07 10:03:21,737 - INFO - Epoch:115, train_mae:11.27, val_mae:22.56601905822754,r_loss=0.00,lr=[0.0001],  time_elapsed:57.953573934035376
+2021-02-07 10:03:21,737 - INFO - Evaluation_test_Begin:
+2021-02-07 10:03:28,166 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2366, RMSE: 43.06
+2021-02-07 10:03:28,168 - INFO - Horizon 02, MAE: 24.29, MAPE: 0.2517, RMSE: 45.20
+2021-02-07 10:03:28,170 - INFO - Horizon 03, MAE: 26.09, MAPE: 0.2762, RMSE: 48.75
+2021-02-07 10:03:28,172 - INFO - Horizon 04, MAE: 27.95, MAPE: 0.2915, RMSE: 52.31
+2021-02-07 10:03:28,172 - INFO - Evaluation_test_End:
+2021-02-07 10:04:26,096 - INFO - Epoch:116, train_mae:11.25, val_mae:22.54210090637207,r_loss=0.00,lr=[0.0001],  time_elapsed:57.92382584401639
+2021-02-07 10:04:26,097 - INFO - Evaluation_test_Begin:
+2021-02-07 10:04:32,547 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2308, RMSE: 42.99
+2021-02-07 10:04:32,549 - INFO - Horizon 02, MAE: 24.26, MAPE: 0.2449, RMSE: 45.14
+2021-02-07 10:04:32,551 - INFO - Horizon 03, MAE: 26.03, MAPE: 0.2667, RMSE: 48.40
+2021-02-07 10:04:32,553 - INFO - Horizon 04, MAE: 27.94, MAPE: 0.2828, RMSE: 52.19
+2021-02-07 10:04:32,553 - INFO - Evaluation_test_End:
+2021-02-07 10:05:30,578 - INFO - Epoch:117, train_mae:11.20, val_mae:22.586122035980225,r_loss=0.00,lr=[0.0001],  time_elapsed:58.02434279897716
+2021-02-07 10:05:30,578 - INFO - Evaluation_test_Begin:
+2021-02-07 10:05:37,017 - INFO - Horizon 01, MAE: 23.14, MAPE: 0.2379, RMSE: 42.92
+2021-02-07 10:05:37,019 - INFO - Horizon 02, MAE: 24.26, MAPE: 0.2509, RMSE: 45.13
+2021-02-07 10:05:37,020 - INFO - Horizon 03, MAE: 26.08, MAPE: 0.2771, RMSE: 48.48
+2021-02-07 10:05:37,022 - INFO - Horizon 04, MAE: 27.99, MAPE: 0.2877, RMSE: 52.17
+2021-02-07 10:05:37,022 - INFO - Evaluation_test_End:
+2021-02-07 10:06:35,059 - INFO - Epoch:118, train_mae:11.13, val_mae:22.61172914505005,r_loss=0.00,lr=[0.0001],  time_elapsed:58.036554265010636
+2021-02-07 10:06:35,060 - INFO - Evaluation_test_Begin:
+2021-02-07 10:06:41,546 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2361, RMSE: 42.94
+2021-02-07 10:06:41,548 - INFO - Horizon 02, MAE: 24.32, MAPE: 0.2513, RMSE: 45.14
+2021-02-07 10:06:41,550 - INFO - Horizon 03, MAE: 26.13, MAPE: 0.2765, RMSE: 48.61
+2021-02-07 10:06:41,552 - INFO - Horizon 04, MAE: 28.00, MAPE: 0.2893, RMSE: 52.20
+2021-02-07 10:06:41,552 - INFO - Evaluation_test_End:
+2021-02-07 10:07:39,724 - INFO - Epoch:119, train_mae:11.16, val_mae:22.617469310760498,r_loss=0.00,lr=[0.0001],  time_elapsed:58.171305549971294
+2021-02-07 10:07:39,724 - INFO - Evaluation_test_Begin:
+2021-02-07 10:07:46,167 - INFO - Horizon 01, MAE: 23.23, MAPE: 0.2378, RMSE: 43.09
+2021-02-07 10:07:46,169 - INFO - Horizon 02, MAE: 24.34, MAPE: 0.2472, RMSE: 45.22
+2021-02-07 10:07:46,172 - INFO - Horizon 03, MAE: 26.15, MAPE: 0.2699, RMSE: 48.66
+2021-02-07 10:07:46,179 - INFO - Horizon 04, MAE: 28.08, MAPE: 0.2845, RMSE: 52.46
+2021-02-07 10:07:46,179 - INFO - Evaluation_test_End:
+2021-02-07 10:08:44,619 - INFO - Epoch:120, train_mae:11.09, val_mae:22.573253631591797,r_loss=0.00,lr=[0.0001],  time_elapsed:58.13921597704757
+2021-02-07 10:08:44,619 - INFO - Evaluation_test_Begin:
+2021-02-07 10:08:51,060 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2355, RMSE: 42.98
+2021-02-07 10:08:51,062 - INFO - Horizon 02, MAE: 24.31, MAPE: 0.2503, RMSE: 45.21
+2021-02-07 10:08:51,064 - INFO - Horizon 03, MAE: 26.09, MAPE: 0.2711, RMSE: 48.60
+2021-02-07 10:08:51,065 - INFO - Horizon 04, MAE: 28.03, MAPE: 0.2885, RMSE: 52.40
+2021-02-07 10:08:51,065 - INFO - Evaluation_test_End:
+2021-02-07 10:09:49,330 - INFO - Epoch:121, train_mae:11.04, val_mae:22.66885232925415,r_loss=0.00,lr=[0.0001],  time_elapsed:58.26414731499972
+2021-02-07 10:09:49,330 - INFO - Evaluation_test_Begin:
+2021-02-07 10:09:55,813 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2373, RMSE: 42.92
+2021-02-07 10:09:55,815 - INFO - Horizon 02, MAE: 24.30, MAPE: 0.2509, RMSE: 45.05
+2021-02-07 10:09:55,817 - INFO - Horizon 03, MAE: 26.12, MAPE: 0.2758, RMSE: 48.37
+2021-02-07 10:09:55,818 - INFO - Horizon 04, MAE: 28.08, MAPE: 0.2893, RMSE: 52.19
+2021-02-07 10:09:55,818 - INFO - Evaluation_test_End:
+2021-02-07 10:10:54,049 - INFO - Epoch:122, train_mae:11.10, val_mae:22.592942714691162,r_loss=0.00,lr=[0.0001],  time_elapsed:58.22965574299451
+2021-02-07 10:10:54,049 - INFO - Evaluation_test_Begin:
+2021-02-07 10:11:00,533 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2390, RMSE: 43.00
+2021-02-07 10:11:00,535 - INFO - Horizon 02, MAE: 24.35, MAPE: 0.2524, RMSE: 45.33
+2021-02-07 10:11:00,537 - INFO - Horizon 03, MAE: 26.14, MAPE: 0.2737, RMSE: 48.60
+2021-02-07 10:11:00,539 - INFO - Horizon 04, MAE: 28.07, MAPE: 0.2907, RMSE: 52.43
+2021-02-07 10:11:00,539 - INFO - Evaluation_test_End:
+2021-02-07 10:11:58,721 - INFO - Epoch:123, train_mae:10.97, val_mae:22.574801921844482,r_loss=0.00,lr=[0.0001],  time_elapsed:58.18163949297741
+2021-02-07 10:11:58,722 - INFO - Evaluation_test_Begin:
+2021-02-07 10:12:05,178 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2334, RMSE: 43.01
+2021-02-07 10:12:05,180 - INFO - Horizon 02, MAE: 24.31, MAPE: 0.2480, RMSE: 45.14
+2021-02-07 10:12:05,181 - INFO - Horizon 03, MAE: 26.10, MAPE: 0.2742, RMSE: 48.49
+2021-02-07 10:12:05,183 - INFO - Horizon 04, MAE: 28.02, MAPE: 0.2876, RMSE: 52.33
+2021-02-07 10:12:05,183 - INFO - Evaluation_test_End:
+2021-02-07 10:13:03,383 - INFO - Epoch:124, train_mae:11.02, val_mae:22.724522590637207,r_loss=0.00,lr=[0.0001],  time_elapsed:58.199600087013096
+2021-02-07 10:13:03,384 - INFO - Evaluation_test_Begin:
+2021-02-07 10:13:09,870 - INFO - Horizon 01, MAE: 23.23, MAPE: 0.2334, RMSE: 43.10
+2021-02-07 10:13:09,873 - INFO - Horizon 02, MAE: 24.41, MAPE: 0.2483, RMSE: 45.33
+2021-02-07 10:13:09,875 - INFO - Horizon 03, MAE: 26.27, MAPE: 0.2677, RMSE: 48.82
+2021-02-07 10:13:09,877 - INFO - Horizon 04, MAE: 28.23, MAPE: 0.2833, RMSE: 52.63
+2021-02-07 10:13:09,877 - INFO - Evaluation_test_End:
+2021-02-07 10:14:08,259 - INFO - Epoch:125, train_mae:11.03, val_mae:22.71733808517456,r_loss=0.00,lr=[0.0001],  time_elapsed:58.053276941995136
+2021-02-07 10:14:08,259 - INFO - Evaluation_test_Begin:
+2021-02-07 10:14:14,699 - INFO - Horizon 01, MAE: 23.32, MAPE: 0.2353, RMSE: 43.23
+2021-02-07 10:14:14,701 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2476, RMSE: 45.36
+2021-02-07 10:14:14,703 - INFO - Horizon 03, MAE: 26.29, MAPE: 0.2689, RMSE: 48.95
+2021-02-07 10:14:14,705 - INFO - Horizon 04, MAE: 28.25, MAPE: 0.2831, RMSE: 52.82
+2021-02-07 10:14:14,705 - INFO - Evaluation_test_End:
+2021-02-07 10:15:12,871 - INFO - Epoch:126, train_mae:11.00, val_mae:22.633047580718994,r_loss=0.00,lr=[0.0001],  time_elapsed:58.1656789049739
+2021-02-07 10:15:12,871 - INFO - Evaluation_test_Begin:
+2021-02-07 10:15:19,320 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2334, RMSE: 43.06
+2021-02-07 10:15:19,322 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2491, RMSE: 45.54
+2021-02-07 10:15:19,324 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2717, RMSE: 48.79
+2021-02-07 10:15:19,326 - INFO - Horizon 04, MAE: 28.12, MAPE: 0.2843, RMSE: 52.61
+2021-02-07 10:15:19,326 - INFO - Evaluation_test_End:
+2021-02-07 10:16:17,405 - INFO - Epoch:127, train_mae:10.94, val_mae:22.603286266326904,r_loss=0.00,lr=[0.0001],  time_elapsed:58.07915055099875
+2021-02-07 10:16:17,406 - INFO - Evaluation_test_Begin:
+2021-02-07 10:16:23,841 - INFO - Horizon 01, MAE: 23.14, MAPE: 0.2292, RMSE: 42.89
+2021-02-07 10:16:23,843 - INFO - Horizon 02, MAE: 24.32, MAPE: 0.2477, RMSE: 45.23
+2021-02-07 10:16:23,844 - INFO - Horizon 03, MAE: 26.10, MAPE: 0.2682, RMSE: 48.46
+2021-02-07 10:16:23,846 - INFO - Horizon 04, MAE: 28.04, MAPE: 0.2819, RMSE: 52.34
+2021-02-07 10:16:23,846 - INFO - Evaluation_test_End:
+2021-02-07 10:17:21,866 - INFO - Epoch:128, train_mae:10.90, val_mae:22.604074954986572,r_loss=0.00,lr=[0.0001],  time_elapsed:58.01987789798295
+2021-02-07 10:17:21,867 - INFO - Evaluation_test_Begin:
+2021-02-07 10:17:28,299 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2374, RMSE: 43.02
+2021-02-07 10:17:28,301 - INFO - Horizon 02, MAE: 24.34, MAPE: 0.2535, RMSE: 45.26
+2021-02-07 10:17:28,302 - INFO - Horizon 03, MAE: 26.16, MAPE: 0.2744, RMSE: 48.73
+2021-02-07 10:17:28,304 - INFO - Horizon 04, MAE: 28.03, MAPE: 0.2891, RMSE: 52.37
+2021-02-07 10:17:28,304 - INFO - Evaluation_test_End:
+2021-02-07 10:18:26,429 - INFO - Epoch:129, train_mae:10.84, val_mae:22.58339023590088,r_loss=0.00,lr=[0.0001],  time_elapsed:58.124500339035876
+2021-02-07 10:18:26,429 - INFO - Evaluation_test_Begin:
+2021-02-07 10:18:32,861 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2335, RMSE: 43.00
+2021-02-07 10:18:32,863 - INFO - Horizon 02, MAE: 24.38, MAPE: 0.2503, RMSE: 45.36
+2021-02-07 10:18:32,864 - INFO - Horizon 03, MAE: 26.15, MAPE: 0.2719, RMSE: 48.67
+2021-02-07 10:18:32,866 - INFO - Horizon 04, MAE: 28.06, MAPE: 0.2860, RMSE: 52.41
+2021-02-07 10:18:32,866 - INFO - Evaluation_test_End:
+2021-02-07 10:19:31,266 - INFO - Epoch:130, train_mae:10.85, val_mae:22.576999187469482,r_loss=0.00,lr=[0.0001],  time_elapsed:58.13419915904524
+2021-02-07 10:19:31,266 - INFO - Evaluation_test_Begin:
+2021-02-07 10:19:37,713 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2331, RMSE: 43.00
+2021-02-07 10:19:37,715 - INFO - Horizon 02, MAE: 24.35, MAPE: 0.2489, RMSE: 45.24
+2021-02-07 10:19:37,717 - INFO - Horizon 03, MAE: 26.17, MAPE: 0.2733, RMSE: 48.62
+2021-02-07 10:19:37,719 - INFO - Horizon 04, MAE: 27.99, MAPE: 0.2848, RMSE: 52.34
+2021-02-07 10:19:37,719 - INFO - Evaluation_test_End:
+2021-02-07 10:20:35,709 - INFO - Epoch:131, train_mae:10.80, val_mae:22.598012924194336,r_loss=0.00,lr=[0.0001],  time_elapsed:57.989942068990786
+2021-02-07 10:20:35,710 - INFO - Evaluation_test_Begin:
+2021-02-07 10:20:42,139 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2335, RMSE: 42.99
+2021-02-07 10:20:42,141 - INFO - Horizon 02, MAE: 24.40, MAPE: 0.2514, RMSE: 45.36
+2021-02-07 10:20:42,143 - INFO - Horizon 03, MAE: 26.16, MAPE: 0.2724, RMSE: 48.51
+2021-02-07 10:20:42,144 - INFO - Horizon 04, MAE: 28.13, MAPE: 0.2875, RMSE: 52.52
+2021-02-07 10:20:42,144 - INFO - Evaluation_test_End:
+2021-02-07 10:21:40,216 - INFO - Epoch:132, train_mae:10.79, val_mae:22.58722496032715,r_loss=0.00,lr=[0.0001],  time_elapsed:58.07119015202625
+2021-02-07 10:21:40,216 - INFO - Evaluation_test_Begin:
+2021-02-07 10:21:46,649 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2337, RMSE: 42.89
+2021-02-07 10:21:46,651 - INFO - Horizon 02, MAE: 24.36, MAPE: 0.2498, RMSE: 45.31
+2021-02-07 10:21:46,653 - INFO - Horizon 03, MAE: 26.12, MAPE: 0.2668, RMSE: 48.51
+2021-02-07 10:21:46,655 - INFO - Horizon 04, MAE: 28.06, MAPE: 0.2836, RMSE: 52.48
+2021-02-07 10:21:46,655 - INFO - Evaluation_test_End:
+2021-02-07 10:22:44,584 - INFO - Epoch:133, train_mae:10.79, val_mae:22.569754123687744,r_loss=0.00,lr=[0.0001],  time_elapsed:57.92901597998571
+2021-02-07 10:22:44,585 - INFO - Evaluation_test_Begin:
+2021-02-07 10:22:51,019 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2338, RMSE: 43.06
+2021-02-07 10:22:51,021 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2470, RMSE: 45.46
+2021-02-07 10:22:51,023 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2734, RMSE: 48.73
+2021-02-07 10:22:51,024 - INFO - Horizon 04, MAE: 28.12, MAPE: 0.2824, RMSE: 52.61
+2021-02-07 10:22:51,025 - INFO - Evaluation_test_End:
+2021-02-07 10:23:48,923 - INFO - Epoch:134, train_mae:10.77, val_mae:22.68190097808838,r_loss=0.00,lr=[0.0001],  time_elapsed:57.89769766002428
+2021-02-07 10:23:48,923 - INFO - Evaluation_test_Begin:
+2021-02-07 10:23:55,350 - INFO - Horizon 01, MAE: 23.20, MAPE: 0.2342, RMSE: 43.08
+2021-02-07 10:23:55,351 - INFO - Horizon 02, MAE: 24.42, MAPE: 0.2497, RMSE: 45.43
+2021-02-07 10:23:55,353 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2678, RMSE: 48.69
+2021-02-07 10:23:55,355 - INFO - Horizon 04, MAE: 28.15, MAPE: 0.2842, RMSE: 52.57
+2021-02-07 10:23:55,355 - INFO - Evaluation_test_End:
+2021-02-07 10:24:53,496 - INFO - Epoch:135, train_mae:10.80, val_mae:22.555687427520752,r_loss=0.00,lr=[0.0001],  time_elapsed:57.88353101501707
+2021-02-07 10:24:53,496 - INFO - Evaluation_test_Begin:
+2021-02-07 10:24:59,923 - INFO - Horizon 01, MAE: 23.21, MAPE: 0.2296, RMSE: 43.05
+2021-02-07 10:24:59,925 - INFO - Horizon 02, MAE: 24.38, MAPE: 0.2477, RMSE: 45.43
+2021-02-07 10:24:59,926 - INFO - Horizon 03, MAE: 26.17, MAPE: 0.2699, RMSE: 48.81
+2021-02-07 10:24:59,928 - INFO - Horizon 04, MAE: 28.07, MAPE: 0.2815, RMSE: 52.66
+2021-02-07 10:24:59,928 - INFO - Evaluation_test_End:
+2021-02-07 10:25:57,946 - INFO - Epoch:136, train_mae:10.71, val_mae:22.64799737930298,r_loss=0.00,lr=[0.0001],  time_elapsed:58.01762894302374
+2021-02-07 10:25:57,947 - INFO - Evaluation_test_Begin:
+2021-02-07 10:26:04,388 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2340, RMSE: 42.91
+2021-02-07 10:26:04,390 - INFO - Horizon 02, MAE: 24.41, MAPE: 0.2454, RMSE: 45.45
+2021-02-07 10:26:04,391 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2647, RMSE: 48.71
+2021-02-07 10:26:04,393 - INFO - Horizon 04, MAE: 28.10, MAPE: 0.2788, RMSE: 52.59
+2021-02-07 10:26:04,393 - INFO - Evaluation_test_End:
+2021-02-07 10:27:02,421 - INFO - Epoch:137, train_mae:10.67, val_mae:22.63421058654785,r_loss=0.00,lr=[0.0001],  time_elapsed:58.02760463900631
+2021-02-07 10:27:02,421 - INFO - Evaluation_test_Begin:
+2021-02-07 10:27:08,869 - INFO - Horizon 01, MAE: 23.23, MAPE: 0.2378, RMSE: 43.09
+2021-02-07 10:27:08,871 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2501, RMSE: 45.35
+2021-02-07 10:27:08,873 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2755, RMSE: 48.65
+2021-02-07 10:27:08,875 - INFO - Horizon 04, MAE: 28.08, MAPE: 0.2886, RMSE: 52.48
+2021-02-07 10:27:08,875 - INFO - Evaluation_test_End:
+2021-02-07 10:28:06,934 - INFO - Epoch:138, train_mae:10.70, val_mae:22.691303253173828,r_loss=0.00,lr=[0.0001],  time_elapsed:58.05890860798536
+2021-02-07 10:28:06,935 - INFO - Evaluation_test_Begin:
+2021-02-07 10:28:13,380 - INFO - Horizon 01, MAE: 23.21, MAPE: 0.2418, RMSE: 43.07
+2021-02-07 10:28:13,382 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2568, RMSE: 45.48
+2021-02-07 10:28:13,384 - INFO - Horizon 03, MAE: 26.24, MAPE: 0.2776, RMSE: 48.74
+2021-02-07 10:28:13,385 - INFO - Horizon 04, MAE: 28.17, MAPE: 0.2927, RMSE: 52.62
+2021-02-07 10:28:13,385 - INFO - Evaluation_test_End:
+2021-02-07 10:29:11,292 - INFO - Epoch:139, train_mae:10.67, val_mae:22.686448574066162,r_loss=0.00,lr=[0.0001],  time_elapsed:57.90568195004016
+2021-02-07 10:29:11,292 - INFO - Evaluation_test_Begin:
+2021-02-07 10:29:17,720 - INFO - Horizon 01, MAE: 23.21, MAPE: 0.2380, RMSE: 42.95
+2021-02-07 10:29:17,722 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2500, RMSE: 45.45
+2021-02-07 10:29:17,724 - INFO - Horizon 03, MAE: 26.28, MAPE: 0.2744, RMSE: 48.84
+2021-02-07 10:29:17,726 - INFO - Horizon 04, MAE: 28.22, MAPE: 0.2868, RMSE: 52.64
+2021-02-07 10:29:17,726 - INFO - Evaluation_test_End:
+2021-02-07 10:30:15,980 - INFO - Epoch:140, train_mae:10.69, val_mae:22.668067932128906,r_loss=0.00,lr=[0.0001],  time_elapsed:57.989613086974714
+2021-02-07 10:30:15,980 - INFO - Evaluation_test_Begin:
+2021-02-07 10:30:22,424 - INFO - Horizon 01, MAE: 23.23, MAPE: 0.2392, RMSE: 43.00
+2021-02-07 10:30:22,426 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2476, RMSE: 45.41
+2021-02-07 10:30:22,428 - INFO - Horizon 03, MAE: 26.28, MAPE: 0.2719, RMSE: 48.84
+2021-02-07 10:30:22,430 - INFO - Horizon 04, MAE: 28.17, MAPE: 0.2843, RMSE: 52.62
+2021-02-07 10:30:22,430 - INFO - Evaluation_test_End:
+2021-02-07 10:31:20,435 - INFO - Epoch:141, train_mae:10.59, val_mae:22.687556743621826,r_loss=0.00,lr=[0.0001],  time_elapsed:58.0042053249781
+2021-02-07 10:31:20,435 - INFO - Evaluation_test_Begin:
+2021-02-07 10:31:26,867 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2370, RMSE: 42.88
+2021-02-07 10:31:26,868 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2521, RMSE: 45.55
+2021-02-07 10:31:26,870 - INFO - Horizon 03, MAE: 26.25, MAPE: 0.2710, RMSE: 48.74
+2021-02-07 10:31:26,872 - INFO - Horizon 04, MAE: 28.21, MAPE: 0.2875, RMSE: 52.75
+2021-02-07 10:31:26,872 - INFO - Evaluation_test_End:
+2021-02-07 10:32:24,797 - INFO - Epoch:142, train_mae:10.55, val_mae:22.68362808227539,r_loss=0.00,lr=[0.0001],  time_elapsed:57.925008380028885
+2021-02-07 10:32:24,798 - INFO - Evaluation_test_Begin:
+2021-02-07 10:32:31,231 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2317, RMSE: 42.99
+2021-02-07 10:32:31,233 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2468, RMSE: 45.54
+2021-02-07 10:32:31,234 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2655, RMSE: 48.79
+2021-02-07 10:32:31,236 - INFO - Horizon 04, MAE: 28.20, MAPE: 0.2814, RMSE: 52.79
+2021-02-07 10:32:31,236 - INFO - Evaluation_test_End:
+2021-02-07 10:33:29,590 - INFO - Epoch:143, train_mae:10.54, val_mae:22.645052433013916,r_loss=0.00,lr=[0.0001],  time_elapsed:58.35393397102598
+2021-02-07 10:33:29,591 - INFO - Evaluation_test_Begin:
+2021-02-07 10:33:36,063 - INFO - Horizon 01, MAE: 23.22, MAPE: 0.2313, RMSE: 43.01
+2021-02-07 10:33:36,065 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2451, RMSE: 45.49
+2021-02-07 10:33:36,066 - INFO - Horizon 03, MAE: 26.27, MAPE: 0.2645, RMSE: 48.98
+2021-02-07 10:33:36,068 - INFO - Horizon 04, MAE: 28.22, MAPE: 0.2788, RMSE: 52.83
+2021-02-07 10:33:36,068 - INFO - Evaluation_test_End:
+2021-02-07 10:34:34,547 - INFO - Epoch:144, train_mae:10.50, val_mae:22.687073230743408,r_loss=0.00,lr=[0.0001],  time_elapsed:58.47826149495086
+2021-02-07 10:34:34,547 - INFO - Evaluation_test_Begin:
+2021-02-07 10:34:40,985 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2373, RMSE: 42.93
+2021-02-07 10:34:40,987 - INFO - Horizon 02, MAE: 24.44, MAPE: 0.2512, RMSE: 45.47
+2021-02-07 10:34:40,988 - INFO - Horizon 03, MAE: 26.26, MAPE: 0.2702, RMSE: 48.83
+2021-02-07 10:34:40,990 - INFO - Horizon 04, MAE: 28.18, MAPE: 0.2864, RMSE: 52.63
+2021-02-07 10:34:40,990 - INFO - Evaluation_test_End:
+2021-02-07 10:35:39,380 - INFO - Epoch:145, train_mae:10.51, val_mae:22.747543811798096,r_loss=0.00,lr=[0.0001],  time_elapsed:58.125575404963456
+2021-02-07 10:35:39,380 - INFO - Evaluation_test_Begin:
+2021-02-07 10:35:45,832 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2273, RMSE: 43.04
+2021-02-07 10:35:45,834 - INFO - Horizon 02, MAE: 24.49, MAPE: 0.2504, RMSE: 45.61
+2021-02-07 10:35:45,836 - INFO - Horizon 03, MAE: 26.28, MAPE: 0.2688, RMSE: 48.82
+2021-02-07 10:35:45,838 - INFO - Horizon 04, MAE: 28.26, MAPE: 0.2868, RMSE: 52.71
+2021-02-07 10:35:45,838 - INFO - Evaluation_test_End:
+2021-02-07 10:36:43,933 - INFO - Epoch:146, train_mae:10.59, val_mae:22.662804126739502,r_loss=0.00,lr=[0.0001],  time_elapsed:58.09466337400954
+2021-02-07 10:36:43,933 - INFO - Evaluation_test_Begin:
+2021-02-07 10:36:50,378 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2370, RMSE: 42.89
+2021-02-07 10:36:50,380 - INFO - Horizon 02, MAE: 24.42, MAPE: 0.2496, RMSE: 45.43
+2021-02-07 10:36:50,382 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2696, RMSE: 48.62
+2021-02-07 10:36:50,383 - INFO - Horizon 04, MAE: 28.18, MAPE: 0.2842, RMSE: 52.56
+2021-02-07 10:36:50,384 - INFO - Evaluation_test_End:
+2021-02-07 10:37:48,823 - INFO - Epoch:147, train_mae:10.49, val_mae:22.729660511016846,r_loss=0.00,lr=[0.0001],  time_elapsed:58.43863678298658
+2021-02-07 10:37:48,823 - INFO - Evaluation_test_Begin:
+2021-02-07 10:37:55,305 - INFO - Horizon 01, MAE: 23.21, MAPE: 0.2314, RMSE: 42.90
+2021-02-07 10:37:55,307 - INFO - Horizon 02, MAE: 24.51, MAPE: 0.2463, RMSE: 45.58
+2021-02-07 10:37:55,309 - INFO - Horizon 03, MAE: 26.28, MAPE: 0.2641, RMSE: 48.69
+2021-02-07 10:37:55,311 - INFO - Horizon 04, MAE: 28.23, MAPE: 0.2797, RMSE: 52.58
+2021-02-07 10:37:55,311 - INFO - Evaluation_test_End:
+2021-02-07 10:38:53,798 - INFO - Epoch:148, train_mae:10.44, val_mae:22.820736408233643,r_loss=0.00,lr=[0.0001],  time_elapsed:58.48667718004435
+2021-02-07 10:38:53,799 - INFO - Evaluation_test_Begin:
+2021-02-07 10:39:00,261 - INFO - Horizon 01, MAE: 23.24, MAPE: 0.2358, RMSE: 42.97
+2021-02-07 10:39:00,263 - INFO - Horizon 02, MAE: 24.52, MAPE: 0.2502, RMSE: 45.66
+2021-02-07 10:39:00,265 - INFO - Horizon 03, MAE: 26.32, MAPE: 0.2675, RMSE: 48.92
+2021-02-07 10:39:00,267 - INFO - Horizon 04, MAE: 28.34, MAPE: 0.2841, RMSE: 52.92
+2021-02-07 10:39:00,267 - INFO - Evaluation_test_End:
+2021-02-07 10:39:58,902 - INFO - Epoch:149, train_mae:10.45, val_mae:22.64153480529785,r_loss=0.00,lr=[0.0001],  time_elapsed:58.63466784899356
+2021-02-07 10:39:58,903 - INFO - Evaluation_test_Begin:
+2021-02-07 10:40:05,355 - INFO - Horizon 01, MAE: 23.26, MAPE: 0.2421, RMSE: 43.09
+2021-02-07 10:40:05,357 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2476, RMSE: 45.52
+2021-02-07 10:40:05,359 - INFO - Horizon 03, MAE: 26.25, MAPE: 0.2736, RMSE: 48.74
+2021-02-07 10:40:05,361 - INFO - Horizon 04, MAE: 28.13, MAPE: 0.2842, RMSE: 52.61
+2021-02-07 10:40:05,361 - INFO - Evaluation_test_End:
+2021-02-07 10:41:03,672 - INFO - Epoch:150, train_mae:10.35, val_mae:22.695530891418457,r_loss=0.00,lr=[2e-06],  time_elapsed:58.0426747520105
+2021-02-07 10:41:03,673 - INFO - Evaluation_test_Begin:
+2021-02-07 10:41:10,107 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2356, RMSE: 42.88
+2021-02-07 10:41:10,109 - INFO - Horizon 02, MAE: 24.44, MAPE: 0.2508, RMSE: 45.54
+2021-02-07 10:41:10,110 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2697, RMSE: 48.45
+2021-02-07 10:41:10,112 - INFO - Horizon 04, MAE: 28.29, MAPE: 0.2843, RMSE: 52.63
+2021-02-07 10:41:10,112 - INFO - Evaluation_test_End:
+2021-02-07 10:42:08,179 - INFO - Epoch:151, train_mae:10.28, val_mae:22.684065341949463,r_loss=0.00,lr=[1e-05],  time_elapsed:58.066333224996924
+2021-02-07 10:42:08,180 - INFO - Evaluation_test_Begin:
+2021-02-07 10:42:14,616 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2362, RMSE: 42.86
+2021-02-07 10:42:14,618 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2509, RMSE: 45.54
+2021-02-07 10:42:14,620 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2695, RMSE: 48.47
+2021-02-07 10:42:14,622 - INFO - Horizon 04, MAE: 28.27, MAPE: 0.2841, RMSE: 52.62
+2021-02-07 10:42:14,622 - INFO - Evaluation_test_End:
+2021-02-07 10:43:12,618 - INFO - Epoch:152, train_mae:10.26, val_mae:22.670766353607178,r_loss=0.00,lr=[1e-05],  time_elapsed:57.99613469000906
+2021-02-07 10:43:12,619 - INFO - Evaluation_test_Begin:
+2021-02-07 10:43:19,055 - INFO - Horizon 01, MAE: 23.14, MAPE: 0.2355, RMSE: 42.87
+2021-02-07 10:43:19,057 - INFO - Horizon 02, MAE: 24.41, MAPE: 0.2500, RMSE: 45.53
+2021-02-07 10:43:19,059 - INFO - Horizon 03, MAE: 26.16, MAPE: 0.2683, RMSE: 48.40
+2021-02-07 10:43:19,061 - INFO - Horizon 04, MAE: 28.24, MAPE: 0.2826, RMSE: 52.58
+2021-02-07 10:43:19,061 - INFO - Evaluation_test_End:
+2021-02-07 10:44:17,058 - INFO - Epoch:153, train_mae:10.24, val_mae:22.714051723480225,r_loss=0.00,lr=[1e-05],  time_elapsed:57.997095766011626
+2021-02-07 10:44:17,059 - INFO - Evaluation_test_Begin:
+2021-02-07 10:44:23,495 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2364, RMSE: 42.91
+2021-02-07 10:44:23,497 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2509, RMSE: 45.60
+2021-02-07 10:44:23,499 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2698, RMSE: 48.49
+2021-02-07 10:44:23,500 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2841, RMSE: 52.70
+2021-02-07 10:44:23,500 - INFO - Evaluation_test_End:
+2021-02-07 10:45:21,515 - INFO - Epoch:154, train_mae:10.23, val_mae:22.67969512939453,r_loss=0.00,lr=[1e-05],  time_elapsed:58.014748412999325
+2021-02-07 10:45:21,516 - INFO - Evaluation_test_Begin:
+2021-02-07 10:45:27,948 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2367, RMSE: 42.86
+2021-02-07 10:45:27,950 - INFO - Horizon 02, MAE: 24.43, MAPE: 0.2512, RMSE: 45.55
+2021-02-07 10:45:27,952 - INFO - Horizon 03, MAE: 26.18, MAPE: 0.2701, RMSE: 48.45
+2021-02-07 10:45:27,954 - INFO - Horizon 04, MAE: 28.26, MAPE: 0.2839, RMSE: 52.66
+2021-02-07 10:45:27,954 - INFO - Evaluation_test_End:
+2021-02-07 10:46:26,168 - INFO - Epoch:155, train_mae:10.21, val_mae:22.7222580909729,r_loss=0.00,lr=[1e-05],  time_elapsed:57.955678578000516
+2021-02-07 10:46:26,169 - INFO - Evaluation_test_Begin:
+2021-02-07 10:46:32,601 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2366, RMSE: 42.86
+2021-02-07 10:46:32,603 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2509, RMSE: 45.54
+2021-02-07 10:46:32,604 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2700, RMSE: 48.47
+2021-02-07 10:46:32,606 - INFO - Horizon 04, MAE: 28.28, MAPE: 0.2841, RMSE: 52.63
+2021-02-07 10:46:32,606 - INFO - Evaluation_test_End:
+2021-02-07 10:47:30,629 - INFO - Epoch:156, train_mae:10.21, val_mae:22.681878089904785,r_loss=0.00,lr=[1e-05],  time_elapsed:58.02261135302251
+2021-02-07 10:47:30,630 - INFO - Evaluation_test_Begin:
+2021-02-07 10:47:37,062 - INFO - Horizon 01, MAE: 23.15, MAPE: 0.2364, RMSE: 42.85
+2021-02-07 10:47:37,064 - INFO - Horizon 02, MAE: 24.42, MAPE: 0.2508, RMSE: 45.56
+2021-02-07 10:47:37,066 - INFO - Horizon 03, MAE: 26.18, MAPE: 0.2690, RMSE: 48.42
+2021-02-07 10:47:37,067 - INFO - Horizon 04, MAE: 28.26, MAPE: 0.2829, RMSE: 52.64
+2021-02-07 10:47:37,068 - INFO - Evaluation_test_End:
+2021-02-07 10:48:35,065 - INFO - Epoch:157, train_mae:10.19, val_mae:22.688973903656006,r_loss=0.00,lr=[1e-05],  time_elapsed:57.99732132203644
+2021-02-07 10:48:35,066 - INFO - Evaluation_test_Begin:
+2021-02-07 10:48:41,500 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2362, RMSE: 42.87
+2021-02-07 10:48:41,501 - INFO - Horizon 02, MAE: 24.44, MAPE: 0.2503, RMSE: 45.57
+2021-02-07 10:48:41,503 - INFO - Horizon 03, MAE: 26.18, MAPE: 0.2680, RMSE: 48.43
+2021-02-07 10:48:41,505 - INFO - Horizon 04, MAE: 28.27, MAPE: 0.2824, RMSE: 52.66
+2021-02-07 10:48:41,505 - INFO - Evaluation_test_End:
+2021-02-07 10:49:39,492 - INFO - Epoch:158, train_mae:10.19, val_mae:22.69728994369507,r_loss=0.00,lr=[1e-05],  time_elapsed:57.98599676799495
+2021-02-07 10:49:39,492 - INFO - Evaluation_test_Begin:
+2021-02-07 10:49:45,922 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2366, RMSE: 42.89
+2021-02-07 10:49:45,924 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2505, RMSE: 45.62
+2021-02-07 10:49:45,925 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2695, RMSE: 48.48
+2021-02-07 10:49:45,927 - INFO - Horizon 04, MAE: 28.30, MAPE: 0.2827, RMSE: 52.73
+2021-02-07 10:49:45,927 - INFO - Evaluation_test_End:
+2021-02-07 10:50:43,865 - INFO - Epoch:159, train_mae:10.18, val_mae:22.694486141204834,r_loss=0.00,lr=[1e-05],  time_elapsed:57.93805778300157
+2021-02-07 10:50:43,866 - INFO - Evaluation_test_Begin:
+2021-02-07 10:50:50,301 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2356, RMSE: 42.89
+2021-02-07 10:50:50,303 - INFO - Horizon 02, MAE: 24.44, MAPE: 0.2503, RMSE: 45.59
+2021-02-07 10:50:50,305 - INFO - Horizon 03, MAE: 26.20, MAPE: 0.2682, RMSE: 48.46
+2021-02-07 10:50:50,306 - INFO - Horizon 04, MAE: 28.29, MAPE: 0.2824, RMSE: 52.70
+2021-02-07 10:50:50,307 - INFO - Evaluation_test_End:
+2021-02-07 10:51:48,531 - INFO - Epoch:160, train_mae:10.18, val_mae:22.70481300354004,r_loss=0.00,lr=[1e-05],  time_elapsed:57.96300473099109
+2021-02-07 10:51:48,531 - INFO - Evaluation_test_Begin:
+2021-02-07 10:51:54,960 - INFO - Horizon 01, MAE: 23.16, MAPE: 0.2360, RMSE: 42.87
+2021-02-07 10:51:54,961 - INFO - Horizon 02, MAE: 24.44, MAPE: 0.2510, RMSE: 45.57
+2021-02-07 10:51:54,963 - INFO - Horizon 03, MAE: 26.20, MAPE: 0.2691, RMSE: 48.46
+2021-02-07 10:51:54,965 - INFO - Horizon 04, MAE: 28.29, MAPE: 0.2835, RMSE: 52.69
+2021-02-07 10:51:54,965 - INFO - Evaluation_test_End:
+2021-02-07 10:52:52,909 - INFO - Epoch:161, train_mae:10.17, val_mae:22.70935869216919,r_loss=0.00,lr=[1e-05],  time_elapsed:57.94376731198281
+2021-02-07 10:52:52,909 - INFO - Evaluation_test_Begin:
+2021-02-07 10:52:59,341 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2365, RMSE: 42.88
+2021-02-07 10:52:59,343 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2507, RMSE: 45.60
+2021-02-07 10:52:59,345 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2687, RMSE: 48.44
+2021-02-07 10:52:59,346 - INFO - Horizon 04, MAE: 28.30, MAPE: 0.2827, RMSE: 52.73
+2021-02-07 10:52:59,346 - INFO - Evaluation_test_End:
+2021-02-07 10:53:57,355 - INFO - Epoch:162, train_mae:10.16, val_mae:22.69281816482544,r_loss=0.00,lr=[1e-05],  time_elapsed:58.00820488599129
+2021-02-07 10:53:57,355 - INFO - Evaluation_test_Begin:
+2021-02-07 10:54:03,807 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2361, RMSE: 42.90
+2021-02-07 10:54:03,810 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2504, RMSE: 45.60
+2021-02-07 10:54:03,812 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2680, RMSE: 48.46
+2021-02-07 10:54:03,814 - INFO - Horizon 04, MAE: 28.30, MAPE: 0.2822, RMSE: 52.74
+2021-02-07 10:54:03,814 - INFO - Evaluation_test_End:
+2021-02-07 10:55:01,819 - INFO - Epoch:163, train_mae:10.15, val_mae:22.70626401901245,r_loss=0.00,lr=[1e-05],  time_elapsed:58.004671072994824
+2021-02-07 10:55:01,820 - INFO - Evaluation_test_Begin:
+2021-02-07 10:55:08,252 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2367, RMSE: 42.89
+2021-02-07 10:55:08,254 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2501, RMSE: 45.60
+2021-02-07 10:55:08,256 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2682, RMSE: 48.47
+2021-02-07 10:55:08,257 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2824, RMSE: 52.75
+2021-02-07 10:55:08,258 - INFO - Evaluation_test_End:
+2021-02-07 10:56:06,312 - INFO - Epoch:164, train_mae:10.15, val_mae:22.70817279815674,r_loss=0.00,lr=[1e-05],  time_elapsed:58.05370418203529
+2021-02-07 10:56:06,313 - INFO - Evaluation_test_Begin:
+2021-02-07 10:56:12,761 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2363, RMSE: 42.88
+2021-02-07 10:56:12,763 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2505, RMSE: 45.58
+2021-02-07 10:56:12,765 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2691, RMSE: 48.46
+2021-02-07 10:56:12,766 - INFO - Horizon 04, MAE: 28.31, MAPE: 0.2831, RMSE: 52.74
+2021-02-07 10:56:12,766 - INFO - Evaluation_test_End:
+2021-02-07 10:57:11,135 - INFO - Epoch:165, train_mae:10.14, val_mae:22.723769664764404,r_loss=0.00,lr=[1e-05],  time_elapsed:58.109958331042435
+2021-02-07 10:57:11,136 - INFO - Evaluation_test_Begin:
+2021-02-07 10:57:17,567 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2376, RMSE: 42.90
+2021-02-07 10:57:17,568 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2516, RMSE: 45.60
+2021-02-07 10:57:17,570 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2701, RMSE: 48.47
+2021-02-07 10:57:17,572 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2840, RMSE: 52.74
+2021-02-07 10:57:17,572 - INFO - Evaluation_test_End:
+2021-02-07 10:58:15,550 - INFO - Epoch:166, train_mae:10.14, val_mae:22.722659587860107,r_loss=0.00,lr=[1e-05],  time_elapsed:57.9777107660193
+2021-02-07 10:58:15,551 - INFO - Evaluation_test_Begin:
+2021-02-07 10:58:21,984 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2362, RMSE: 42.86
+2021-02-07 10:58:21,986 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2504, RMSE: 45.60
+2021-02-07 10:58:21,988 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2677, RMSE: 48.45
+2021-02-07 10:58:21,990 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2819, RMSE: 52.74
+2021-02-07 10:58:21,990 - INFO - Evaluation_test_End:
+2021-02-07 10:59:19,973 - INFO - Epoch:167, train_mae:10.14, val_mae:22.71785020828247,r_loss=0.00,lr=[1e-05],  time_elapsed:57.98290783900302
+2021-02-07 10:59:19,973 - INFO - Evaluation_test_Begin:
+2021-02-07 10:59:26,413 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2366, RMSE: 42.90
+2021-02-07 10:59:26,415 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2507, RMSE: 45.63
+2021-02-07 10:59:26,417 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2694, RMSE: 48.47
+2021-02-07 10:59:26,419 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2827, RMSE: 52.76
+2021-02-07 10:59:26,419 - INFO - Evaluation_test_End:
+2021-02-07 11:00:24,556 - INFO - Epoch:168, train_mae:10.13, val_mae:22.721050262451172,r_loss=0.00,lr=[1e-05],  time_elapsed:58.13642462796997
+2021-02-07 11:00:24,556 - INFO - Evaluation_test_Begin:
+2021-02-07 11:00:31,034 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2374, RMSE: 42.90
+2021-02-07 11:00:31,036 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2508, RMSE: 45.62
+2021-02-07 11:00:31,037 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2688, RMSE: 48.45
+2021-02-07 11:00:31,039 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2828, RMSE: 52.76
+2021-02-07 11:00:31,039 - INFO - Evaluation_test_End:
+2021-02-07 11:01:29,136 - INFO - Epoch:169, train_mae:10.12, val_mae:22.71831512451172,r_loss=0.00,lr=[1e-05],  time_elapsed:58.09665707498789
+2021-02-07 11:01:29,137 - INFO - Evaluation_test_Begin:
+2021-02-07 11:01:35,574 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2366, RMSE: 42.90
+2021-02-07 11:01:35,576 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2506, RMSE: 45.63
+2021-02-07 11:01:35,578 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2694, RMSE: 48.49
+2021-02-07 11:01:35,580 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2832, RMSE: 52.78
+2021-02-07 11:01:35,580 - INFO - Evaluation_test_End:
+2021-02-07 11:02:33,882 - INFO - Epoch:170, train_mae:10.12, val_mae:22.700963497161865,r_loss=0.00,lr=[1e-05],  time_elapsed:58.035003208962735
+2021-02-07 11:02:33,883 - INFO - Evaluation_test_Begin:
+2021-02-07 11:02:40,331 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2362, RMSE: 42.89
+2021-02-07 11:02:40,333 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2506, RMSE: 45.62
+2021-02-07 11:02:40,335 - INFO - Horizon 03, MAE: 26.20, MAPE: 0.2682, RMSE: 48.44
+2021-02-07 11:02:40,337 - INFO - Horizon 04, MAE: 28.31, MAPE: 0.2820, RMSE: 52.76
+2021-02-07 11:02:40,337 - INFO - Evaluation_test_End:
+2021-02-07 11:03:38,576 - INFO - Epoch:171, train_mae:10.11, val_mae:22.71116018295288,r_loss=0.00,lr=[1e-05],  time_elapsed:58.2382818350452
+2021-02-07 11:03:38,577 - INFO - Evaluation_test_Begin:
+2021-02-07 11:03:45,023 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2358, RMSE: 42.91
+2021-02-07 11:03:45,025 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2498, RMSE: 45.63
+2021-02-07 11:03:45,027 - INFO - Horizon 03, MAE: 26.20, MAPE: 0.2671, RMSE: 48.43
+2021-02-07 11:03:45,028 - INFO - Horizon 04, MAE: 28.31, MAPE: 0.2814, RMSE: 52.74
+2021-02-07 11:03:45,028 - INFO - Evaluation_test_End:
+2021-02-07 11:04:43,152 - INFO - Epoch:172, train_mae:10.11, val_mae:22.706575870513916,r_loss=0.00,lr=[1e-05],  time_elapsed:58.123263365007006
+2021-02-07 11:04:43,152 - INFO - Evaluation_test_Begin:
+2021-02-07 11:04:49,605 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2360, RMSE: 42.89
+2021-02-07 11:04:49,607 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2504, RMSE: 45.62
+2021-02-07 11:04:49,609 - INFO - Horizon 03, MAE: 26.20, MAPE: 0.2683, RMSE: 48.42
+2021-02-07 11:04:49,611 - INFO - Horizon 04, MAE: 28.30, MAPE: 0.2821, RMSE: 52.74
+2021-02-07 11:04:49,611 - INFO - Evaluation_test_End:
+2021-02-07 11:05:47,805 - INFO - Epoch:173, train_mae:10.11, val_mae:22.69961977005005,r_loss=0.00,lr=[1e-05],  time_elapsed:58.19351208797889
+2021-02-07 11:05:47,805 - INFO - Evaluation_test_Begin:
+2021-02-07 11:05:54,248 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2365, RMSE: 42.90
+2021-02-07 11:05:54,250 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2504, RMSE: 45.60
+2021-02-07 11:05:54,252 - INFO - Horizon 03, MAE: 26.19, MAPE: 0.2686, RMSE: 48.43
+2021-02-07 11:05:54,253 - INFO - Horizon 04, MAE: 28.30, MAPE: 0.2827, RMSE: 52.75
+2021-02-07 11:05:54,254 - INFO - Evaluation_test_End:
+2021-02-07 11:06:52,314 - INFO - Epoch:174, train_mae:10.10, val_mae:22.721532821655273,r_loss=0.00,lr=[1e-05],  time_elapsed:58.059527305013034
+2021-02-07 11:06:52,314 - INFO - Evaluation_test_Begin:
+2021-02-07 11:06:58,754 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2364, RMSE: 42.89
+2021-02-07 11:06:58,756 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2504, RMSE: 45.61
+2021-02-07 11:06:58,758 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2680, RMSE: 48.44
+2021-02-07 11:06:58,759 - INFO - Horizon 04, MAE: 28.31, MAPE: 0.2823, RMSE: 52.73
+2021-02-07 11:06:58,760 - INFO - Evaluation_test_End:
+2021-02-07 11:07:57,172 - INFO - Epoch:175, train_mae:10.10, val_mae:22.71329641342163,r_loss=0.00,lr=[1e-05],  time_elapsed:58.12669711600756
+2021-02-07 11:07:57,172 - INFO - Evaluation_test_Begin:
+2021-02-07 11:08:03,616 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2372, RMSE: 42.87
+2021-02-07 11:08:03,618 - INFO - Horizon 02, MAE: 24.45, MAPE: 0.2505, RMSE: 45.61
+2021-02-07 11:08:03,620 - INFO - Horizon 03, MAE: 26.20, MAPE: 0.2689, RMSE: 48.42
+2021-02-07 11:08:03,622 - INFO - Horizon 04, MAE: 28.31, MAPE: 0.2821, RMSE: 52.76
+2021-02-07 11:08:03,622 - INFO - Evaluation_test_End:
+2021-02-07 11:09:01,714 - INFO - Epoch:176, train_mae:10.09, val_mae:22.708780765533447,r_loss=0.00,lr=[1e-05],  time_elapsed:58.09172905801097
+2021-02-07 11:09:01,715 - INFO - Evaluation_test_Begin:
+2021-02-07 11:09:08,157 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2368, RMSE: 42.90
+2021-02-07 11:09:08,159 - INFO - Horizon 02, MAE: 24.46, MAPE: 0.2508, RMSE: 45.64
+2021-02-07 11:09:08,160 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2685, RMSE: 48.47
+2021-02-07 11:09:08,162 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2823, RMSE: 52.80
+2021-02-07 11:09:08,162 - INFO - Evaluation_test_End:
+2021-02-07 11:10:06,196 - INFO - Epoch:177, train_mae:10.09, val_mae:22.74065399169922,r_loss=0.00,lr=[1e-05],  time_elapsed:58.033411102951504
+2021-02-07 11:10:06,196 - INFO - Evaluation_test_Begin:
+2021-02-07 11:10:12,632 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2375, RMSE: 42.90
+2021-02-07 11:10:12,634 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2509, RMSE: 45.67
+2021-02-07 11:10:12,636 - INFO - Horizon 03, MAE: 26.25, MAPE: 0.2692, RMSE: 48.51
+2021-02-07 11:10:12,638 - INFO - Horizon 04, MAE: 28.35, MAPE: 0.2831, RMSE: 52.82
+2021-02-07 11:10:12,638 - INFO - Evaluation_test_End:
+2021-02-07 11:11:10,635 - INFO - Epoch:178, train_mae:10.09, val_mae:22.711713790893555,r_loss=0.00,lr=[1e-05],  time_elapsed:57.99673064099625
+2021-02-07 11:11:10,635 - INFO - Evaluation_test_Begin:
+2021-02-07 11:11:17,069 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2373, RMSE: 42.91
+2021-02-07 11:11:17,071 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2501, RMSE: 45.67
+2021-02-07 11:11:17,072 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2700, RMSE: 48.48
+2021-02-07 11:11:17,074 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2822, RMSE: 52.80
+2021-02-07 11:11:17,074 - INFO - Evaluation_test_End:
+2021-02-07 11:12:15,111 - INFO - Epoch:179, train_mae:10.08, val_mae:22.711856842041016,r_loss=0.00,lr=[1e-05],  time_elapsed:58.03647939901566
+2021-02-07 11:12:15,111 - INFO - Evaluation_test_Begin:
+2021-02-07 11:12:21,547 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2369, RMSE: 42.90
+2021-02-07 11:12:21,549 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2504, RMSE: 45.66
+2021-02-07 11:12:21,550 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2686, RMSE: 48.46
+2021-02-07 11:12:21,552 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2823, RMSE: 52.78
+2021-02-07 11:12:21,552 - INFO - Evaluation_test_End:
+2021-02-07 11:13:19,828 - INFO - Epoch:180, train_mae:10.07, val_mae:22.701093673706055,r_loss=0.00,lr=[1e-05],  time_elapsed:58.010943985020276
+2021-02-07 11:13:19,828 - INFO - Evaluation_test_Begin:
+2021-02-07 11:13:26,265 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2367, RMSE: 42.90
+2021-02-07 11:13:26,267 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2505, RMSE: 45.65
+2021-02-07 11:13:26,269 - INFO - Horizon 03, MAE: 26.21, MAPE: 0.2683, RMSE: 48.46
+2021-02-07 11:13:26,270 - INFO - Horizon 04, MAE: 28.31, MAPE: 0.2823, RMSE: 52.78
+2021-02-07 11:13:26,271 - INFO - Evaluation_test_End:
+2021-02-07 11:14:24,329 - INFO - Epoch:181, train_mae:10.07, val_mae:22.726542472839355,r_loss=0.00,lr=[1e-05],  time_elapsed:58.05761653697118
+2021-02-07 11:14:24,329 - INFO - Evaluation_test_Begin:
+2021-02-07 11:14:30,758 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2368, RMSE: 42.90
+2021-02-07 11:14:30,760 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2510, RMSE: 45.64
+2021-02-07 11:14:30,762 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2687, RMSE: 48.46
+2021-02-07 11:14:30,764 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2834, RMSE: 52.76
+2021-02-07 11:14:30,764 - INFO - Evaluation_test_End:
+2021-02-07 11:15:28,735 - INFO - Epoch:182, train_mae:10.06, val_mae:22.71168088912964,r_loss=0.00,lr=[1e-05],  time_elapsed:57.97015599202132
+2021-02-07 11:15:28,735 - INFO - Evaluation_test_Begin:
+2021-02-07 11:15:35,163 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2366, RMSE: 42.90
+2021-02-07 11:15:35,165 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2505, RMSE: 45.68
+2021-02-07 11:15:35,167 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2680, RMSE: 48.49
+2021-02-07 11:15:35,169 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2820, RMSE: 52.83
+2021-02-07 11:15:35,169 - INFO - Evaluation_test_End:
+2021-02-07 11:16:33,267 - INFO - Epoch:183, train_mae:10.06, val_mae:22.69978666305542,r_loss=0.00,lr=[1e-05],  time_elapsed:58.09758523304481
+2021-02-07 11:16:33,267 - INFO - Evaluation_test_Begin:
+2021-02-07 11:16:39,697 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2363, RMSE: 42.91
+2021-02-07 11:16:39,698 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2503, RMSE: 45.66
+2021-02-07 11:16:39,700 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2682, RMSE: 48.49
+2021-02-07 11:16:39,702 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2826, RMSE: 52.82
+2021-02-07 11:16:39,702 - INFO - Evaluation_test_End:
+2021-02-07 11:17:37,909 - INFO - Epoch:184, train_mae:10.06, val_mae:22.72319793701172,r_loss=0.00,lr=[1e-05],  time_elapsed:58.206867784960195
+2021-02-07 11:17:37,910 - INFO - Evaluation_test_Begin:
+2021-02-07 11:17:44,345 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2370, RMSE: 42.90
+2021-02-07 11:17:44,347 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2508, RMSE: 45.65
+2021-02-07 11:17:44,349 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2687, RMSE: 48.48
+2021-02-07 11:17:44,350 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2828, RMSE: 52.82
+2021-02-07 11:17:44,350 - INFO - Evaluation_test_End:
+2021-02-07 11:18:42,606 - INFO - Epoch:185, train_mae:10.05, val_mae:22.72609567642212,r_loss=0.00,lr=[1e-05],  time_elapsed:57.99171071196906
+2021-02-07 11:18:42,606 - INFO - Evaluation_test_Begin:
+2021-02-07 11:18:49,026 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2374, RMSE: 42.88
+2021-02-07 11:18:49,028 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2501, RMSE: 45.64
+2021-02-07 11:18:49,030 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2685, RMSE: 48.46
+2021-02-07 11:18:49,031 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2815, RMSE: 52.80
+2021-02-07 11:18:49,031 - INFO - Evaluation_test_End:
+2021-02-07 11:19:46,817 - INFO - Epoch:186, train_mae:10.06, val_mae:22.716885089874268,r_loss=0.00,lr=[1e-05],  time_elapsed:57.78464125102619
+2021-02-07 11:19:46,817 - INFO - Evaluation_test_Begin:
+2021-02-07 11:19:53,233 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2368, RMSE: 42.89
+2021-02-07 11:19:53,234 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2504, RMSE: 45.65
+2021-02-07 11:19:53,236 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2682, RMSE: 48.49
+2021-02-07 11:19:53,238 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2820, RMSE: 52.82
+2021-02-07 11:19:53,238 - INFO - Evaluation_test_End:
+2021-02-07 11:20:51,185 - INFO - Epoch:187, train_mae:10.04, val_mae:22.71763038635254,r_loss=0.00,lr=[1e-05],  time_elapsed:57.946376897976734
+2021-02-07 11:20:51,185 - INFO - Evaluation_test_Begin:
+2021-02-07 11:20:57,601 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2362, RMSE: 42.87
+2021-02-07 11:20:57,603 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2505, RMSE: 45.66
+2021-02-07 11:20:57,604 - INFO - Horizon 03, MAE: 26.22, MAPE: 0.2679, RMSE: 48.45
+2021-02-07 11:20:57,606 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2822, RMSE: 52.78
+2021-02-07 11:20:57,606 - INFO - Evaluation_test_End:
+2021-02-07 11:21:55,390 - INFO - Epoch:188, train_mae:10.04, val_mae:22.718780994415283,r_loss=0.00,lr=[1e-05],  time_elapsed:57.78390270395903
+2021-02-07 11:21:55,391 - INFO - Evaluation_test_Begin:
+2021-02-07 11:22:01,807 - INFO - Horizon 01, MAE: 23.17, MAPE: 0.2360, RMSE: 42.90
+2021-02-07 11:22:01,809 - INFO - Horizon 02, MAE: 24.47, MAPE: 0.2503, RMSE: 45.66
+2021-02-07 11:22:01,811 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2686, RMSE: 48.48
+2021-02-07 11:22:01,812 - INFO - Horizon 04, MAE: 28.32, MAPE: 0.2825, RMSE: 52.84
+2021-02-07 11:22:01,812 - INFO - Evaluation_test_End:
+2021-02-07 11:22:59,567 - INFO - Epoch:189, train_mae:10.04, val_mae:22.762587070465088,r_loss=0.00,lr=[1e-05],  time_elapsed:57.75437838601647
+2021-02-07 11:22:59,567 - INFO - Evaluation_test_Begin:
+2021-02-07 11:23:05,980 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2365, RMSE: 42.88
+2021-02-07 11:23:05,982 - INFO - Horizon 02, MAE: 24.49, MAPE: 0.2511, RMSE: 45.66
+2021-02-07 11:23:05,983 - INFO - Horizon 03, MAE: 26.26, MAPE: 0.2685, RMSE: 48.51
+2021-02-07 11:23:05,985 - INFO - Horizon 04, MAE: 28.37, MAPE: 0.2828, RMSE: 52.87
+2021-02-07 11:23:05,985 - INFO - Evaluation_test_End:
+2021-02-07 11:24:04,004 - INFO - Epoch:190, train_mae:10.04, val_mae:22.747153282165527,r_loss=0.00,lr=[1e-05],  time_elapsed:57.7645833309507
+2021-02-07 11:24:04,005 - INFO - Evaluation_test_Begin:
+2021-02-07 11:24:10,416 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2370, RMSE: 42.89
+2021-02-07 11:24:10,418 - INFO - Horizon 02, MAE: 24.50, MAPE: 0.2512, RMSE: 45.69
+2021-02-07 11:24:10,420 - INFO - Horizon 03, MAE: 26.26, MAPE: 0.2693, RMSE: 48.54
+2021-02-07 11:24:10,421 - INFO - Horizon 04, MAE: 28.36, MAPE: 0.2827, RMSE: 52.90
+2021-02-07 11:24:10,421 - INFO - Evaluation_test_End:
+2021-02-07 11:25:08,170 - INFO - Epoch:191, train_mae:10.03, val_mae:22.735387325286865,r_loss=0.00,lr=[1e-05],  time_elapsed:57.748351602989715
+2021-02-07 11:25:08,170 - INFO - Evaluation_test_Begin:
+2021-02-07 11:25:14,581 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2372, RMSE: 42.88
+2021-02-07 11:25:14,583 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2509, RMSE: 45.64
+2021-02-07 11:25:14,584 - INFO - Horizon 03, MAE: 26.24, MAPE: 0.2690, RMSE: 48.49
+2021-02-07 11:25:14,586 - INFO - Horizon 04, MAE: 28.34, MAPE: 0.2826, RMSE: 52.81
+2021-02-07 11:25:14,586 - INFO - Evaluation_test_End:
+2021-02-07 11:26:12,359 - INFO - Epoch:192, train_mae:10.03, val_mae:22.79245662689209,r_loss=0.00,lr=[1e-05],  time_elapsed:57.77306386100827
+2021-02-07 11:26:12,360 - INFO - Evaluation_test_Begin:
+2021-02-07 11:26:18,777 - INFO - Horizon 01, MAE: 23.20, MAPE: 0.2369, RMSE: 42.88
+2021-02-07 11:26:18,778 - INFO - Horizon 02, MAE: 24.51, MAPE: 0.2509, RMSE: 45.68
+2021-02-07 11:26:18,780 - INFO - Horizon 03, MAE: 26.29, MAPE: 0.2689, RMSE: 48.52
+2021-02-07 11:26:18,781 - INFO - Horizon 04, MAE: 28.39, MAPE: 0.2828, RMSE: 52.84
+2021-02-07 11:26:18,782 - INFO - Evaluation_test_End:
+2021-02-07 11:27:16,588 - INFO - Epoch:193, train_mae:10.03, val_mae:22.727008819580078,r_loss=0.00,lr=[1e-05],  time_elapsed:57.80657619499834
+2021-02-07 11:27:16,589 - INFO - Evaluation_test_Begin:
+2021-02-07 11:27:23,009 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2366, RMSE: 42.89
+2021-02-07 11:27:23,010 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2508, RMSE: 45.66
+2021-02-07 11:27:23,012 - INFO - Horizon 03, MAE: 26.24, MAPE: 0.2688, RMSE: 48.50
+2021-02-07 11:27:23,014 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2825, RMSE: 52.84
+2021-02-07 11:27:23,014 - INFO - Evaluation_test_End:
+2021-02-07 11:28:20,867 - INFO - Epoch:194, train_mae:10.03, val_mae:22.747604846954346,r_loss=0.00,lr=[1e-05],  time_elapsed:57.852613443974406
+2021-02-07 11:28:20,867 - INFO - Evaluation_test_Begin:
+2021-02-07 11:28:27,286 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2371, RMSE: 42.88
+2021-02-07 11:28:27,287 - INFO - Horizon 02, MAE: 24.49, MAPE: 0.2506, RMSE: 45.67
+2021-02-07 11:28:27,289 - INFO - Horizon 03, MAE: 26.26, MAPE: 0.2689, RMSE: 48.51
+2021-02-07 11:28:27,290 - INFO - Horizon 04, MAE: 28.36, MAPE: 0.2824, RMSE: 52.87
+2021-02-07 11:28:27,291 - INFO - Evaluation_test_End:
+2021-02-07 11:29:25,394 - INFO - Epoch:195, train_mae:10.02, val_mae:22.703036785125732,r_loss=0.00,lr=[1e-05],  time_elapsed:57.84973924700171
+2021-02-07 11:29:25,394 - INFO - Evaluation_test_Begin:
+2021-02-07 11:29:31,817 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2360, RMSE: 42.93
+2021-02-07 11:29:31,818 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2496, RMSE: 45.71
+2021-02-07 11:29:31,820 - INFO - Horizon 03, MAE: 26.25, MAPE: 0.2671, RMSE: 48.55
+2021-02-07 11:29:31,822 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2818, RMSE: 52.94
+2021-02-07 11:29:31,822 - INFO - Evaluation_test_End:
+2021-02-07 11:30:29,765 - INFO - Epoch:196, train_mae:10.02, val_mae:22.72559690475464,r_loss=0.00,lr=[1e-05],  time_elapsed:57.94229341397295
+2021-02-07 11:30:29,765 - INFO - Evaluation_test_Begin:
+2021-02-07 11:30:36,210 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2364, RMSE: 42.91
+2021-02-07 11:30:36,212 - INFO - Horizon 02, MAE: 24.48, MAPE: 0.2505, RMSE: 45.67
+2021-02-07 11:30:36,214 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2684, RMSE: 48.49
+2021-02-07 11:30:36,216 - INFO - Horizon 04, MAE: 28.33, MAPE: 0.2823, RMSE: 52.85
+2021-02-07 11:30:36,216 - INFO - Evaluation_test_End:
+2021-02-07 11:31:34,100 - INFO - Epoch:197, train_mae:10.02, val_mae:22.734021186828613,r_loss=0.00,lr=[1e-05],  time_elapsed:57.883811442996375
+2021-02-07 11:31:34,101 - INFO - Evaluation_test_Begin:
+2021-02-07 11:31:40,527 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2360, RMSE: 42.88
+2021-02-07 11:31:40,528 - INFO - Horizon 02, MAE: 24.49, MAPE: 0.2502, RMSE: 45.67
+2021-02-07 11:31:40,530 - INFO - Horizon 03, MAE: 26.23, MAPE: 0.2676, RMSE: 48.49
+2021-02-07 11:31:40,532 - INFO - Horizon 04, MAE: 28.34, MAPE: 0.2819, RMSE: 52.87
+2021-02-07 11:31:40,532 - INFO - Evaluation_test_End:
+2021-02-07 11:32:38,383 - INFO - Epoch:198, train_mae:10.01, val_mae:22.732552528381348,r_loss=0.00,lr=[1e-05],  time_elapsed:57.85067063005408
+2021-02-07 11:32:38,383 - INFO - Evaluation_test_Begin:
+2021-02-07 11:32:44,810 - INFO - Horizon 01, MAE: 23.18, MAPE: 0.2372, RMSE: 42.90
+2021-02-07 11:32:44,812 - INFO - Horizon 02, MAE: 24.49, MAPE: 0.2504, RMSE: 45.69
+2021-02-07 11:32:44,814 - INFO - Horizon 03, MAE: 26.24, MAPE: 0.2685, RMSE: 48.51
+2021-02-07 11:32:44,815 - INFO - Horizon 04, MAE: 28.36, MAPE: 0.2819, RMSE: 52.91
+2021-02-07 11:32:44,815 - INFO - Evaluation_test_End:
+2021-02-07 11:33:42,653 - INFO - Epoch:199, train_mae:10.01, val_mae:22.748178958892822,r_loss=0.00,lr=[1e-05],  time_elapsed:57.83759122603806
+2021-02-07 11:33:42,654 - INFO - Evaluation_test_Begin:
+2021-02-07 11:33:49,074 - INFO - Horizon 01, MAE: 23.19, MAPE: 0.2369, RMSE: 42.89
+2021-02-07 11:33:49,076 - INFO - Horizon 02, MAE: 24.50, MAPE: 0.2511, RMSE: 45.68
+2021-02-07 11:33:49,077 - INFO - Horizon 03, MAE: 26.26, MAPE: 0.2692, RMSE: 48.52
+2021-02-07 11:33:49,079 - INFO - Horizon 04, MAE: 28.36, MAPE: 0.2826, RMSE: 52.87
+2021-02-07 11:33:49,079 - INFO - Evaluation_test_End:
+/home/charles/anaconda3/envs/PVCGN/lib/python3.7/site-packages/torch/optim/lr_scheduler.py:417: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  "please use `get_last_lr()`.", UserWarning)

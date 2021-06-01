@@ -16,6 +16,6 @@ def np_load_frame(filename, resized_size=None):
     if resized_size is not None:
         image = cv2.resize(image, resized_size)
     image = image.astype(dtype=np.float32)
-    if resized_size is not None:
-        image = (image / 127.5) - 1.0
+    # if resized_size is not None:
+    #     image = (image / 127.5) - 1.0
     return image

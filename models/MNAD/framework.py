@@ -10,7 +10,8 @@ import torchvision.transforms as tt
 from models.fire_classification.fc.utils.device import to_device, get_default_device
 from models.MNAD.utils import (
     psnr,
-    anomaly_score_list
+    # anomaly_score_list
+    anomaly_score_list_inv
 )
 from urls import (
     vad_model_dir,
@@ -49,7 +50,7 @@ class VideoAnomalyDetector:
             # mse_feas=compactness_loss.item()
             psnr_list.append(psnr(mse_loss))
             mse_imgs.append(mse_img.permute(1, 2, 0).cpu().numpy())
-        anomaly_score_total_list = anomaly_score_list(psnr_list)
+        anomaly_score_total_list = anomaly_score_list_inv(psnr_list)
 
         # mse_imgs = torch.stack(mse_imgs, 0)
         # print(mse_imgs.shape)
@@ -64,12 +65,12 @@ class VideoAnomalyDetector:
         # ax2.plot(anomaly_score_total_list, color='r')
         # plt.show()
 
-        print(len(data['frames']))
-        print(len(mse_imgs))
+        # print(len(data['frames']))
+        # print(len(mse_imgs))
         return {
             'type': 'vad',
             'anomaly': bool(np.max(anomaly_score_total_list) > self.cfg['th']),
-            'frames': data['frames'],
+            'frames': data['frames'][4:, ...],
             'pred': anomaly_score_total_list,
             'mse_imgs': mse_imgs,
             # 'label': data['label'].item(),
@@ -93,7 +94,7 @@ class FramesDataset(data.Dataset):
         self._resize_width = resize_width
         self._time_step = time_step
         self._num_pred = num_pred
-        print('VAD', self.frames.shape, type(self.frames.shape))
+        # print('VAD', self.frames.shape, type(self.frames.shape))
         self.length = self.frames.shape[0] - self._time_step - self._num_pred
 
     def __getitem__(self, index):
@@ -101,6 +102,8 @@ class FramesDataset(data.Dataset):
 
         for i in range(self._time_step+self._num_pred):
             image = self.frames[index + i]
+            image = (image / 127.5) - 1.0
+
             if self.transform is not None:
                 frames.append(self.transform(image))
 

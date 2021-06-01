@@ -1,0 +1,47 @@
+<body onload="ketisiEmergency">
+    hello
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    <script type="text/javascript">
+        function ketisiEmergency() {
+            console.log("-------------------------");
+            // $.ajax({
+            //     url: "http://223.3.90.21:5000/anomalies",
+            //     type: "get",
+            //     dataType: "application/json",
+            //     success: function (data) {
+            //         console.log('success')
+            //         console.log(data);
+            //         alert(data)
+            //     },
+            //     error: function(xhr) {
+            //         console.log(xhr)
+            //     }
+            // })
+            $.getJSON('http://223.3.90.21:5000/anomalies', function (data) {
+                console.log('success')
+                console.log(data);
+                // alert(data)
+                var anomaly_list = Array()
+                for (var model_name in data) {
+                    console.log(model_name, data[model_name])
+                    anomaly_list.push.apply(anomaly_list,
+                        data[model_name]['results'].map(
+                            result => ({
+                                anomaly: result['anomaly'],
+                                model_name: model_name,
+                                type: result['type'],
+                                time: result['time'],
+                                sensors: result['sensors']
+                            })
+                        ).filter(
+                            result => result.anomaly
+                        )
+                    )
+                }
+                console.log(anomaly_list)
+            });
+        }
+    // ketisiEmergency()
+    </script>
+    <button onclick="ketisiEmergency()"></button>
+</body>

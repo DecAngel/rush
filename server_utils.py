@@ -5,6 +5,7 @@ import json
 import numpy as np
 from skimage import data, exposure, img_as_float
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 
@@ -57,6 +58,50 @@ mse_imgs = None
 #     return gen_score_frame
 
 
+def save_VAD_frames_wrapper(VAD_results):
+    # print(len(VAD_results))
+    global frames
+    global anomaly_score_list
+    global mse_imgs
+    VAD_result = VAD_results[0]
+    frames = VAD_result['frames']
+    anomaly_score_list = VAD_result['pred']
+    mse_imgs = VAD_result['mse_imgs']
+
+    def save_score_gif(anomaly_score_list=anomaly_score_list):
+        fig = plt.figure()
+        ims = []
+        for i in range(len(anomaly_score_list)):
+            im = plt.plot(anomaly_score_list[:i])
+            plt.yticks(np.arange(0, 1.1, 0.1))
+            ims.append(im)
+        ani = animation.ArtistAnimation(fig, ims, interval=50, repeat_delay=1000)
+        ani.save("score.gif",writer='pillow')
+
+    def save_raw_video_gif(frames=frames):
+        fig = plt.figure()
+        ims = []
+        for i in range(len(frames)):
+            img = frames[i].astype(np.int)
+            im = plt.imshow(img, animated=True)
+            ims.append([im])
+        ani = animation.ArtistAnimation(fig, ims, interval=50, repeat_delay=1000)
+        ani.save("raw.gif",writer='pillow')
+
+    def save_mse_gif(mse_imgs=mse_imgs):
+        fig = plt.figure()
+        ims = []
+        for i in range(len(mse_imgs)):
+            img = mse_imgs[i]
+            img = exposure.rescale_intensity(img)
+            im = plt.imshow(img, animated=True)
+            ims.append([im])
+        ani = animation.ArtistAnimation(fig, ims, interval=50, repeat_delay=1000)
+        ani.save("mse.gif",writer='pillow')
+    
+    return save_raw_video_gif, save_mse_gif, save_score_gif
+
+
 def gen_VAD_frames_wrapper(VAD_results):
     # print(len(VAD_results))
     global idx
@@ -77,6 +122,9 @@ def gen_VAD_frames_wrapper(VAD_results):
             fig = Figure()
             axis = fig.add_subplot(1, 1, 1)
             axis.plot(anomaly_score_list[:idx+1])
+            # axis.ylim((0,1))
+            axis.set_yticks(np.arange(0, 1.1, 0.1))
+
             FigureCanvas(fig).print_jpeg(stream)
             stream.seek(0)
             frame = stream.read()
@@ -85,7 +133,7 @@ def gen_VAD_frames_wrapper(VAD_results):
 
             idx = (idx+1) % len(anomaly_score_list)
             yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def gen_frame():
         global idx
@@ -93,7 +141,7 @@ def gen_VAD_frames_wrapper(VAD_results):
         while True:
             fig = Figure()
             axis = fig.add_subplot(1, 1, 1)
-            img = frames[idx]
+            img = frames[idx].astype(np.int)
             # exposure.adjust_gamma(img, 0.5)
             axis.imshow(img)
             axis.axis('off')
@@ -106,7 +154,7 @@ def gen_VAD_frames_wrapper(VAD_results):
 
             idx = (idx+1) % len(anomaly_score_list)
             yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     def gen_mse_frame():
         global idx
@@ -128,7 +176,7 @@ def gen_VAD_frames_wrapper(VAD_results):
 
             idx = (idx+1) % len(anomaly_score_list)
             yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     # def gen_VAD_frames():
     #     global idx
