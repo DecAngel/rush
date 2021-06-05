@@ -69,6 +69,7 @@ def save_VAD_frames_wrapper(VAD_results):
     mse_imgs = VAD_result['mse_imgs']
 
     def save_score_gif(anomaly_score_list=anomaly_score_list):
+        global idx
         fig = plt.figure()
         ims = []
         for i in range(len(anomaly_score_list)):
@@ -76,7 +77,8 @@ def save_VAD_frames_wrapper(VAD_results):
             plt.yticks(np.arange(0, 1.1, 0.1))
             ims.append(im)
         ani = animation.ArtistAnimation(fig, ims, interval=50, repeat_delay=1000)
-        ani.save("score.gif",writer='pillow')
+        ani.save(f"score_{idx}.gif",writer='pillow')
+        idx += 1
 
     def save_raw_video_gif(frames=frames):
         fig = plt.figure()
@@ -86,7 +88,7 @@ def save_VAD_frames_wrapper(VAD_results):
             im = plt.imshow(img, animated=True)
             ims.append([im])
         ani = animation.ArtistAnimation(fig, ims, interval=50, repeat_delay=1000)
-        ani.save("raw.gif",writer='pillow')
+        ani.save(f"raw_{idx}.gif",writer='pillow')
 
     def save_mse_gif(mse_imgs=mse_imgs):
         fig = plt.figure()
@@ -97,7 +99,7 @@ def save_VAD_frames_wrapper(VAD_results):
             im = plt.imshow(img, animated=True)
             ims.append([im])
         ani = animation.ArtistAnimation(fig, ims, interval=50, repeat_delay=1000)
-        ani.save("mse.gif",writer='pillow')
+        ani.save(f"mse_{idx}.gif",writer='pillow')
     
     return save_raw_video_gif, save_mse_gif, save_score_gif
 

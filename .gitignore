@@ -3,6 +3,9 @@
 .pytest_cache
 __pycache__
 
+/*.gif
 data
+/tmp
+/xian_results
 
 nohup.out

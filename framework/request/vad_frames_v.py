@@ -7,8 +7,6 @@ from PIL import Image
 from torch.utils import data
 
 from framework.request.utils import np_load_frame
-# fire_image_dir = '/home/yuanyu/projects/rush/models/fire_classification/data/testingsamples'
-from models.fire_classification.fc.data import create_dataset, log_dateset_info
 from urls import vad_videos_dir
 
 
