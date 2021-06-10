@@ -44,5 +44,9 @@ def get_fire_image_v() -> Dict[str, object]:
     return {
         'image': image,
         'label': label,
-        'sensor': 'virtual image'
+        'sensors': [
+            'virtual image',
+            'virtual Thermo',
+            'CO2'
+        ]
     }

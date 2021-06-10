@@ -33,20 +33,20 @@ class FlaskServer(object):
         # self.VAD_frame, self.VAD_score_frame = None, None
         self.step = 0
 
-        @scheduler.task('interval', id='one_step', seconds=15)
+        @scheduler.task('interval', id='one_step', seconds=20)
         def job_one_step():
             self.results_dict = one_step(self.models_dict)
             self.gen_frame, self.gen_mse_frame, self.gen_score_frame = gen_VAD_frames_wrapper(
                 self.results_dict['video_anomaly_detector']['results'])
 
-            # save_raw, save_mse, save_score = save_VAD_frames_wrapper(
-            #     self.results_dict['video_anomaly_detector']['results']
-            # )
+            save_raw, save_mse, save_score = save_VAD_frames_wrapper(
+                self.results_dict['video_anomaly_detector']['results']
+            )
             print(f'step {self.step} end'.center(100, '*'))
+            save_raw(self.step)
+            save_mse(self.step)
+            save_score(self.step)
             self.step += 1
-            # save_raw()
-            # save_mse()
-            # save_score()
 
         # @scheduler.task('interval', id='VAD_display', seconds=0.5)
         # def job_one_step():

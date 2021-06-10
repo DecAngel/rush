@@ -6,6 +6,6 @@ __pycache__
 /*.gif
 data
 /tmp
-/xian_results
+/xian_results*
 
 nohup.out

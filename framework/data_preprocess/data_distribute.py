@@ -13,10 +13,17 @@ def distribute_data(data_dict: Dict[str, object], model_config_dict: Dict[str, o
                 for data_name in data_name_list:
                     for key, value in data_dict[data_name].items():
                         tmp_dict[key] = value
-                tmp_dict.pop('sensor')
+                if tmp_dict.get('sensor', None) is not None:
+                    tmp_dict.pop('sensor')
                 tmp_dict.pop('anomaly')
-                tmp_dict['sensors'] = [data_dict[data_name]['sensor']
-                                       for data_name in data_name_list]
+                # tmp_dict['sensors'] = [data_dict[data_name]['sensor']
+                #                        for data_name in data_name_list]
+                tmp_dict['sensors'] = list()
+                for data_name in data_name_list:
+                    if data_dict[data_name].get('sensor', None) is not None:
+                        tmp_dict['sensors'].append(data_dict[data_name]['sensor'])
+                    if data_dict[data_name].get('sensors', None) is not None:
+                        tmp_dict['sensors'].extend(data_dict[data_name]['sensors'])
                 distributed_data[model_name].append(
                     tmp_dict)
     pass

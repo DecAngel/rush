@@ -92,7 +92,7 @@ class CustomDataLoader(data.Dataset):
         # split train n test
         self.train = train
         self.dir = Path(video_folder)
-        self.video_path_list = glob.glob(str(self.dir / '*'))
+        self.video_path_list = sorted(glob.glob(str(self.dir / '*')))
         self.label_df = pd.read_csv(label_file_path, index_col=0)
         self.train_video_path_list, self.test_video_path_list = self.split_train_n_test(self.video_path_list, self.label_df)
 

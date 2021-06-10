@@ -5,7 +5,9 @@ from collections import OrderedDict
 import copy
 import random
 import glob
+import time
 from easydict import EasyDict
+os.chdir('/home/yuanyu/projects/rush')
 
 import cv2
 import numpy as np
@@ -23,7 +25,7 @@ from torch.autograd import Variable
 from sklearn.metrics import roc_auc_score
 import torchvision.utils as v_utils
 import matplotlib.pyplot as plt
-import time
+
 from models.MNAD.model.utils import CustomDataLoader
 from models.MNAD.model.final_future_prediction_with_memory_spatial_sumonly_weight_ranking_top1 import *
 from models.MNAD.model.Reconstruction import *

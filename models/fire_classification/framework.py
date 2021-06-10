@@ -46,7 +46,8 @@ class FireDetector:
             'anomaly': pred == 1,
             'pred': pred,
             'label': data['label'].item(),
-            'sensors': data['sensors']
+            'sensors': data['sensors'],
+            'data': data
         }
 
     def init_model(self):

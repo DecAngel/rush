@@ -23,22 +23,13 @@ import torchvision.transforms as transforms
 from torch.autograd import Variable
 import torchvision.utils as v_utils
 import matplotlib.pyplot as plt
+from sklearn.metrics import roc_auc_score
 
 from models.MNAD.model.utils import CustomDataLoader
-from sklearn.metrics import roc_auc_score
 from models.MNAD.utils import *
+import models.MNAD.configs as config
 
-
-configs = EasyDict(
-    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C51/frames',
-    label_file_path='/home/yuanyu/projects/dyt_VAD/label2.csv',
-    transform=transforms.Compose([transforms.ToTensor()]),
-    resize_height=256,
-    resize_width=256,
-    time_step=4,
-    num_pred=1,
-    log_dir='/home/yuanyu/projects/rush/models/MNAD/exp/Xian/pred/log2'
-)
+# configs = 
 
 
 parser = argparse.ArgumentParser(description="MNAD")
@@ -78,8 +69,15 @@ parser.add_argument('--dataset_type', type=str, default='Xian',
                     help='type of dataset: Xian')
 parser.add_argument('--exp_dir', type=str, default='log',
                     help='directory of log')
+parser.add_argument('--config', type=str, default='config_8_C51')
 
 args = parser.parse_args()
+configs = getattr(config, args.config)
+print(f'Config {args.config}'.center(100, '='))
+print(configs)
+print('='*100)
+# print()
+input('Type enter to continue~~')
 
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 if args.gpus is None:
@@ -137,7 +135,7 @@ model.cuda()
 
 
 # Report the training process
-log_dir = cfg.log_dir
+log_dir = configs.log_dir
 if not os.path.exists(log_dir):
     os.makedirs(log_dir)
 orig_stdout = sys.stdout
