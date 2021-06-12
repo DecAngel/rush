@@ -3,7 +3,7 @@ import glob
 
 import pandas as pd
 
-from urls import gas_dir
+from urls import gas_dir, mode
 
 
 class GasResource:
@@ -30,8 +30,8 @@ class GasResource:
 
         return gas_pd
 
-
-gas_resource = GasResource()
+if mode == 'run':
+    gas_resource = GasResource()
 
 # PM1,PM10,PM2_5,CH4,H2S,CO,flamGas
 def get_gas() -> Dict[str, object]:

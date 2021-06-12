@@ -9,7 +9,7 @@ from PIL import Image
 from torch.utils import data
 
 from framework.request.utils import np_load_frame
-from urls import xian_vad_videos_dir, xian_label_df_path
+from urls import xian_vad_videos_dir, xian_label_df_path, mode
 
 
 class VADFramesResource:
@@ -86,7 +86,8 @@ class VADFramesResource:
         return train_list, test_list
 
 
-vad_frames_resource = VADFramesResource()
+if mode == 'run':
+    vad_frames_resource = VADFramesResource()
 
 
 def get_vad_frames_xian() -> np.ndarray:

@@ -1,6 +1,6 @@
 from models.PVCGN.lib import utils
 from models.PVCGN.ggnn_train import read_cfg_file
-from urls import PV_cfg_path
+from urls import PV_cfg_path, mode
 
 
 class ODResource:
@@ -22,8 +22,8 @@ class ODResource:
                 yield od      # 使用 yield
 
 
-
-OD_Resource = ODResource()
+if mode == 'run':
+    OD_Resource = ODResource()
 
 
 def get_OD_v():

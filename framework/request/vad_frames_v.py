@@ -7,7 +7,7 @@ from PIL import Image
 from torch.utils import data
 
 from framework.request.utils import np_load_frame
-from urls import vad_videos_dir
+from urls import vad_videos_dir, mode
 
 
 class VADFramesResource:
@@ -51,8 +51,8 @@ class VADFramesResource:
             self.video_dict[video_path]['length'] = len(
                 self.video_dict[video_path]['frame'])
 
-
-vad_frames_resource = VADFramesResource()
+if mode == 'run':
+    vad_frames_resource = VADFramesResource()
 
 
 def get_vad_frames_v() -> np.ndarray:

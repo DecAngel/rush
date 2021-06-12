@@ -1,7 +1,7 @@
 from typing import Dict
 
 from models.fire_classification.fc.data import create_dataset, DeviceDataLoader, log_dateset_info
-from urls import fire_image_dir
+from urls import fire_image_dir, mode
 
 
 class FireImageResource:
@@ -36,7 +36,8 @@ class FireImageResource:
         return img, label
 
 
-fireImageResource = FireImageResource()
+if mode == 'run':
+    fireImageResource = FireImageResource()
 
 
 def get_fire_image_v() -> Dict[str, object]:

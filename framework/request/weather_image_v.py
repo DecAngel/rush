@@ -7,7 +7,7 @@ from PIL import Image
 from framework.request.utils import np_load_frame
 # fire_image_dir = '/home/yuanyu/projects/rush/models/fire_classification/data/testingsamples'
 from models.weather_classification.wcyy.data import create_full_dataset, log_dateset_info
-from urls import wc_classes, wc_image_dir
+from urls import wc_classes, wc_image_dir, mode
 
 
 class WeatherImageResource:
@@ -39,7 +39,8 @@ class WeatherImageResource:
         return img, label
 
 
-weatherImageResource = WeatherImageResource()
+if mode == 'run':
+    weatherImageResource = WeatherImageResource()
 
 
 def get_weather_image_v() -> Image.Image:
