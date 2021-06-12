@@ -35,7 +35,7 @@ import urls
 id = 51
 cfg = EasyDict(
     # dataset
-    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C' + str(id) + '/frames',
+    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C' + str(id) + '/frames_new',
     label_file_path='/home/yuanyu/projects/rush/process_xian_video_for_VAD/label_dyt_' + str(id) + '_0429.csv',
     transform=transforms.Compose([transforms.ToTensor()]),
     resized_height=256,
