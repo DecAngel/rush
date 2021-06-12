@@ -101,7 +101,6 @@ def save_VAD_frames_wrapper(VAD_results):
         ims = []
         for i in range(len(mse_imgs)):
             img = mse_imgs[i]
-            img = exposure.rescale_intensity(img)
             img = 1 - exposure.rescale_intensity(img)
             im = plt.imshow(img, animated=True)
             ims.append([im])

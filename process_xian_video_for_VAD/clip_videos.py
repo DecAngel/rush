@@ -96,7 +96,7 @@ if __name__ == '__main__':
     videos_name.sort()
 
     # don't foget it !!!!
-    videos_name = [videos_name[-12:]]
+    videos_name = videos_name[-12:]
     # don't forget above !!!!
     
     videos_num = len(videos_name)

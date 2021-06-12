@@ -1,9 +1,9 @@
 from models import (
     FireDetector,
-    WeatherClassifier,
     VideoAnomalyDetector,
-    PVCDetector,
     CrowdCounter
+    # WeatherClassifier,
+    # PVCDetector,
 )
 
 
@@ -18,17 +18,6 @@ model_config_dict = {
             # ]
         ],
         'model': FireDetector
-    },
-    'weather_classifier': {
-        'data_lists': [
-            [
-                'weather-image-v'
-            ]
-            # [
-            #     'weather-image'
-            # ]
-        ],
-        'model': WeatherClassifier
     },
     'video_anomaly_detector': {
         'data_lists': [
@@ -49,6 +38,17 @@ model_config_dict = {
         ],
         'model': CrowdCounter
     },
+    # 'weather_classifier': {
+    #     'data_lists': [
+    #         [
+    #             'weather-image-v'
+    #         ]
+    #         # [
+    #         #     'weather-image'
+    #         # ]
+    #     ],
+    #     'model': WeatherClassifier
+    # },
     # 'pv_detector': {
     #     'data_lists': [
     #         [

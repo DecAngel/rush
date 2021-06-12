@@ -120,6 +120,7 @@ class CustomDataLoader(data.Dataset):
             self.videos[video_name]['length'] = len(
                 self.videos[video_name]['frame'])
 
+    # TO DO
     def get_all_samples(self):
         videos = self.train_video_path_list if self.train else self.test_video_path_list
         frames = []
