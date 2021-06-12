@@ -11,6 +11,7 @@ pv_detector
 无：
 gas_detector
 '''
+import datetime
 
 
 results_dict_list = [
@@ -22,7 +23,9 @@ results_dict_list = [
                     'type': 'fire',
                     'anomaly': True,
                     'pred': False,  # new added
-                    'time': '',
+                    'time': datetime.datetime(2021, 5, 1, 12, 20, 20),
+                    'type_zh': '火灾（模拟）',
+                    'description': '在大厅发现着火点',
                     'sensors': [
                         'virtual image'
                     ],
@@ -49,7 +52,9 @@ results_dict_list = [
                     'type': 'crowd',
                     'pred': False,
                     'anomaly': True,
-                    'time': '',
+                    'time': datetime.datetime(2021, 5, 1, 12, 20, 20),
+                    'type_zh': '人群拥堵',
+                    'description': '在电梯口发现人群拥堵',
                     'sensors': [
                         'virtual image'
                     ],
@@ -76,7 +81,9 @@ results_dict_list = [
                     'type': 'gas',
                     'pred': False,
                     'anomaly': True,
-                    'time': '',
+                    'time': datetime.datetime(2021, 5, 1, 12, 20, 20),
+                    'type_zh': '异常气体泄露（模拟）',
+                    'description': '在大厅发现可燃气体泄露',
                     'sensors': [
                         'virtual image'
                     ],
@@ -103,7 +110,9 @@ results_dict_list = [
                     'type': 'vad',
                     'pred': False,
                     'anomaly': True,
-                    'time': '',
+                    'time': datetime.datetime(2021, 5, 1, 12, 20, 20),
+                    'type_zh': '行为异常：骑自行车',
+                    'description': '大厅处发现异常物体：自行车',
                     'sensors': [
                         'virtual image'
                     ],
@@ -130,7 +139,10 @@ results_dict_list = [
                     'type': 'vad',
                     'pred': False,
                     'anomaly': True,
-                    'time': '',
+                    'time': datetime.datetime(2021, 5, 1, 12, 20, 20),
+                    #'time': '2021-05-21-20:22:05'
+                    'type_zh': '行为异常：跑动',
+                    'description': '在上行尾处发现异常行为：跑动',
                     'sensors': [
                         'virtual image'
                     ],
@@ -154,10 +166,12 @@ results_dict_list = [
         'crowd_predictor': {
             'results': [
                 {
-                    'type': 'vad',
-                    'pred': False,
+                    'type': 'crowd_pred',
+                    'pred': True,
                     'anomaly': True,
-                    'time': '',
+                    'time': datetime.datetime(2021, 5, 1, 12, 20, 20),
+                    'type_zh': '拥堵',
+                    'description': '预测 在 15 min 后，三号电梯口发生拥堵',
                     'sensors': [
                         'virtual image'
                     ],

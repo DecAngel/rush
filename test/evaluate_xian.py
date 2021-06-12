@@ -32,10 +32,11 @@ from models.MNAD.model.Reconstruction import *
 from models.MNAD.utils import *
 import urls
 
+id = 51
 cfg = EasyDict(
     # dataset
-    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C51/frames',
-    label_file_path='/home/yuanyu/projects/dyt_VAD/label.csv',
+    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C' + str(id) + '/frames',
+    label_file_path='/home/yuanyu/projects/rush/process_xian_video_for_VAD/label_dyt_' + str(id) + '_0429.csv',
     transform=transforms.Compose([transforms.ToTensor()]),
     resized_height=256,
     resized_width=256,
@@ -50,9 +51,9 @@ cfg = EasyDict(
     msize=10,
 
     # test
-    model_path='./models/MNAD/exp/Xian/pred/log/model.pth',
-    m_items_path='./models/MNAD/exp/Xian/pred/log/keys.pt',
-    log_dir='./xian_results',
+    model_path='./models/MNAD/exp/Xian/pred/log' + str(id) + '/model.pth',
+    m_items_path='./models/MNAD/exp/Xian/pred/log' + str(id) + '/keys.pt',
+    log_dir='./xian_results/' + str(id),
     gpus='1,2,3',
     batch_size=1,
     num_workers=1,
