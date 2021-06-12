@@ -27,12 +27,14 @@ results_dict_list = [
                     'type_zh': '火灾（模拟）',
                     'description': '在大厅发现着火点',
                     'sensors': [
-                        'virtual image'
+                        '摄像头51',
+                        '易燃气体检测传感器04',
+                        '温度计03'
                     ],
                     'filename_list': [  # new added
                         'fire_img.tif',
-                        'fire_flamGas.gif',
-                        'fire_Temperature.gif'
+                        'fire_flamGas.mp4',
+                        'fire_Temperature.mp4'
                     ]
                 }
             ],
@@ -56,12 +58,13 @@ results_dict_list = [
                     'type_zh': '人群拥堵',
                     'description': '在电梯口发现人群拥堵',
                     'sensors': [
-                        'virtual image'
+                        '摄像头32',
+                        '毫米波传感器02',
                     ],
                     'filename_list': [
-                        'crowd_32_input.avi',
-                        'crowd_den_32.avi',
-                        'crowd_mmv32.avi'
+                        'crowd_32_input.mp4',
+                        'crowd_den_32.mp4',
+                        'crowd_mmv32.mp4'
                     ]
                 }
             ],
@@ -85,12 +88,14 @@ results_dict_list = [
                     'type_zh': '异常气体泄露（模拟）',
                     'description': '在大厅发现可燃气体泄露',
                     'sensors': [
-                        'virtual image'
+                        '红外甲烷传感器02',
+                        '硫化氢传感器02',
+                        '温度计03'
                     ],
                     'filename_list': [
-                        'gas_CH4.gif',
-                        'gas_H2S.gif',
-                        'gas_CO.gif'
+                        'gas_CH4.mp4',
+                        'gas_H2S.mp4',
+                        'gas_CO.mp4'
                     ]
                 }
             ],
@@ -114,12 +119,12 @@ results_dict_list = [
                     'type_zh': '行为异常：骑自行车',
                     'description': '大厅处发现异常物体：自行车',
                     'sensors': [
-                        'virtual image'
+                        '摄像头32'
                     ],
                     'filename_list': [
-                        'vad_raw_0.gif',
-                        'vad_mse_0.gif',
-                        'vad_score_0.gif'
+                        'vad_raw_0.mp4',
+                        'vad_mse_0.mp4',
+                        'vad_score_0.mp4'
                     ]
                 }
             ],
@@ -144,12 +149,12 @@ results_dict_list = [
                     'type_zh': '行为异常：跑动',
                     'description': '在上行尾处发现异常行为：跑动',
                     'sensors': [
-                        'virtual image'
+                        '摄像头51'
                     ],
                     'filename_list': [
-                        'vad_raw_1.gif',
-                        'vad_mse_1.gif',
-                        'vad_score_1.gif'
+                        'vad_raw_1.mp4',
+                        'vad_mse_1.mp4',
+                        'vad_score_1.mp4'
                     ]
                 }
             ],
@@ -173,13 +178,14 @@ results_dict_list = [
                     'type_zh': '拥堵',
                     'description': '预测 在 15 min 后，三号电梯口发生拥堵',
                     'sensors': [
-                        'virtual image'
+                        '摄像头33',
+                        'tmp',
                     ],
                     'filename_list': [
-                        'xxx.gif'
-                        'xxx.gif',
-                        'xxx.gif',
-                        'xxx.gif'
+                        'xxx.mp4'
+                        'xxx.mp4',
+                        'xxx.mp4',
+                        'xxx.mp4'
                     ]
                 }
             ],
