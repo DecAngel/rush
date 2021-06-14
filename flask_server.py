@@ -156,17 +156,17 @@ class FlaskServer(object):
             # save_mse(self.step)
             # save_score(self.step)
             print(f'step {self.step} end'.center(100, '*'))
-            self.step += 1
         else:
             new_results_dict = get_all_results()
 
+        self.step += 1
         self.results_dict = merge_results_dict(
             self.results_dict, new_results_dict)
 
     def monitoring_loop(self):
         while True:
             self.job_one_step()
-            input('Type enter to continue~~')
+            input(f'Step {self.step-1} end. Press enter to continue~~')
 
 
 if __name__ == '__main__':

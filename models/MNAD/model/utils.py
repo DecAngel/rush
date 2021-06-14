@@ -138,12 +138,13 @@ class CustomDataLoader(data.Dataset):
         anomal_video_path_set = set(label_df.new_video)
         # print(anomal_video_path_set)
         for video_path in video_path_list:
-            if str(video_path).split('/')[-1] in anomal_video_path_set:
-                # print(str(video_path).split('/')[-1])
-                test_list.append(video_path)
-            else:
-                train_list.append(video_path)
-        
+            # if str(video_path).split('/')[-1] in anomal_video_path_set:
+            #     # print(str(video_path).split('/')[-1])
+            #     test_list.append(video_path)
+            # else:
+            #     train_list.append(video_path)
+            test_list.append(video_path)
+        print(len(train_list), len(test_list))
         return train_list, test_list
 
     def __getitem__(self, index):

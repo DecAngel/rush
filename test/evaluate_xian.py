@@ -32,10 +32,10 @@ from models.MNAD.model.Reconstruction import *
 from models.MNAD.utils import *
 import urls
 
-id = 51
+id = 33
 cfg = EasyDict(
     # dataset
-    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C' + str(id) + '/frames_new',
+    video_folder='/home/yuanyu/projects/data/DaYanTa_2/8_C' + str(id) + '/frames_select',
     label_file_path='/home/yuanyu/projects/rush/process_xian_video_for_VAD/label_dyt_' + str(id) + '_0429.csv',
     transform=transforms.Compose([transforms.ToTensor()]),
     resized_height=256,

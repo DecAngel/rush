@@ -28,12 +28,12 @@ results_dict_list = [
                     'description': '在大厅发现着火点',
                     'sensors': [
                         '摄像头51',
-                        '易燃气体检测传感器04',
+                        '二氧化碳浓度传感器03',
                         '温度计03'
                     ],
                     'filename_list': [  # new added
-                        'fire_img.tif',
-                        'fire_flamGas.mp4',
+                        'fire_img.mp4',
+                        'fire_CO2.mp4',
                         'fire_Temperature.mp4'
                     ]
                 }
@@ -55,13 +55,14 @@ results_dict_list = [
                     'pred': False,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    'type_zh': '人群拥堵',
+                    'type_zh': '局部拥堵',
                     'description': '在电梯口发现人群拥堵',
                     'sensors': [
                         '摄像头32',
-                        '毫米波传感器02',
+                        '毫米波传感器32',
                     ],
                     'filename_list': [
+                        'crowd_32_input.mp4', # to do
                         'crowd_32_input.mp4',
                         'crowd_den_32.mp4',
                         'crowd_mmv32.mp4'
@@ -85,17 +86,53 @@ results_dict_list = [
                     'pred': False,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    'type_zh': '异常气体泄露（模拟）',
+                    'type_zh': '有毒气体泄露（模拟）',
                     'description': '在大厅发现可燃气体泄露',
                     'sensors': [
-                        '红外甲烷传感器02',
-                        '硫化氢传感器02',
-                        '温度计03'
+                        '红外甲烷传感器01',
+                        '硫化氢传感器01',
+                        '一氧化碳传感器01'
                     ],
                     'filename_list': [
-                        'gas_CH4.mp4',
-                        'gas_H2S.mp4',
-                        'gas_CO.mp4'
+                        'gas_CH4_CH4.mp4',
+                        'gas_CH4_H2S.mp4',
+                        'gas_CH4_CO.mp4'
+                    ]
+                },
+                                {
+                    'type': 'gas',
+                    'pred': False,
+                    'anomaly': True,
+                    'time': ('2021', '05', '01', '12', '20', '20'),
+                    'type_zh': '有毒气体泄露（模拟）',
+                    'description': '在大厅发现可燃气体泄露',
+                    'sensors': [
+                        '硫化氢传感器02',
+                        '红外甲烷传感器02',
+                        '一氧化碳传感器02'
+                    ],
+                    'filename_list': [
+                        'gas_H2S_CH4.mp4',
+                        'gas_H2S_H2S.mp4',
+                        'gas_H2S_CO.mp4'
+                    ]
+                },
+                                {
+                    'type': 'gas',
+                    'pred': False,
+                    'anomaly': True,
+                    'time': ('2021', '05', '01', '12', '20', '20'),
+                    'type_zh': '有毒气体泄露（模拟）',
+                    'description': '在大厅发现可燃气体泄露',
+                    'sensors': [
+                        '一氧化碳传感器02'
+                        '红外甲烷传感器02',
+                        '硫化氢传感器02',
+                    ],
+                    'filename_list': [
+                        'gas_CO_CH4.mp4',
+                        'gas_CO_H2S.mp4',
+                        'gas_CO_CO.mp4'
                     ]
                 }
             ],
@@ -166,7 +203,7 @@ results_dict_list = [
             ]
         },
     },
-    # result 4
+    # result 5
     {
         'crowd_predictor': {
             'results': [
@@ -175,17 +212,16 @@ results_dict_list = [
                     'pred': True,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    'type_zh': '拥堵',
-                    'description': '预测 在 15 min 后，三号电梯口发生拥堵',
+                    'type_zh': '拥堵预测',
+                    'description': '预测在 15 min 后，三号电梯口发生拥堵',
                     'sensors': [
-                        '摄像头33',
-                        'tmp',
+                        '闸机口01',
+                        '电车门01',
                     ],
                     'filename_list': [
-                        'xxx.mp4'
-                        'xxx.mp4',
-                        'xxx.mp4',
-                        'xxx.mp4'
+                        'vad_raw_0.mp4',
+                        'in.mp4',
+                        'out.mp4'
                     ]
                 }
             ],
