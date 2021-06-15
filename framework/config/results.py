@@ -62,7 +62,7 @@ results_dict_list = [
                         '毫米波传感器32',
                     ],
                     'filename_list': [
-                        'crowd_32_input.mp4', # to do
+                        'crowd_32_input.mp4',  # to do
                         'crowd_32_input.mp4',
                         'crowd_den_32.mp4',
                         'crowd_mmv32.mp4'
@@ -99,7 +99,7 @@ results_dict_list = [
                         'gas_CH4_CO.mp4'
                     ]
                 },
-                                {
+                {
                     'type': 'gas',
                     'pred': False,
                     'anomaly': True,
@@ -117,7 +117,7 @@ results_dict_list = [
                         'gas_H2S_CO.mp4'
                     ]
                 },
-                                {
+                {
                     'type': 'gas',
                     'pred': False,
                     'anomaly': True,
@@ -125,7 +125,7 @@ results_dict_list = [
                     'type_zh': '有毒气体（一氧化碳）泄露（模拟）',
                     'description': '在大厅发现一氧化碳泄露',
                     'sensors': [
-                        '一氧化碳传感器02'
+                        '一氧化碳传感器02',
                         '红外甲烷传感器02',
                         '硫化氢传感器02',
                     ],
@@ -182,7 +182,7 @@ results_dict_list = [
                     'pred': False,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    #'time': '2021-05-21-20:22:05'
+                    # 'time': '2021-05-21-20:22:05'
                     'type_zh': '行为异常：跑动',
                     'description': '在上行尾处发现异常行为：跑动',
                     'sensors': [
