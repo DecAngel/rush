@@ -86,8 +86,8 @@ results_dict_list = [
                     'pred': False,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    'type_zh': '有毒气体泄露（模拟）',
-                    'description': '在大厅发现可燃气体泄露',
+                    'type_zh': '有毒气体（甲烷）泄露（模拟）',
+                    'description': '在大厅发现甲烷泄露',
                     'sensors': [
                         '红外甲烷传感器01',
                         '硫化氢传感器01',
@@ -104,8 +104,8 @@ results_dict_list = [
                     'pred': False,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    'type_zh': '有毒气体泄露（模拟）',
-                    'description': '在大厅发现可燃气体泄露',
+                    'type_zh': '有毒气体（硫化氢）泄露（模拟）',
+                    'description': '在大厅发现硫化氢泄露',
                     'sensors': [
                         '硫化氢传感器02',
                         '红外甲烷传感器02',
@@ -122,8 +122,8 @@ results_dict_list = [
                     'pred': False,
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
-                    'type_zh': '有毒气体泄露（模拟）',
-                    'description': '在大厅发现可燃气体泄露',
+                    'type_zh': '有毒气体（一氧化碳）泄露（模拟）',
+                    'description': '在大厅发现一氧化碳泄露',
                     'sensors': [
                         '一氧化碳传感器02'
                         '红外甲烷传感器02',
@@ -213,7 +213,7 @@ results_dict_list = [
                     'anomaly': True,
                     'time': ('2021', '05', '01', '12', '20', '20'),
                     'type_zh': '拥堵预测',
-                    'description': '预测在 15 min 后，三号电梯口发生拥堵',
+                    'description': '预测15分钟后，三号电梯口拥堵',
                     'sensors': [
                         '闸机口01',
                         '电车门01',
