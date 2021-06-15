@@ -112,8 +112,8 @@ results_dict_list = [
                         '一氧化碳传感器02'
                     ],
                     'filename_list': [
-                        'gas_H2S_CH4.mp4',
                         'gas_H2S_H2S.mp4',
+                        'gas_H2S_CH4.mp4',
                         'gas_H2S_CO.mp4'
                     ]
                 },
@@ -130,9 +130,9 @@ results_dict_list = [
                         '硫化氢传感器02',
                     ],
                     'filename_list': [
+                        'gas_CO_CO.mp4'
                         'gas_CO_CH4.mp4',
                         'gas_CO_H2S.mp4',
-                        'gas_CO_CO.mp4'
                     ]
                 }
             ],
