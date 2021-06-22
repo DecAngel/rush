@@ -39,7 +39,7 @@ def generate_time_list(start_time: Tuple[int], time_delta=1, steps=100):
 
 
 def plot_and_save_score_gif(data: pd.Series, save_path: str, yticks=np.arange(0, 1.1, 0.1), start_time=(
-        2017, 1, 1, 20, 10, 10), time_delta=1, title='', unit='ppm') -> animation.Animation:
+        2017, 1, 1, 20, 10, 10), time_delta=1, title='', unit='ppm', ylim=None, fps=1) -> animation.Animation:
     fig = plt.figure()
     ax = fig.gca()
     ax.yaxis.set_major_formatter(mticker.FormatStrFormatter(f'%d {unit}'))
@@ -51,6 +51,8 @@ def plot_and_save_score_gif(data: pd.Series, save_path: str, yticks=np.arange(0,
         # ax.spines['top'].set_color('none')
 
     plt.title(title, fontdict={'fontsize': 20})
+    if ylim is not None:
+        plt.ylim(ylim)
     # plt.yticks(yticks)
     time_list = generate_time_list(
         start_time=start_time, time_delta=time_delta, steps=len(data))
@@ -73,7 +75,7 @@ def plot_and_save_score_gif(data: pd.Series, save_path: str, yticks=np.arange(0,
                                        frames=len(data))
     # plt.show()
     # animator.save(save_path, writer='pillow')
-    FFwriter = animation.FFMpegWriter(fps=3)
+    FFwriter = animation.FFMpegWriter(fps=1)
     animator.save(save_path, writer=FFwriter)
 
 
@@ -86,8 +88,9 @@ def plot_gas():
             title = f'{col.name} 浓度'
             save_path = f'{output_dir}/gas_{i}_{col_index}.mp4'
             yticks = np.arange(0, 101, 10)
+            ylim = (-15, 100)
             plot_and_save_score_gif(col, save_path, yticks, start_time=(
-                2017, 1, 1, 20, 10, 10), time_delta=1, title=title, unit='ppm')
+                2017, 1, 1, 20, 10, 10), time_delta=1, title=title, unit='ppm', ylim=ylim)
             # break
 
 
@@ -125,10 +128,10 @@ def plot_fire_gas():
 
 
 def main():
-    # print('Plot gas...'.center(100, '='))
-    # plot_gas()
-    print('Plot fire_gas...'.center(100, '='))
-    plot_fire_gas()
+    print('Plot gas...'.center(100, '='))
+    plot_gas()
+    # print('Plot fire_gas...'.center(100, '='))
+    # plot_fire_gas()
 
 
 if __name__ == '__main__':
