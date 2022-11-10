@@ -12,6 +12,7 @@ from framework.main import (
 )
 # from server_utils import gen_VAD_frame_wrapper, gen_VAD_frames_wrapper
 from server_utils import gen_VAD_frames_wrapper, save_VAD_frames_wrapper, merge_results_dict
+from robot import Robot, config as robot_config
 from urls import (
     host,
     port,
@@ -25,6 +26,7 @@ class FlaskServer(object):
         assert mode in ['display', 'run']
         self.mode = mode
         self.file_dir = "./data/files"
+        self.robot = Robot(robot_config)
 
         # import os
         # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
@@ -162,11 +164,18 @@ class FlaskServer(object):
         self.step += 1
         self.results_dict = merge_results_dict(
             self.results_dict, new_results_dict)
+        print('Detect a new anomaly!'.center(50, '-'))
+        sensor_key = new_results_dict.keys[0]
+        self.robot.say(
+            robot_config['device_id'], f'{new_results_dict[sensor_key]["results"][-1]["description"]}，请大家尽快撤离！')
+        print(new_results_dict[sensor_key]["results"][-1])
+        print('-'*50)
 
     def monitoring_loop(self):
         while True:
+            input(f'Press enter to continue')
+            print('Begin to process new data', datetime.datetime.now())
             self.job_one_step()
-            input(f'Step {self.step-1} end. Press enter to continue~~')
 
 
 if __name__ == '__main__':

@@ -8,5 +8,6 @@ venv
 data
 /tmp
 /xian_results*
+/runs
 
 nohup.out
