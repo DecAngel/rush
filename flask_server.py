@@ -166,9 +166,12 @@ class FlaskServer(object):
             self.results_dict, new_results_dict)
         print('Detect a new anomaly!'.center(50, '-'))
         sensor_key = list(new_results_dict.keys())[0]
+        print(new_results_dict[sensor_key]["results"][-1])
+        for _ in range(2):
+            self.robot.navigate(
+                robot_config['device_id'], robot_config['path'])
         self.robot.say(
             robot_config['device_id'], f'{new_results_dict[sensor_key]["results"][-1]["description"]}，请大家尽快撤离！')
-        print(new_results_dict[sensor_key]["results"][-1])
         print('-'*50)
 
     def monitoring_loop(self):
@@ -176,6 +179,7 @@ class FlaskServer(object):
             input(f'Press enter to continue')
             print('Begin to process new data', datetime.datetime.now())
             self.job_one_step()
+            print('End', datetime.datetime.now())
 
 
 if __name__ == '__main__':
