@@ -8,6 +8,7 @@ from models.fire_classification.fc.utils.device import to_device, get_default_de
 from models.fire_classification.fc.models import create_model
 from urls import fire_detection_model_root
 
+
 class FireDetector:
     def __init__(self) -> None:
         stats = ((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))

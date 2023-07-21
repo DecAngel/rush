@@ -1,7 +1,6 @@
-import cv2
-from PIL import Image, ImageOps
+from PIL import Image
 
-from models.crowd_count.crowd_counting.model import CrowdCounter
+from models.crowd_count.framework import CrowdCounter
 
 
 img = Image.open('./test.jpg').convert('RGB')

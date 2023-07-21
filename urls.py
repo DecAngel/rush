@@ -1,7 +1,7 @@
 host = '0.0.0.0'
 port = '5000'
-mode = 'display'
-# mode = 'run'
+# mode = 'display'
+mode = 'run'
 
 fire_image_dir = './data/dataset/fire'
 fire_detection_model_root = './data/models/fire'

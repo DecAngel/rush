@@ -3,7 +3,8 @@ import base64
 import json
 
 import numpy as np
-from skimage import data, exposure, img_as_float
+from skimage import data, exposure
+from skimage.util import img_as_float
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas

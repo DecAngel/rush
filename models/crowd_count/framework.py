@@ -8,7 +8,7 @@ from models.weather_classification.wcyy.utils.device import get_default_device
 from urls import crowd_count_model_path, crowd_count_gpus
 
 
-class CrowdCounter():
+class CrowdCounter:
     def __init__(self):
         # torch.cuda.set_device(0)
         self.mean_std = ([0.49254346, 0.47839335, 0.50212276], [
@@ -29,6 +29,7 @@ class CrowdCounter():
         self.crowd_counter_model.to(self.cfg['device'])
         self.crowd_counter_model.eval()
 
+    @torch.no_grad()
     def one_step(self, data):
         img = self.cfg['img_transform'](data['image'])
         with torch.no_grad():

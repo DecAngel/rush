@@ -16,6 +16,7 @@ class CrowdCountImageResource:
     def next(self):
         return self.img
 
+
 if mode == 'run':
     crowd_count_img_resource = CrowdCountImageResource()
 

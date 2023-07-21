@@ -20,11 +20,11 @@ from urls import (
 )
 
 
-class FlaskServer(object):
-    def __init__(self, host='0.0.0.0', port=5000, mode='display') -> None:
+class FlaskServer:
+    def __init__(self, _host='0.0.0.0', _port=5000, _mode='display') -> None:
         super().__init__()
-        assert mode in ['display', 'run']
-        self.mode = mode
+        assert _mode in ['display', 'run']
+        self.mode = _mode
         self.file_dir = "./data/files"
         self.robot = Robot(robot_config)
 
@@ -140,7 +140,7 @@ class FlaskServer(object):
         scheduler.start()
         monitoring_thread = threading.Thread(target=self.monitoring_loop)
         monitoring_thread.start()
-        self.app.run(host=host, port=port)
+        self.app.run(host=_host, port=_port)
 
     def job_one_step(self):
         assert self.mode in ['run', 'display']

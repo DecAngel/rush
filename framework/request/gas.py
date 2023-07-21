@@ -30,8 +30,10 @@ class GasResource:
 
         return gas_pd
 
+
 if mode == 'run':
     gas_resource = GasResource()
+
 
 # PM1,PM10,PM2_5,CH4,H2S,CO,flamGas
 def get_gas() -> Dict[str, object]:

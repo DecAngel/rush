@@ -24,18 +24,20 @@ config = {
 
 
 class Robot:
-    def __init__(self, config=config) -> None:
-        url = f'http://{config["ip"]}:{config["port"]}/{config["login_path"]}'
-        header = config['header']
+    def __init__(self, _config=None) -> None:
+        if _config is None:
+            _config = config
+        url = f'http://{_config["ip"]}:{_config["port"]}/{_config["login_path"]}'
+        header = _config['header']
         a = requests.post(
             url=url,
             data={
-                'username': config['username'],
-                'password': config['password'],
+                'username': _config['username'],
+                'password': _config['password'],
                 'grant_type': 'password'
             },
             headers=header)
-        self.config = config
+        self.config = _config
         print(json.loads(a.text))
         self.cookies = {
             "Admin-Token": json.loads(a.text)['data']['access_token']}
@@ -56,12 +58,15 @@ class Robot:
             cookies=self.cookies,
             params={'deviceId': device_id, 'posX': x, 'posY': y}
         )
-        while True:
-            time.sleep(self.config['waitout'])
-            cur_x, cur_y = self.get_cur_cood(device_id)
-            # print(cur_x, cur_y)
-            if self.comp(cur_x, cur_y, [x, y], 5):
-                break
+        if go.status_code == 200:
+            while True:
+                time.sleep(self.config['waitout'])
+                cur_x, cur_y = self.get_cur_cood(device_id)
+                # print(cur_x, cur_y)
+                if self.comp(cur_x, cur_y, [x, y], 5):
+                    break
+        else:
+            raise RuntimeError(f'robot move request failed: {go.text}')
         # self.say(
         #     device_id=device_id,
         #     text='到达巡检点'

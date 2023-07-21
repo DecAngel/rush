@@ -32,7 +32,7 @@ class VideoAnomalyDetector:
         }
         self.model, self.m_items=self.init_model()
 
-    @ torch.no_grad()
+    @torch.no_grad()
     def one_step(self, data: Dict[str, object]):
         dataset = FramesDataset(data['frames'], self.cfg['valid_transform'], 256, 256)
         psnr_list = list()

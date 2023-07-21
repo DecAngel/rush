@@ -51,6 +51,7 @@ class VADFramesResource:
             self.video_dict[video_path]['length'] = len(
                 self.video_dict[video_path]['frame'])
 
+
 if mode == 'run':
     vad_frames_resource = VADFramesResource()
 
