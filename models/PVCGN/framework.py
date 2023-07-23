@@ -10,14 +10,14 @@ from models.PVCGN.ggnn.multigraph import Net
 from models.PVCGN.lib.utils import collate_wrapper
 from models.PVCGN.ggnn_train import read_cfg_file
 from models.PVCGN.lib import utils
-from urls import PV_cfg_path
+from settings import pv_cfg_path
 
 
 class PVCDetector:
     def __init__(self) -> None:
         self.cfg = {
-            'config_filename': PV_cfg_path,
-            'model_cfg': read_cfg_file(PV_cfg_path),
+            'config_filename': pv_cfg_path,
+            'model_cfg': read_cfg_file(pv_cfg_path),
             'device': get_default_device()
         }
         self.model = self.init_model()

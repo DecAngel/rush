@@ -6,7 +6,7 @@ import torchvision.transforms as tt
 
 from models.weather_classification.wcyy.utils.device import to_device, get_default_device
 from models.weather_classification.wcyy.models import create_model
-from urls import (
+from settings import (
     wc_model_root,
     wc_classes
 )

@@ -1,3 +1,5 @@
+import os
+
 import torch
 import torch.utils.data
 from PIL import Image
@@ -10,9 +12,12 @@ def load_annotation_list(filename):
 
     """
     annotations = []
+    working_directory = os.path.split(filename)[0]
     with open(filename) as ann:
         for line in ann:
-            annotations.append(line.strip())
+            path, label = line.strip().split(':')
+            path = os.path.abspath(os.path.join(working_directory, path))
+            annotations.append((path, label))
 
     return annotations
 
@@ -35,17 +40,14 @@ class DataSet(torch.utils.data.Dataset):
         self.label_list = []
         self.transform = transform
 
-        for line in annotation_list:
-            if line[0] != '#':
-                line = line.rstrip().split(':')
-                file = line[0]
-                img = Image.open(file)
+        for path, label in annotation_list:
+            img = Image.open(path)
 
-                if self.transform:
-                    img = self.transform(img)
-                label = torch.tensor(int(line[1]))
-                self.img_list.append(img)
-                self.label_list.append(label)
+            if self.transform:
+                img = self.transform(img)
+            label = torch.tensor(int(label))
+            self.img_list.append(img)
+            self.label_list.append(label)
 
         self.length = len(self.label_list)
 

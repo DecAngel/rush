@@ -2,21 +2,20 @@ import os
 import glob
 from pathlib import Path
 from collections import OrderedDict
+from typing import Dict, Any
 
 import numpy as np
 import pandas as pd
-from PIL import Image
-from torch.utils import data
 
 from framework.request.utils import np_load_frame
-from urls import xian_vad_videos_dir, xian_label_df_path, mode
+from settings import vad_xian_videos_dir, vad_xian_label_df_path
 
 
 class VADFramesResource:
     def __init__(self, train=False) -> None:
-        self.dir = Path(xian_vad_videos_dir)
+        self.dir = Path(vad_xian_videos_dir)
         self.label_df = self.label_df = pd.read_csv(
-            xian_label_df_path, index_col=0)
+            vad_xian_label_df_path, index_col=0)
         self.cfg = {
             'resized_height': 256,
             'resized_width': 256
@@ -34,16 +33,14 @@ class VADFramesResource:
 
         self.cur_idx = 0
         self.length = len(self.video_path_list)
-        # print('vad virtual data resource'.center(100, '-'))
-        # print(len(self.video_dict))
 
     def next(self):
-        # img_path = self.imgs[self.cur_idx]
-        # img = Image.open(img_path)
         video_name = self.video_name_list[self.cur_idx]
 
-        frames = list(map(lambda img_path: np_load_frame(img_path, (self.cfg['resized_width'],
-                                                                    self.cfg['resized_height'])), self.video_dict[video_name]['frame']))
+        frames = list(map(
+            lambda img_path: np_load_frame(img_path, (self.cfg['resized_width'], self.cfg['resized_height'])),
+            self.video_dict[video_name]['frame'])
+        )
 
         self.cur_idx = (self.cur_idx + 1) % self.length
         return np.array(frames)
@@ -55,11 +52,9 @@ class VADFramesResource:
             self.video_name_list.append(video_name)
             self.video_dict[video_name] = {}
             self.video_dict[video_name]['path'] = video
-            self.video_dict[video_name]['frame'] = glob.glob(
-                os.path.join(video, '*.jpg'))
+            self.video_dict[video_name]['frame'] = glob.glob(os.path.join(video, '*.jpg'))
             self.video_dict[video_name]['frame'].sort()
-            self.video_dict[video_name]['length'] = len(
-                self.video_dict[video_name]['frame'])
+            self.video_dict[video_name]['length'] = len(self.video_dict[video_name]['frame'])
 
     def get_all_samples(self):
         videos = self.train_video_path_list if self.train else self.test_video_path_list
@@ -86,12 +81,12 @@ class VADFramesResource:
         return train_list, test_list
 
 
-if mode == 'run':
-    vad_frames_resource = VADFramesResource()
-
-
-def get_vad_frames_xian() -> np.ndarray:
-    frame_array = vad_frames_resource.next()
+def get_vad_frames_xian() -> Dict[str, Any]:
+    try:
+        frame_array = get_vad_frames_xian.resource.next()
+    except AttributeError:
+        get_vad_frames_xian.resource = VADFramesResource()
+        frame_array = get_vad_frames_xian.resource.next()
     return {
         'frames': frame_array,
         'sensor': 'virtual video'

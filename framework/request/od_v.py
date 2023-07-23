@@ -1,11 +1,11 @@
 from models.PVCGN.lib import utils
 from models.PVCGN.ggnn_train import read_cfg_file
-from urls import PV_cfg_path, mode
+from settings import pv_cfg_path
 
 
 class ODResource:
-    def __init__(self) -> None:
-        self.cfg = read_cfg_file(PV_cfg_path)['data']
+    def __init__(self):
+        self.cfg = read_cfg_file(pv_cfg_path)['data']
 
         dataset = utils.load_dataset_nj(**self.cfg)
         self.dataloader = dataset['test_loader'].get_iterator()
@@ -22,14 +22,14 @@ class ODResource:
                 yield od      # 使用 yield
 
 
-if mode == 'run':
-    OD_Resource = ODResource()
-
-
 def get_OD_v():
-    od = OD_Resource.next()
+    try:
+        od = get_OD_v.resource.next()
+    except AttributeError:
+        get_OD_v.resource = ODResource()
+        od = get_OD_v.resource.next()
     return {
         'od': od,
-        'scaler': OD_Resource.scaler,
+        'scaler': get_OD_v.resource.scaler,
         'sensor': 'virtual od, xian'
     }

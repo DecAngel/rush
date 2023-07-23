@@ -30,7 +30,7 @@ from models.MNAD.model.utils import CustomDataLoader
 from models.MNAD.model.final_future_prediction_with_memory_spatial_sumonly_weight_ranking_top1 import *
 from models.MNAD.model.Reconstruction import *
 from models.MNAD.utils import *
-import urls
+import settings
 
 cfg = EasyDict(
     # dataset

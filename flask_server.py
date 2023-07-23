@@ -12,8 +12,8 @@ from framework.main import (
 )
 # from server_utils import gen_VAD_frame_wrapper, gen_VAD_frames_wrapper
 from server_utils import gen_VAD_frames_wrapper, save_VAD_frames_wrapper, merge_results_dict
-from robot import Robot, config as robot_config
-from urls import (
+from robot import Robot
+from settings import (
     host,
     port,
     mode
@@ -26,10 +26,8 @@ class FlaskServer:
         assert _mode in ['display', 'run']
         self.mode = _mode
         self.file_dir = "./data/files"
-        self.robot = Robot(robot_config)
+        self.robot = Robot()
 
-        # import os
-        # os.environ['CUDA_VISIBLE_DEVICES'] = '1'
         if mode == 'run':
             self.models_dict = init()
         self.results_dict = dict()
@@ -124,9 +122,6 @@ class FlaskServer:
                     )
                     results_dict[model_name]['displays'] = data['displays']
                     results_dict[model_name]['solves'] = data['solves']
-
-            # return Response(json.dumps(self.results_dict, cls=CustomJSONizer),
-            #                 mimetype='application/json')
             elif self.mode == 'display':
                 results_dict = self.results_dict
             return jsonify(results_dict)
@@ -143,9 +138,6 @@ class FlaskServer:
         self.app.run(host=_host, port=_port)
 
     def job_one_step(self):
-        assert self.mode in ['run', 'display']
-
-        new_results_dict = dict()
         if self.mode == 'run':
             new_results_dict = one_step(self.models_dict)
             # self.gen_frame, self.gen_mse_frame, self.gen_score_frame = gen_VAD_frames_wrapper(
@@ -157,21 +149,18 @@ class FlaskServer:
             # save_raw(self.step)
             # save_mse(self.step)
             # save_score(self.step)
+            print(new_results_dict.keys())
             print(f'step {self.step} end'.center(100, '*'))
         else:
             new_results_dict = get_all_results()
 
         self.step += 1
         self.results_dict = merge_results_dict(
-            self.results_dict, new_results_dict)
+            self.results_dict, new_results_dict
+        )
         print('Detect a new anomaly!'.center(50, '-'))
         sensor_key = list(new_results_dict.keys())[0]
         print(new_results_dict[sensor_key]["results"][-1])
-        for _ in range(2):
-            self.robot.navigate(
-                robot_config['device_id'], robot_config['path'])
-        self.robot.say(
-            robot_config['device_id'], f'{new_results_dict[sensor_key]["results"][-1]["description"]}，请大家尽快撤离！')
         print('-'*50)
 
     def monitoring_loop(self):
@@ -183,6 +172,4 @@ class FlaskServer:
 
 
 if __name__ == '__main__':
-    # import os
-    # os.environ['CUDA_VISIBLE_DEVICES'] = '1,3'
     flask_server = FlaskServer(host, port, mode)

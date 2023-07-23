@@ -4,10 +4,11 @@ from framework.config import results_dict_list
 
 
 class ResultResource:
-    def __init__(self,
-                 results_dict_list: List[Dict[str, object]] = results_dict_list) \
-            -> None:
-        self.results_dict_list = results_dict_list
+    def __init__(
+            self,
+            _results_dict_list: List[Dict[str, object]] = results_dict_list
+    ) -> None:
+        self.results_dict_list = _results_dict_list
 
         self.length = len(self.results_dict_list)
         self.cur_idx = 0
@@ -19,8 +20,9 @@ class ResultResource:
         return results_dict
 
 
-result_resource = ResultResource()
-
-
 def get_all_results() -> Dict[str, object]:
-    return result_resource.next()
+    try:
+        return get_all_results.resource.next()
+    except AttributeError:
+        get_all_results.resource = ResultResource()
+        return get_all_results.resource.next()

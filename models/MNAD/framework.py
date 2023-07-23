@@ -13,9 +13,10 @@ from models.MNAD.utils import (
     # anomaly_score_list
     anomaly_score_list_inv
 )
-from urls import (
+from settings import (
     vad_model_dir,
-    vad_mitems_dir
+    vad_mitems_dir,
+    vad_device,
 )
 
 
@@ -25,7 +26,7 @@ class VideoAnomalyDetector:
         self.cfg = {
             'model_dir': vad_model_dir,
             'mitems_dir': vad_mitems_dir,
-            'device': get_default_device(),
+            'device': torch.device(f'cuda:{vad_device}'),
             'valid_transform': tt.Compose([tt.ToTensor()]),
             'loss_func_mse': nn.MSELoss(reduction='none'),
             'th': 0.8
@@ -52,28 +53,12 @@ class VideoAnomalyDetector:
             mse_imgs.append(mse_img.permute(1, 2, 0).cpu().numpy())
         anomaly_score_total_list = anomaly_score_list_inv(psnr_list)
 
-        # mse_imgs = torch.stack(mse_imgs, 0)
-        # print(mse_imgs.shape)
-        # print(mse_imgs[0])
-        # import matplotlib.pyplot as plt
-        # from torchvision.utils import make_grid
-        # fig, ax = plt.subplots(figsize=(12, 12))
-        # ax.set_xticks([])
-        # ax.set_yticks([])
-        # ax.imshow(make_grid(mse_imgs.cpu()[:], nrow=32, normalize=True).permute(1, 2, 0))
-        # fig2, ax2 = plt.subplots(figsize=(12, 12))
-        # ax2.plot(anomaly_score_total_list, color='r')
-        # plt.show()
-
-        # print(len(data['frames']))
-        # print(len(mse_imgs))
         return {
             'type': 'vad',
             'anomaly': bool(np.max(anomaly_score_total_list) > self.cfg['th']),
             'frames': data['frames'][4:, ...],
             'pred': anomaly_score_total_list,
             'mse_imgs': mse_imgs,
-            # 'label': data['label'].item(),
             'sensors': data['sensors']
         }
 
