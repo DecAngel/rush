@@ -7,7 +7,6 @@ import torch.nn as nn
 from torch.utils import data
 import torchvision.transforms as tt
 
-from models.fire_classification.fc.utils.device import to_device, get_default_device
 from models.MNAD.utils import (
     psnr,
     # anomaly_score_list
